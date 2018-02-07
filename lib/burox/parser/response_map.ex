@@ -256,6 +256,122 @@ defmodule Burox.Parser.ResponseMap do
           "key" => :date_of_update,
           "type" => "date"
         },
+        "00" => %{
+          "key" => :record_disputed,
+          "type" => "string"
+        },
+        "01" => %{
+          "key" => :member_code,
+          "type" => "string"
+        },
+        "02" => %{
+          "key" => :user_name,
+          "type" => "string"
+        },
+        "03" => %{
+          "key" => :user_phone_number,
+          "type" => "string"
+        },
+        "04" => %{
+          "key" => :account_number,
+          "type" => "string"
+        },
+        "05" => %{
+          "key" => :responsability_type,
+          "type" => "string"
+        },
+        "06" => %{
+          "key" => :account_type,
+          "type" => "string"
+        },
+        "07" => %{
+          "key" => :product,
+          "type" => "string"
+        },
+        "08" => %{
+          "key" => :currency,
+          "type" => "string"
+        },
+        "09" => %{
+          "key" => :valuation_amount,
+          "type" => "string"
+        },
+        "10" => %{
+          "key" => :number_of_payments,
+          "type" => "string"
+        },
+        "11" => %{
+          "key" => :payment_frequency,
+          "type" => "string"
+        },
+        "12" => %{
+          "key" => :amount_to_pay,
+          "type" => "string"
+        },
+        "13" => %{
+          "key" => :date_of_account_opening,
+          "type" => "string"
+        },
+        "14" => %{
+          "key" => :last_date_of_payment,
+          "type" => "string"
+        },
+        "15" => %{
+          "key" => :last_date_of_use,
+          "type" => "string"
+        },
+        "16" => %{
+          "key" => :date_of_close,
+          "type" => "string"
+        },
+        "17" => %{
+          "key" => :date_of_report,
+          "type" => "string"
+        },
+        "18" => %{
+          "key" => :reporting_mode,
+          "type" => "string"
+        },
+        "19" => %{
+          "key" => :last_date_of_nil_balance,
+          "type" => "string"
+        },
+        "20" => %{
+          "key" => :warranty,
+          "type" => "string"
+        },
+        "21" => %{
+          "key" => :maximum_credit_authorized,
+          "type" => "string"
+        },
+        "22" => %{
+          "key" => :current_balance,
+          "type" => "string"
+        },
+        "23" => %{
+          "key" => :credit_limit,
+          "type" => "string"
+        },
+        "24" => %{
+          "key" => :balance_due,
+          "type" => "string"
+        },
+        "25" => %{
+          "key" => :,
+          "type" => "string"
+        },
+        "26" => %{
+          "key" => :,
+          "type" => "string"
+        },
+        "27" => %{
+          "key" => :date_of_update,
+          "type" => "date"
+        },
+        "28" => %{
+          "key" => :date_of_update,
+          "type" => "date"
+        },
       }
     },
     "IQ" => %{

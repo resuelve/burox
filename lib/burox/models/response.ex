@@ -80,7 +80,46 @@ defmodule Burox.Response.Credit do
   @moduledoc false
   defstruct [
     :date_update,
-    :record_disputed
+    :record_disputed,
+    :member_code,
+    :user_name,
+    :user_phone_number,
+    :account_number,
+    :responsability_type,
+    :account_type,
+    :product,
+    :currency,
+    :valuation_amount,
+    :number_of_payments,
+    :payment_frequency,
+    :amount_to_pay,
+    :date_of_account_opening,
+    :last_date_of_payment,
+    :last_date_of_use,
+    :date_of_close,
+    :date_of_last_report,
+    :reporting_mode,
+    :last_date_of_nil_balance,
+    :warranty,
+    :maximum_credit_authorized,
+    :current_balance,
+    :credit_limit,
+    :balance_due,
+    :number_of_due_payments,
+    :manner_of_payment,
+    :payments_history,
+    :last_date_of_payments_history,
+    :older_date_payments_history,
+    :observation_code,
+    :total_number_of_payments_reported,
+    :total_number_of_payments_with_MOP_02,
+    :total_number_of_payments_with_MOP_03,
+    :total_number_of_payments_with_MOP_04,
+    :total_number_of_payments_with_MOP_05,
+    :date_of_maximum_defaulting,
+    :slowness_in_pay_MOP,
+    :init_date_of_the_debt_reestructuring,
+    :amount_of_last_payment
   ]
 end
 
@@ -126,7 +165,7 @@ defmodule Burox.Response.ConsumerDeclaration do
   @moduledoc false
   defstruct [
     :type,
-    # :declaration
+    :declaration
   ]
 end
 
