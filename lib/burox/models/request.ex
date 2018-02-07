@@ -1,15 +1,9 @@
 defmodule Burox.Request.Person do
   @moduledoc false
 
-  # @enforce_keys [
-  #   :name, :middle_name,
-  #   :last_name, :last_name_2,
-  #   :birth_date
-  # ]
-
   defstruct [
-    :name,
-    :middle_name,
+    :first_name,
+    :second_name,
     :last_name,
     :last_name_2,
     :birth_date,
@@ -19,11 +13,6 @@ end
 
 defmodule Burox.Request.Address do
   @moduledoc false
-
-  # @enforce_keys [
-  #   :settlement, :municipality,
-  #   :city, :state, :zip_code
-  # ]
 
   defstruct [
     :street,
@@ -49,13 +38,13 @@ defmodule Burox.Request do
   @moduledoc """
   Basic struct to make requests to Buro de Crédito
   """
+  alias Burox.Request
 
   @enforce_keys [:person, :address]
 
   defstruct [
-    person: %Burox.Request.Person{},
-    address: %Burox.Request.Address{},
-    credit: %Burox.Request.Credit{}
+    person: %Request.Person{},
+    address: %Request.Address{},
+    credit: %Request.Credit{}
   ]
-
 end

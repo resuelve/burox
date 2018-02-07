@@ -1,7 +1,6 @@
 defmodule Burox do
-  @moduledoc """
-  Documentation for Burox.
-  """
+  @moduledoc File.read!("#{__DIR__}/../README.md")
+
   alias Burox.Request
 
   @doc """
@@ -9,12 +8,13 @@ defmodule Burox do
 
   ## Examples
 
-      iex> Burox.request_info{%Burox.Request{}}
-      {:ok}
+      iex> Burox.request{%Burox.Request{}}
+      {:ok, term}
 
   """
-  def request_info(data) do
-    request = struct!t statsu(Request, data)
+  @spec request(Burox.Request.t) :: {:ok, term} | {:error, term}
+  def request(data) do
+    request = struct(Request, data)
     case request do
       %Request{} -> {:ok}
       _ -> {:error}

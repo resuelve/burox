@@ -88,13 +88,18 @@ defmodule ParserTest do
   end
 
   test "match section value" do
-    string = "PN10Nombre 123PA123"
-    assert match_section(string, "PN", ["PN", "PA"]) == {%{"" => "Nombre 123"}, "PA123"}
+    string = "PN05Perez0005LopezPA123"
+    assert match_section(string, "PN", ["PN", "PA"]) ==
+    {
+      %{last_name: "Perez",
+        last_name_2: "Lopez"},
+      "PA123"
+    }
   end
 
   test "match multiple section values" do
     string = "PN06URBANO0004MAZA0206HECTOR0408160219880513UAMH880216S190802MX"
-    assert match_section(string, "PN", ["PN"]) == {%{ "" => "URBANO",
+    assert match_section(string, "PN", ["PN"]) == {%{"" => "URBANO",
                                              "00" => "MAZA",
                                              "02" => "HECTOR",
                                              "04" => "16021988",

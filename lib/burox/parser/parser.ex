@@ -1,17 +1,20 @@
 defmodule Burox.Parser do
   @moduledoc false
 
+  import Burox.Parser.ResponseMap
+  alias Burox.Response
+
   @success_sections [
-    "INTL",  # Reponse head
+    "INTL",  # Response header
     "PN",    # General info from client
-    "PA",    # Address
+    "PA",    # Client Addresses
+    "PE",    # Work Addresses
+    "TL",    # Credits or accounts
     "IQ",    # Queries of Buro de crédito
     "RS",    # Summary of Buro de Crédito
-    "PE",    # Work address
-    "TL",    # Credits or accounts
     "HI",    # HI Hawk Alert
     "HR",    # HR Hawk Alert
-    "CR",    # Declarativa?
+    "CR",    # Declarativa
     "SC",    # BC-Score
     "ES"     # End
   ]
@@ -31,7 +34,10 @@ defmodule Burox.Parser do
     response
     |> String.starts_with?("INTL")
     |> if  do
-      _process_response(response, @success_sections)
+      response
+      |> _process_response(@success_sections)
+      |> Map.to_list()
+      |> (&struct(Response, &1)).()
     else
       _process_response(response, @error_sections)
     end
@@ -41,8 +47,23 @@ defmodule Burox.Parser do
   # Process the response depending if it was succesful or failed.
   defp _process_response(response, sections) do
     Enum.reduce(sections, %{"tail" => response}, fn(tag, section_values) ->
+        # Seek for sections and their values
         {values, tail} = match_section(section_values["tail"], tag, sections)
-        Map.merge(section_values, %{tag => values, "tail" => tail})
+
+        # Read config to map section
+        section_key = sections_map[tag]["key"]
+        section_struct = sections_map[tag]["struct"]
+        type = sections_map[tag]["type"]
+
+        convert_to_list? = type == "list" and is_map(values)
+
+        values = if convert_to_list? do
+            if Enum.empty?(values), do: [] , else: [values]
+          else
+            values
+          end
+
+        Map.merge(section_values, %{section_key => values, "tail" => tail})
       end
     )
   end
@@ -84,7 +105,22 @@ defmodule Burox.Parser do
     |> elem(1)
     |> read_value()
 
-    values = Map.merge(values, %{tag => value})
+    merge = fn section_map ->
+      if is_nil(section_map) do
+        Map.merge(values, %{tag => value})
+      else
+        tag_model = section_map
+        |> Map.get("tags")
+        |> Map.get(tag)
+
+        Map.merge(values, %{tag_model["key"] => value})
+      end
+    end
+
+    values = sections_map()
+    |> Map.get(section)
+    |> merge.()
+
     next_tag = String.slice(tail, 0, 2)
 
     # Check if we reach the end of section
