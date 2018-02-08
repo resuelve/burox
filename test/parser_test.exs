@@ -3,81 +3,113 @@ defmodule ParserTest do
 
   import Burox.Parser
 
-  @success_response "INTL13                         MX0010FF4736100100PN06AVELAR0009HERNANDEZ0204JOSE0304LUIS0408131019830513AEHL8310136J6PA08HUERTA 10121VILLAS DE LA HACIENDA0220TLAJOMULCO DE ZUNIGA0320TLAJOMULCO DE ZUNIGA0403JAL0505456541208180720161302MXIQ08180720160110FF473610010208RESUELVE031055864796020402CC060100701I0801Y09010IQ0818072016000400000215BURO DE CREDITO0402CC0502MX06090000000000801Y09011RS08180720160002000102000202000302000402000502000602000702000802000904000010040000110400001204000013040000140400001502001602011701Y1805NNNNN1901N210900000000022090000000002310000000000+24090000000002509000000000260300027090000000002810000000000+29090000000003009000000000310200320200330200340800000000350800000000360201370818072016380200390800000000400200410800000000SC08BC SCORE00030070104-009ES0500811001012123420590102**"
+  @success_response "INTL13                         MX0010FF4736100100PN06AVELAR0009HERNANDEZ0204JOSE0304LUIS0408131019830513AEHL8310136J6PA08HUERTA 10121VILLAS DE LA HACIENDA0220TLAJOMULCO DE ZUNIGA0320TLAJOMULCO DE ZUNIGA0403JAL0505456541208180720161302MXIQ08180720160110FF473610010208RESUELVE031055864796020402CC060100701I0801Y09010IQ0818072016000400000215BURO DE CREDITO0402CC0502MX06090000000000801Y09011RS08180720160002000102000202000302000402000502000602000702000802000904000010040000110400001204000013040000140400001502001602011701Y1805NNNNN1901N210900000000022090000000002310000000000+24090000000002509000000000260300027090000000002810000000000+29090000000003009000000000310200320200330200340800000000350800000000360201370818072016380200390800000000400200410800000000SC08BC SCORE00030070103709ES0500811001012123420590102**"
 
   @error_response "ERRRUR25                         0506PN0408ES05000580002**"
 
   test "parse succesful response" do
     assert process_response(@success_response) ==
-      %{
-        "CR" => %{},
-        "ES" => %{"" => "00811", "00" => "1212342059", "01" => "**"},
-        "HI" => %{},
-        "HR" => %{},
-        "INTL" => "MX0010FF4736100",
-        "IQ" => [%{
-                    "" => "18072016", "01" => "FF47361001",
-                    "02" => "RESUELVE", "03" => "5586479602",
-                    "04" => "CC", "06" => "0",
-                    "07" => "I", "08" => "Y",
-                    "09" => "0"} |
-                 %{
-                   "" => "18072016", "00" => "0000", "01" => "FF47361001",
-                   "02" => "BURO DE CREDITO", "03" => "5586479602",
-                   "04" => "CC", "05" => "MX", "06" => "000000000",
-                   "07" => "I", "08" => "Y", "09" => "1", "IQ" => "18072016"}
-        ],
-        "PA" => %{
-          "" => "HUERTA 1", "01" => "VILLAS DE LA HACIENDA",
-          "02" => "TLAJOMULCO DE ZUNIGA", "03" => "TLAJOMULCO DE ZUNIGA",
-          "04" => "JAL", "05" => "45654", "12" => "18072016", "13" => "MX"},
-        "PE" => %{},
-        "PN" => %{
-          "" => "AVELAR", "00" => "HERNANDEZ",
-          "02" => "JOSE", "03" => "LUIS",
-          "04" => "13101983", "05" => "AEHL8310136J6"},
-        "RS" => %{
-          "10" => "0000",
-          "37" => "18072016",
-          "24" => "000000000",
-          "14" => "0000",
-          "12" => "0000",
-          "36" => "01",
-          "16" => "01",
-          "26" => "000",
-          "07" => "00",
-          "34" => "00000000",
-          "32" => "00",
-          "06" => "00",
-          "19" => "N",
-          "13" => "0000",
-          "04" => "00",
-          "11" => "0000",
-          "40" => "00",
-          "15" => "00",
-          "29" => "000000000",
-          "17" => "Y",
-          "25" => "000000000",
-          "39" => "00000000",
-          "28" => "000000000+",
-          "18" => "NNNNN",
-          "27" => "000000000",
-          "35" => "00000000",
-          "00" => "00",
-          "23" => "000000000+",
-          "" => "18072016",
-          "31" => "00",
-          "09" => "0000",
-          "41" => "00000000",
-          "02" => "00",
-          "30" => "000000000",
-          "22" => "000000000", "03" => "00",
-          "21" => "000000000", "38" => "00", "01" => "00",
-          "05" => "00", "08" => "00",
-          "33" => "00"},
-        "SC" => %{"" => "BC SCORE", "00" => "007", "01" => "-009"},
-        "TL" => %{},
-        "tail" => ""}
+    %Burox.Response{
+              addresses: [
+                %{
+                  city: "TLAJOMULCO DE ZUNIGA",
+                  country_code: "MX",
+                  date_of_registration: "18072016",
+                  municipality: "TLAJOMULCO DE ZUNIGA",
+                  settlement: "VILLAS DE LA HACIENDA",
+                  state: "JAL",
+                  street: "HUERTA 1",
+                  zip_code: "45654"
+                }
+              ],
+              consumer_declaration: %{},
+              credits: [],
+              hawk_inquiry: %{},
+              hawk_response: %{},
+              person: %{
+                birth_date: "13101983",
+                first_name: "JOSE",
+                last_name: "AVELAR",
+                last_name_2: "HERNANDEZ",
+                rfc: "AEHL8310136J6",
+                second_name: "LUIS"
+              },
+              queries: [
+                %{
+                  contract_value: "0",
+                  date_of_query: "18072016",
+                  member_code: "FF47361001",
+                  new_client_indicator: "Y",
+                  product: "CC",
+                  reserved: "0",
+                  responsability_type: "I",
+                  user_name: "RESUELVE",
+                  user_phone_number: "5586479602"
+                } |
+                %{
+                  contract_value: "000000000",
+                  currency: "MX",
+                  date_of_query: "18072016",
+                  member_code: "FF47361001",
+                  new_client_indicator: "Y",
+                  product: "CC",
+                  reserved: "1",
+                  responsability_type: "I",
+                  user_name: "BURO DE CREDITO",
+                  user_phone_number: "5586479602"
+                }
+              ],
+              score: %{
+                name: "BC SCORE",
+                score_code: "007",
+                score_value: "709"
+              },
+              summary: %{
+                number_of_accounts_with_MOP_01: "00",
+                number_of_accounts_with_MOP_97: "00",
+                opening_date_of_newest_account: "00000000",
+                most_recent_openning_date_of_account_in_collection_agency: "00000000",
+                total_limit_credit_of_accounts_with_revolving_credit: "000000000",
+                number_of_buro_requests_made_by_collection_agencies: "00",
+                date_of_latest_request: "18072016",
+                alert_message: "NNNNN",
+                total_maximum_credit_of_accounts_with_revolving_credit: "000000000",
+                number_of_accounts_with_MOP_04: "00",
+                number_of_buro_request: "01",
+                new_address_in_last_60_days: "Y",
+                total_maximum_credit_of_accounts_of_mortage_or_fixed_payments: "000000000",
+                number_of_accounts_with_MOP_03: "00",
+                date_of_integration: "18072016",
+                number_of_accounts_in_collection_agencies: "00",
+                number_of_accounts_with_MOP_00: "00",
+                number_of_accounts_with_MOP_96: "00",
+                total_payment_amount_of_accounts_with_revolving_credit: "000000000",
+                customer_declaration: "N",
+                number_of_accounts_in_clarification: "00",
+                percentage_of_limit_credit_of_accounts_with_revolving_credit: "000",
+                number_of_accounts_with_slowness_in_pay_history: "0000",
+                number_of_accounts_with_MOP_07: "00",
+                number_of_accounts_with_MOP_05: "00",
+                total_current_balance_of_accounts_of_mortage_or_fixed_payments: "000000000+",
+                number_of_closed_accounts: "0000",
+                date_of_last_request_of_buro_made_by_a_collection_agency: "00000000",
+                number_of_requests_to_client_record: "01",
+                number_of_accounts_with_MOP_06: "00",
+                number_of_accounts_of_mortage_or_fixed_payments: "0000",
+                number_of_accounts_with_current_slowness_in_pay: "0000",
+                total_balance_due_of_accounts_of_mortage_or_fixed_payments: "000000000",
+                number_of_accounts_with_MOP_98: "00",
+                number_of_accounts_with_MOP_02: "00",
+                opening_date_of_older_account: "00000000",
+                number_of_accounts_with_revolving_credit: "0000",
+                total_current_balance_of_accounts_with_revolving_credit: "000000000+",
+                number_of_accounts: "0000",
+                number_of_accounts_with_MOP_UR: "00",
+                total_payment_amount_of_accounts_of_mortage_or_fixed_payments: "000000000",
+                total_balance_due_of_accounts_with_revolving_credit: "000000000"
+              },
+              work_addresses: []
+            }
   end
 
   test "parse failed response" do
@@ -88,13 +120,18 @@ defmodule ParserTest do
   end
 
   test "match section value" do
-    string = "PN10Nombre 123PA123"
-    assert match_section(string, "PN", ["PN", "PA"]) == {%{"" => "Nombre 123"}, "PA123"}
+    string = "PN05Perez0005LopezPA123"
+    assert match_section(string, "PN", ["PN", "PA"]) ==
+    {
+      %{last_name: "Perez",
+        last_name_2: "Lopez"},
+      "PA123"
+    }
   end
 
   test "match multiple section values" do
     string = "PN06URBANO0004MAZA0206HECTOR0408160219880513UAMH880216S190802MX"
-    assert match_section(string, "PN", ["PN"]) == {%{ "" => "URBANO",
+    assert match_section(string, "PN", ["PN"]) == {%{"" => "URBANO",
                                              "00" => "MAZA",
                                              "02" => "HECTOR",
                                              "04" => "16021988",
