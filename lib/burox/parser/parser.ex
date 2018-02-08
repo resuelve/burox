@@ -54,6 +54,7 @@ defmodule Burox.Parser do
         section_key = sections_map[tag]["key"]
         section_struct = sections_map[tag]["struct"]
         type = sections_map[tag]["type"]
+        IO.inspect "#{section_key}"
 
         convert_to_list? = type == "list" and is_map(values)
 
@@ -113,6 +114,8 @@ defmodule Burox.Parser do
         |> Map.get("tags")
         |> Map.get(tag)
 
+        tag_key = tag_model["key"]
+
         Map.merge(values, %{tag_model["key"] => value})
       end
     end
@@ -124,13 +127,14 @@ defmodule Burox.Parser do
     next_tag = String.slice(tail, 0, 2)
 
     # Check if we reach the end of section
-    is_member = Enum.member?(sections, next_tag)
-    is_same_section = section == next_tag
+    is_member = Enum.member?(sections, next)
 
+    # Section could be a list instead of a map_tag
+    is_same_section = section == next_tag
     cond do
       is_same_section ->
         {next_values, final_tail} =
-          _match_section(section, tail, next_tag, values, sections)
+          _match_section(section, tail, "", values, sections)
 
         {[values] ++ next_values, final_tail}
       is_member ->
