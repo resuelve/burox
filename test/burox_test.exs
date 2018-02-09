@@ -48,11 +48,11 @@ defmodule BuroxTest do
   }
 
   test "Gets the information of a person in Buro de Crédito" do
-    assert Burox.request_info(@valid_person_data) == {:ok}
+    assert Burox.request(@valid_person_data) == {:ok}
   end
 
   test "Gets an error trying to get information of a person in Buro de Crédito" do
-    assert Burox.request_info(@invalid_person_data) == {:invalid}
+    assert Burox.request(@invalid_person_data) == {:invalid}
   end
 
 end

@@ -161,6 +161,10 @@ defmodule Burox.Parser.ResponseMap do
           "key" => :street,
           "type" => "string"
         },
+        "00" => %{
+          "key" => :street_2,
+          "type" => "string"
+        },
         "01" => %{
           "key" => :settlement,
           "type" => "string"
@@ -664,6 +668,18 @@ defmodule Burox.Parser.ResponseMap do
         "" => %{
           "key" => :date_of_report,
           "type" => "date"
+        },
+        "00" => %{
+          "key" => :preventon_code,
+          "type" => "string"
+        },
+        "01" => %{
+          "key" => :user_type,
+          "type" => "string"
+        },
+        "02" => %{
+          "key" => :message,
+          "type" => "string"
         }
       }
     },
@@ -675,6 +691,18 @@ defmodule Burox.Parser.ResponseMap do
         "" => %{
           "key" => :date_of_report,
           "type" => "date"
+        },
+        "00" => %{
+          "key" => :preventon_code,
+          "type" => "string"
+        },
+        "01" => %{
+          "key" => :user_type,
+          "type" => "string"
+        },
+        "02" => %{
+          "key" => :message,
+          "type" => "string"
         }
       }
     },
@@ -720,6 +748,25 @@ defmodule Burox.Parser.ResponseMap do
         },
         "06" => %{
           "key" => :error_code,
+          "type" => "string"
+        },
+      }
+    },
+    "ES" => %{
+      "key" => :end,
+      "struct" => Burox.Response.ConsumerDeclaration,
+      "type" => "map",
+      "tags" => %{
+        "" => %{
+          "key" => :longitude,
+          "type" => "integer"
+        },
+        "00" => %{
+          "key" => :request_id,
+          "type" => "string"
+        },
+        "01" => %{
+          "key" => :end,
           "type" => "string"
         },
       }
