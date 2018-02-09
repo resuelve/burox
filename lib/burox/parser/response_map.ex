@@ -714,7 +714,11 @@ defmodule Burox.Parser.ResponseMap do
         "" => %{
           "key" => :type,
           "type" => "string"
-        }
+        },
+        "00" => %{
+          "key" => :declaration,
+          "type" => "string"
+        },
       }
     },
     "SC" => %{

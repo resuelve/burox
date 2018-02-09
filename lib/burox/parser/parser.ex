@@ -96,10 +96,28 @@ defmodule Burox.Parser do
   # Retrieves values until the next section is found
   defp _match_section(_, "", _, values, _), do: {values, ""}
   defp _match_section(_, "", _, values, _), do: {values, ""}
+
   defp _match_section(section, tail, tag, values, sections) do
+
+    # Remove tag
+    tail = tail
+      |> String.split_at(2)
+      |> elem(1)
+
+    # Special case to get all
+    {value, tail} =
+    if section == "CR" && tal == "01" do
+      length = String.to_integer values["CR"][00]
+      tail
+      |> read_value(length)
+      |> extract_declarations()
+      else
+        read_value(tail)
+      end
 
     # Read the values
     {value, tail} = tail
+
     |> String.split_at(2)
     |> elem(1)
     |> read_value()
@@ -158,6 +176,10 @@ defmodule Burox.Parser do
     |> String.slice(0, 2)
     |> Integer.parse()
 
+    read_value(string, length)
+  end
+
+  defp read_value(string, length) do
     # Value starts after the lenght info
     value_start = 0 + 2
 
@@ -180,5 +202,29 @@ defmodule Burox.Parser do
     |> elem(1)
 
   end
+
+  # Parse a string to Date(), 'yyyymmmdd'
+  defp parse_string_to_date("000000000"), do: Date.new(1900, 01, 01)
+  defp parse_string_to_date(str_date) do
+    [d, m, y1, y2] = for <<x::binary-2 <- str_date>>, do: x
+
+    y1 <> y2
+    |> String.to_integer
+    |> Date.new(String.to_integer(m), String.to_integer(d))
+    |> elem(1)
+
+  end
+
+
+  # Extract declaration per credit accounts.
+  # They all start with ##CREDITO
+  defp extract_declarations(string) do
+
+    if (String.starts_with?("##")) do
+    string
+    |> String.split(string, ~r(##CREDITO))
+    |> Enum.map(fn(credit, index) ->
+      end
+    end)
 
 end

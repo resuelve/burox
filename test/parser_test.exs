@@ -883,6 +883,18 @@ defmodule ParserTest do
   end
 
 
+  test "match multiple customer declarations" do
+    string = "CR0400520000ESTA ES UNA DECLARATIVA DE PRUEBA##CREDITO01 POR CADA CREDITO EL CONSUMIDOR PUEDE MANIFESTAR SU INCONFORMIDAD##CREDITO02 CADA DECLARATIVA PUEDE CONTENER HASTA MIL PALABRAS##CREDITO03 LAS DECLARATIVAS SE DESPLEGARAN DE ACUERDO CON LA SECUENCIA DE LOS CREDITOS EN EL REPORTE DE CREDITOES"
+    assert match_section(string, "CR", ["CR"]) ==
+    {
+       %{
+        longitude: "Perez",
+        last_name_2: "Lopez"
+      ,
+      ""
+    }
+  end
+
   test "match multiple section values" do
     string = "PN06URBANO0004MAZA0206HECTOR0408160219880513UAMH880216S190802MX"
     assert match_section(string, "PN", ["PN"]) ==  {
