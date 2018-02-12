@@ -870,4 +870,22 @@ defmodule ParserTest do
 
   end
 
+  test "parse multiple sintetiza features" do
+    string = "CL02150001101019020523432CL021500011010210020820100203"
+    assert match_section(string, "CL", ["CL"]) == {
+      [%{
+          identifier_of_template_feature: "1",
+          number_of_feature: 9,
+          template_requested: "15",
+          value_of_feature: "23432"
+       } |
+       %{
+         identifier_of_template_feature: "1",
+         number_of_feature: 10,
+         template_requested: "15",
+         value_of_feature: "20100203"}
+      ], ""}
+
+  end
+
 end

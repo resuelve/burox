@@ -752,6 +752,33 @@ defmodule Burox.Parser.ResponseMap do
         },
       }
     },
+    "CL" => %{
+      "key" => :sintetiza,
+      "struct" => Burox.Response.Sintetiza,
+      "type" => "list",
+      "tags" => %{
+        "" => %{
+          "key" => :template_requested,
+          "type" => "string"
+        },
+        "00" => %{
+          "key" => :identifier_of_template_feature,
+          "type" => "string"
+        },
+        "01" => %{
+          "key" => :number_of_feature,
+          "type" => "integer"
+        },
+        "02" => %{
+          "key" => :value_of_feature,
+          "type" => "string"
+        },
+        "03" => %{
+          "key" => :error_code,
+          "type" => "string"
+        }
+      }
+    },
     "ES" => %{
       "key" => :end,
       "struct" => Burox.Response.ConsumerDeclaration,

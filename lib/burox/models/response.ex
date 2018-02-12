@@ -231,6 +231,17 @@ defmodule Burox.Response.Score do
   ]
 end
 
+defmodule Burox.Response.Sintetiza do
+  @moduledoc false
+  defstruct [
+    :template_requested,
+    :identifier_of_template_feature,
+    :number_of_feature,
+    :value_of_feature,
+    :error_code
+  ]
+end
+
 defmodule Burox.Response do
   @moduledoc """
   Basic struct for responses from Buro de Crédito
