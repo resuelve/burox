@@ -234,11 +234,11 @@ end
 defmodule Burox.Response.Sintetiza do
   @moduledoc false
   defstruct [
-    :template_requested,
-    :identifier_of_template_feature,
-    :number_of_feature,
-    :value_of_feature,
-    :error_code
+    :plantilla_solicitada,
+    :identificador_de_caracteristica_de_plantilla,
+    :numero_de_caracteristica,
+    :valor_de_la_caracteristica,
+    :codigo_de_error
   ]
 end
 

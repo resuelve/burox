@@ -117,7 +117,10 @@ defmodule Burox.Parser do
         |> Map.get("type")
         |> case  do
              "integer" -> String.to_integer(value)
-             "float" -> String.to_float(value)
+             "float" ->
+               value
+               |> Float.parse()
+               |> elem(0)
              "date" -> parse_string_to_date(value)
              _ -> value
            end

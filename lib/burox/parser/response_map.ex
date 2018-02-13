@@ -758,23 +758,23 @@ defmodule Burox.Parser.ResponseMap do
       "type" => "list",
       "tags" => %{
         "" => %{
-          "key" => :template_requested,
+          "key" => :plantilla_solicitada,
           "type" => "string"
         },
         "00" => %{
-          "key" => :identifier_of_template_feature,
+          "key" => :identificador_de_caracteristica_de_plantilla,
           "type" => "string"
         },
         "01" => %{
-          "key" => :number_of_feature,
+          "key" => :numero_de_caracteristica,
           "type" => "integer"
         },
         "02" => %{
-          "key" => :value_of_feature,
+          "key" => :valor_de_la_caracteristica,
           "type" => "string"
         },
         "03" => %{
-          "key" => :error_code,
+          "key" => :codigo_de_error,
           "type" => "string"
         }
       }
