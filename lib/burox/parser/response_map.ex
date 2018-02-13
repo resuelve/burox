@@ -666,19 +666,19 @@ defmodule Burox.Parser.ResponseMap do
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :date_of_report,
+          "key" => :fecha_de_reporte,
           "type" => "date"
         },
         "00" => %{
-          "key" => :preventon_code,
+          "key" => :codigo_de_la_prevencion,
           "type" => "string"
         },
         "01" => %{
-          "key" => :user_type,
+          "key" => :tipo_de_usuario,
           "type" => "string"
         },
         "02" => %{
-          "key" => :message,
+          "key" => :mensaje,
           "type" => "string"
         }
       }
@@ -689,19 +689,19 @@ defmodule Burox.Parser.ResponseMap do
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :date_of_report,
+          "key" => :fecha_de_reporte,
           "type" => "date"
         },
         "00" => %{
-          "key" => :preventon_code,
+          "key" => :codigo_de_la_prevencion,
           "type" => "string"
         },
         "01" => %{
-          "key" => :user_type,
+          "key" => :tipo_de_usuario,
           "type" => "string"
         },
         "02" => %{
-          "key" => :message,
+          "key" => :mensaje,
           "type" => "string"
         }
       }

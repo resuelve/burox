@@ -858,6 +858,31 @@ defmodule ParserTest do
     }
   end
 
+  test "match inquiry HWK section" do
+    string = "HI083105201500035200116SERV. PUB. SANC.0219003-24052015- - -0-"
+    assert match_section(string, "HI", ["HI", "HR"]) ==
+    {
+      %{
+        codigo_de_la_prevencion: "520",
+        fecha_de_reporte: ~D[2015-05-31],
+        mensaje: "003-24052015- - -0-",
+        tipo_de_usuario: "SERV. PUB. SANC."
+      }, ""}
+  end
+
+  test "match response HWK section" do
+    string = "HR081112201500035400116SERV. PUB. SANC.02335006-15072015-16072015-12012017-5"
+    assert match_section(string, "HR", ["HR"]) ==
+    {
+      %{
+        tipo_de_usuario: "SERV. PUB. SANC.",
+        codigo_de_la_prevencion: "540",
+        fecha_de_reporte: ~D[2015-12-11],
+        mensaje: "5006-15072015-16072015-12012017-5"
+      }, ""}
+  end
+
+
   test "match multiple section values" do
     string = "PN06URBANO0004MAZA0206HECTOR0408160219880513UAMH880216S190802MX"
     assert match_section(string, "PN", ["PN"]) ==  {
