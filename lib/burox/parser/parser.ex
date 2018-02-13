@@ -52,9 +52,7 @@ defmodule Burox.Parser do
 
         # Read config to map section
         section_key = sections_map[tag]["key"]
-        section_struct = sections_map[tag]["struct"]
         type = sections_map[tag]["type"]
-        IO.inspect "#{section_key}"
 
         convert_to_list? = type == "list" and is_map(values)
 
@@ -115,8 +113,16 @@ defmodule Burox.Parser do
         |> Map.get(tag)
 
         tag_key = tag_model["key"]
+        value = tag_model
+        |> Map.get("type")
+        |> case  do
+             "integer" -> String.to_integer(value)
+             "float" -> String.to_float(value)
+             "date" -> parse_string_to_date(value)
+             _ -> value
+           end
 
-        Map.merge(values, %{tag_model["key"] => value})
+        Map.merge(values, %{tag_key => value})
       end
     end
 
@@ -127,7 +133,7 @@ defmodule Burox.Parser do
     next_tag = String.slice(tail, 0, 2)
 
     # Check if we reach the end of section
-    is_member = Enum.member?(sections, next)
+    is_member = Enum.member?(sections, next_tag)
 
     # Section could be a list instead of a map_tag
     is_same_section = section == next_tag
@@ -161,6 +167,17 @@ defmodule Burox.Parser do
     |> elem(1)
 
     {String.slice(string, value_start, length), tail}
+  end
+
+  # Parse a string to Date(), 'yyyymmmdd'
+  defp parse_string_to_date("000000000"), do: Date.new(1900, 01, 01)
+  defp parse_string_to_date(str_date) do
+    [d, m, y1, y2] = for <<x::binary-2 <- str_date>>, do: x
+
+    y1 <> y2
+    |> String.to_integer
+    |> Date.new(String.to_integer(m), String.to_integer(d))
+    |> elem(1)
 
   end
 

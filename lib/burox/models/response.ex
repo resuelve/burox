@@ -193,14 +193,20 @@ end
 defmodule Burox.Response.HawkInquiry do
   @moduledoc false
   defstruct [
-    :date_of_report
+    :fecha_de_reporte,
+    :codigo_de_la_prevencion,
+    :tipo_de_usuario,
+    :mensaje
   ]
 end
 
 defmodule Burox.Response.HawkResponse do
   @moduledoc false
   defstruct [
-    :date_of_report
+    :fecha_de_reporte,
+    :codigo_de_la_prevencion,
+    :tipo_de_usuario,
+    :mensaje
   ]
 end
 
