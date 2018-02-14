@@ -104,23 +104,18 @@ defmodule Burox.Parser do
       |> String.split_at(2)
       |> elem(1)
 
-    # Special case to get all
+    # Caso especial para extraer las declarativas del cliente en una lista
     {value, tail} =
-    if section == "CR" && tal == "01" do
-      length = String.to_integer values["CR"][00]
+    if section == "CR" && tag == "00" do
+      length = String.to_integer(values[:tipo_de_segmento])
+
       tail
-      |> read_value(length)
-      |> extract_declarations()
-      else
-        read_value(tail)
-      end
-
-    # Read the values
-    {value, tail} = tail
-
-    |> String.split_at(2)
-    |> elem(1)
-    |> read_value()
+      |> read_value()
+      |> elem(1)
+      |> extract_declarations(length)
+    else
+      read_value(tail)
+    end
 
     merge = fn section_map ->
       if is_nil(section_map) do
@@ -216,15 +211,26 @@ defmodule Burox.Parser do
   end
 
 
-  # Extract declaration per credit accounts.
-  # They all start with ##CREDITO
-  defp extract_declarations(string) do
+  # Esta función ayuda a separar las declarativas de credito
+  # Estan estan en una sola cadena separadas por ##CREDITO
+  def extract_declarations(string, length) do
+    {string, tail} = String.split_at(string, length)
+    only_credits? = String.starts_with?(string, "##")
 
-    if (String.starts_with?("##")) do
-    string
-    |> String.split(string, ~r(##CREDITO))
-    |> Enum.map(fn(credit, index) ->
-      end
-    end)
+    # Las declarativas se presentan de acuerdo a la secuencia de los
+    # créditos mostrados en el buro
+
+    value = string
+      |> String.split(~r(##CREDITO))
+      |> Enum.with_index()
+      |> Enum.map(fn {credit, index} ->
+           if index == 0 && !only_credits? do
+             {"Expediente", credit}
+           else
+             String.split_at(credit, 2)
+           end
+         end)
+    {value, tail}
+  end
 
 end

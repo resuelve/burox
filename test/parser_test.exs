@@ -24,7 +24,7 @@ defmodule ParserTest do
                   zip_code: "45654"
                 }
               ],
-              consumer_declaration: %{},
+              declarativa_consumidor: %{},
               credits: [],
               hawk_inquiry: %{},
               hawk_response: %{},
@@ -169,7 +169,7 @@ defmodule ParserTest do
                   zip_code: "72000"
                 }
               ],
-              consumer_declaration: %{},
+              declarativa_consumidor: %{},
               credits: [
                 %{
                   account_type: "R",
@@ -882,17 +882,17 @@ defmodule ParserTest do
       }, ""}
   end
 
-
-  test "match multiple customer declarations" do
-    string = "CR0400520000ESTA ES UNA DECLARATIVA DE PRUEBA##CREDITO01 POR CADA CREDITO EL CONSUMIDOR PUEDE MANIFESTAR SU INCONFORMIDAD##CREDITO02 CADA DECLARATIVA PUEDE CONTENER HASTA MIL PALABRAS##CREDITO03 LAS DECLARATIVAS SE DESPLEGARAN DE ACUERDO CON LA SECUENCIA DE LOS CREDITOS EN EL REPORTE DE CREDITOES"
+  test "Extraer varias declarativas del cliente" do
+    string = "CR0402700000ESTA ES UNA DECLARATIVA DE PRUEBA##CREDITO01 POR CADA CREDITO EL CONSUMIDOR PUEDE MANIFESTAR SU INCONFORMIDAD##CREDITO02 CADA DECLARATIVA PUEDE CONTENER HASTA MIL PALABRAS##CREDITO03 LAS DECLARATIVAS SE DESPLEGARAN DE ACUERDO CON LA SECUENCIA DE LOS CREDITOS"
     assert match_section(string, "CR", ["CR"]) ==
     {
-       %{
-        longitude: "Perez",
-        last_name_2: "Lopez"
-      ,
-      ""
-    }
+      %{
+        declarativa: [
+          {"Expediente", "ESTA ES UNA DECLARATIVA DE PRUEBA"},
+          {"01", " POR CADA CREDITO EL CONSUMIDOR PUEDE MANIFESTAR SU INCONFORMIDAD"},
+          {"02", " CADA DECLARATIVA PUEDE CONTENER HASTA MIL PALABRAS"},
+          {"03", " LAS DECLARATIVAS SE DESPLEGARAN DE ACUERDO CON LA SECUENCIA DE LOS CREDITOS"}],
+        tipo_de_segmento: "0270"}, ""}
   end
 
   test "match multiple section values" do
