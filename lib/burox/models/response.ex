@@ -210,11 +210,11 @@ defmodule Burox.Response.HawkResponse do
   ]
 end
 
-defmodule Burox.Response.ConsumerDeclaration do
+defmodule Burox.Response.DeclarativaConsumidor do
   @moduledoc false
   defstruct [
-    :type,
-    :declaration
+    :tipo_de_segmento,
+    :declarativa
   ]
 end
 
@@ -247,7 +247,7 @@ defmodule Burox.Response do
     summary: %Response.Summary{},
     hawk_inquiry: %Response.HawkInquiry{},
     hawk_response: %Response.HawkInquiry{},
-    consumer_declaration: [%Response.ConsumerDeclaration{}],
+    declarativa_consumidor: [%Response.DeclarativaConsumidor{}],
     score: %Response.Score{}
   ]
 

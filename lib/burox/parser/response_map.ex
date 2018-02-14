@@ -707,17 +707,17 @@ defmodule Burox.Parser.ResponseMap do
       }
     },
     "CR" => %{
-      "key" => :consumer_declaration,
-      "struct" => Burox.Response.ConsumerDeclaration,
+      "key" => :declarativa_consumidor,
+      "struct" => Burox.Response.DeclarativaConsumidor,
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :type,
+          "key" => :tipo_de_segmento,
           "type" => "string"
         },
         "00" => %{
-          "key" => :declaration,
-          "type" => "string"
+          "key" => :declarativa,
+          "type" => "list"
         },
       }
     },
@@ -758,7 +758,7 @@ defmodule Burox.Parser.ResponseMap do
     },
     "ES" => %{
       "key" => :end,
-      "struct" => Burox.Response.ConsumerDeclaration,
+      "struct" => Burox.Response.DeclarativaConsumidor,
       "type" => "map",
       "tags" => %{
         "" => %{
