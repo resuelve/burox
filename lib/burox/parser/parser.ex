@@ -16,6 +16,7 @@ defmodule Burox.Parser do
     "HR",    # HR Hawk Alert
     "CR",    # Declarativa
     "SC",    # BC-Score
+    "CL",    # Sintetiza
     "ES"     # End
   ]
 
@@ -96,13 +97,26 @@ defmodule Burox.Parser do
   # Retrieves values until the next section is found
   defp _match_section(_, "", _, values, _), do: {values, ""}
   defp _match_section(_, "", _, values, _), do: {values, ""}
+
   defp _match_section(section, tail, tag, values, sections) do
 
-    # Read the values
-    {value, tail} = tail
-    |> String.split_at(2)
-    |> elem(1)
-    |> read_value()
+    # Eliminar Tag
+    tail = tail
+      |> String.split_at(2)
+      |> elem(1)
+
+    # Caso especial para extraer las declarativas del cliente en una lista
+    {value, tail} =
+    if section == "CR" && tag == "00" do
+      length = String.to_integer(values[:tipo_de_segmento])
+
+      tail
+      |> read_value()
+      |> elem(1)
+      |> extract_declarations(length)
+    else
+      read_value(tail)
+    end
 
     merge = fn section_map ->
       if is_nil(section_map) do
@@ -117,7 +131,10 @@ defmodule Burox.Parser do
         |> Map.get("type")
         |> case  do
              "integer" -> String.to_integer(value)
-             "float" -> String.to_float(value)
+             "float" ->
+               value
+               |> Float.parse()
+               |> elem(0)
              "date" -> parse_string_to_date(value)
              _ -> value
            end
@@ -158,6 +175,10 @@ defmodule Burox.Parser do
     |> String.slice(0, 2)
     |> Integer.parse()
 
+    read_value(string, length)
+  end
+
+  defp read_value(string, length) do
     # Value starts after the lenght info
     value_start = 0 + 2
 
@@ -169,8 +190,8 @@ defmodule Burox.Parser do
     {String.slice(string, value_start, length), tail}
   end
 
-  # Parse a string to Date(), 'yyyymmmdd'
-  defp parse_string_to_date("000000000"), do: Date.new(1900, 01, 01)
+  # Convierte una cadena a Fecha, 'yyyymmmdd'
+  defp parse_string_to_date("000000000"), do: nil
   defp parse_string_to_date(str_date) do
     [d, m, y1, y2] = for <<x::binary-2 <- str_date>>, do: x
 
@@ -179,6 +200,28 @@ defmodule Burox.Parser do
     |> Date.new(String.to_integer(m), String.to_integer(d))
     |> elem(1)
 
+  end
+
+  # Esta función ayuda a separar las declarativas de credito
+  # Estan estan en una sola cadena separadas por ##CREDITO
+  def extract_declarations(string, length) do
+    {string, tail} = String.split_at(string, length)
+    only_credits? = String.starts_with?(string, "##")
+
+    # Las declarativas se presentan de acuerdo a la secuencia de los
+    # créditos mostrados en el buro
+
+    value = string
+      |> String.split(~r(##CREDITO))
+      |> Enum.with_index()
+      |> Enum.map(fn {credit, index} ->
+           if index == 0 && !only_credits? do
+             {"Expediente", credit}
+           else
+             String.split_at(credit, 2)
+           end
+         end)
+    {value, tail}
   end
 
 end
