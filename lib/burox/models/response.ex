@@ -231,6 +231,17 @@ defmodule Burox.Response.Score do
   ]
 end
 
+defmodule Burox.Response.Sintetiza do
+  @moduledoc false
+  defstruct [
+    :plantilla_solicitada,
+    :identificador_de_caracteristica_de_plantilla,
+    :numero_de_caracteristica,
+    :valor_de_la_caracteristica,
+    :codigo_de_error
+  ]
+end
+
 defmodule Burox.Response do
   @moduledoc """
   Basic struct for responses from Buro de Crédito

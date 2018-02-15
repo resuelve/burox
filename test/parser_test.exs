@@ -898,12 +898,31 @@ defmodule ParserTest do
   test "match multiple section values" do
     string = "PN06URBANO0004MAZA0206HECTOR0408160219880513UAMH880216S190802MX"
     assert match_section(string, "PN", ["PN"]) ==  {
-      %{:birth_date => "16021988",
+      %{:birth_date => ~D[1988-02-16],
         :first_name => "HECTOR",
         :last_name => "URBANO",
         :last_name_2 => "MAZA",
         :nationality => "MX",
         :rfc => "UAMH880216S19"}, ""}
+
+  end
+
+  test "parse multiple sintetiza features" do
+    string = "CL02150001101019020523432CL021500011010210020820100203"
+    assert match_section(string, "CL", ["CL"]) == {
+      [%{
+          identificador_de_caracteristica_de_plantilla: "1",
+          numero_de_caracteristica: 9,
+          plantilla_solicitada: "15",
+          valor_de_la_caracteristica: "23432"
+       } |
+       %{
+         identificador_de_caracteristica_de_plantilla: "1",
+         numero_de_caracteristica: 10,
+         plantilla_solicitada: "15",
+         valor_de_la_caracteristica: "20100203"
+       }
+      ], ""}
 
   end
 
