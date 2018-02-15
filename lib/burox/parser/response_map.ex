@@ -3,28 +3,28 @@ defmodule Burox.Parser.ResponseMap do
 
   @sections_map %{
     "PN" => %{
-      "key" => :person,
-      "struct" => Burox.Response.Person,
+      "key" => :persona,
+      "struct" => Burox.Response.Persona,
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :last_name,
+          "key" => :apellido_paterno,
           "type" => "string"
         },
         "00" => %{
-          "key" => :last_name_2,
+          "key" => :apellido_materno,
           "type" => "string"
         },
         "02" => %{
-          "key" => :first_name,
+          "key" => :primer_nombre,
           "type" => "string"
         },
         "03" => %{
-          "key" => :second_name,
+          "key" => :segundo_nombre,
           "type" => "string"
         },
         "04" => %{
-          "key" => :birth_date,
+          "key" => :fecha_de_nacimiento,
           "type" => "date"
         },
         "05" => %{
@@ -32,39 +32,39 @@ defmodule Burox.Parser.ResponseMap do
           "type" => "string"
         },
         "06" => %{
-          "key" => :title,
+          "key" => :prefijo_personal,
           "type" => "string"
         },
         "07" => %{
-          "key" => :sufix,
+          "key" => :sufijo_personal,
           "type" => "string"
         },
         "08" => %{
-          "key" => :nationality,
+          "key" => :nacionalidad,
           "type" => "string"
         },
         "09" => %{
-          "key" => :residential_type,
+          "key" => :tipo_de_residencia,
           "type" => "string"
         },
         "10" => %{
-          "key" => :license_id,
+          "key" => :numero_de_licencia_de_conducir,
           "type" => "string"
         },
         "11" => %{
-          "key" => :marital_status,
+          "key" => :estado_civil,
           "type" => "string"
         },
         "12" => %{
-          "key" => :genre,
+          "key" => :genero,
           "type" => "string"
         },
         "13" => %{
-          "key" => :professional_license_id,
+          "key" => :numero_de_cedula_profesional,
           "type" => "string"
         },
         "14" => %{
-          "key" => :identity_id,
+          "key" => :numero_de_registro_electoral,
           "type" => "string"
         },
         "15" => %{
@@ -72,62 +72,62 @@ defmodule Burox.Parser.ResponseMap do
           "type" => "string"
         },
         "16" => %{
-          "key" => :country_code,
+          "key" => :clave_de_pais,
           "type" => "string"
         },
         "17" => %{
-          "key" => :dependents_number,
+          "key" => :numero_de_dependientes,
           "type" => "string"
         },
         "18" => %{
-          "key" => :dependents_registration_date,
-          "type" => "string"
+          "key" => :fecha_de_defuncion,
+          "type" => "date"
         }
       }
     },
     "PA" => %{
-      "key" => :addresses,
-      "struct" => Burox.Response.Address,
+      "key" => :direcciones,
+      "struct" => Burox.Response.Direccion,
       "type" => "list",
       "tags" => %{
         "" => %{
-          "key" => :street,
+          "key" => :primera_linea_de_direccion,
+          "type" => "string"
+        },
+        "00" => %{
+          "key" => :segunda_linea_de_direccion,
           "type" => "string"
         },
         "01" => %{
-          "key" => :settlement,
+          "key" => :colonia,
           "type" => "string"
         },
         "02" => %{
-          "key" => :municipality,
+          "key" => :municipio,
           "type" => "string"
         },
         "03" => %{
-          "key" => :city,
+          "key" => :ciudad,
           "type" => "string"
         },
         "04" => %{
-          "key" => :state,
-          "type" => "string"
-        },
-        "04" => %{
-          "key" => :state,
+          "key" => :estado,
           "type" => "string"
         },
         "05" => %{
-          "key" => :zip_code,
+          "key" => :codigo_postal,
           "type" => "string"
         },
         "06" => %{
-          "key" => :date_of_residence,
+          "key" => :fecha_de_residencia,
           "type" => "date"
         },
         "07" => %{
-          "key" => :phone_number,
+          "key" => :numero_de_telefono,
           "type" => "string"
         },
         "08" => %{
-          "key" => :ext,
+          "key" => :extension_telefonica,
           "type" => "string"
         },
         "09" => %{
@@ -135,70 +135,66 @@ defmodule Burox.Parser.ResponseMap do
           "type" => "string"
         },
         "10" => %{
-          "key" => :type,
+          "key" => :tipo_de_domicilio,
           "type" => "string"
         },
         "11" => %{
-          "key" => :special_indicator,
+          "key" => :indicador_especial,
           "type" => "string"
         },
         "12" => %{
-          "key" => :date_of_registration,
+          "key" => :fecha_de_reporte_de_la_direccion,
           "type" => "date"
         },
         "13" => %{
-          "key" => :country_code,
+          "key" => :origen_del_domicilio,
           "type" => "string"
         }
       }
     },
     "PE" => %{
-      "key" => :work_addresses,
-      "struct" => Burox.Response.WorkAddress,
+      "key" => :direcciones_de_trabajo,
+      "struct" => Burox.Response.DireccionDeTrabajo,
       "type" => "list",
       "tags" => %{
         "" => %{
-          "key" => :street,
+          "key" => :primera_linea_de_direccion,
           "type" => "string"
         },
         "00" => %{
-          "key" => :street_2,
+          "key" => :segunda_linea_de_direccion,
           "type" => "string"
         },
         "01" => %{
-          "key" => :settlement,
+          "key" => :colonia,
           "type" => "string"
         },
         "02" => %{
-          "key" => :municipality,
+          "key" => :municipio,
           "type" => "string"
         },
         "03" => %{
-          "key" => :city,
+          "key" => :ciudad,
           "type" => "string"
         },
         "04" => %{
-          "key" => :state,
-          "type" => "string"
-        },
-        "04" => %{
-          "key" => :state,
+          "key" => :estado,
           "type" => "string"
         },
         "05" => %{
-          "key" => :zip_code,
+          "key" => :codigo_postal,
           "type" => "string"
         },
         "06" => %{
-          "key" => :date_of_residence,
+          "key" => :fecha_de_residencia,
           "type" => "date"
         },
         "07" => %{
-          "key" => :phone_number,
+          "key" => :numero_de_telefono,
           "type" => "string"
         },
         "08" => %{
-          "key" => :ext,
+          "key" => :extension_telefonica,
           "type" => "string"
         },
         "09" => %{
@@ -206,233 +202,233 @@ defmodule Burox.Parser.ResponseMap do
           "type" => "string"
         },
         "10" => %{
-          "key" => :ocuppation,
+          "key" => :ocupacion,
           "type" => "string"
         },
         "11" => %{
-          "key" => :date_of_hire,
+          "key" => :fecha_de_contratacion,
           "type" => "date"
         },
         "12" => %{
-          "key" => :currency_of_salary,
+          "key" => :clave_de_la_moneda_del_sueldo,
           "type" => "string"
         },
         "13" => %{
-          "key" => :salary,
+          "key" => :salario,
           "type" => "float"
         },
         "14" => %{
-          "key" => :payment_period,
+          "key" => :perido_de_pago,
           "type" => "string"
         },
         "15" => %{
-          "key" => :employee_number,
+          "key" => :numero_de_empleado,
           "type" => "string"
         },
         "16" => %{
-          "key" => :last_day_of_employment,
+          "key" => :fecha_de_ultimo_dia_de_empleo,
           "type" => "date"
         },
         "17" => %{
-          "key" => :date_of_registration,
+          "key" => :fecha_de_reporte_de_empleo,
           "type" => "date"
         },
         "18" => %{
-          "key" => :date_of_verification,
+          "key" => :fecha_de_verificacion_de_empleo,
           "type" => "date"
         },
         "19" => %{
-          "key" => :verification_method,
+          "key" => :modo_de_verificacion,
           "type" => "string"
         },
         "20" => %{
-          "key" => :country_code,
+          "key" => :origen_de_la_razon_social,
           "type" => "string"
         }
       }
     },
     "TL" => %{
-      "key" => :credits,
-      "struct" => Burox.Response.Credit,
+      "key" => :creditos,
+      "struct" => Burox.Response.Credito,
       "type" => "list",
       "tags" => %{
         "" => %{
-          "key" => :date_of_update,
+          "key" => :fecha_de_actualizacion,
           "type" => "date"
         },
         "00" => %{
-          "key" => :record_disputed,
+          "key" => :registro_impugando,
           "type" => "string"
         },
         "01" => %{
-          "key" => :member_code,
+          "key" => :clave_del_usuario,
           "type" => "string"
         },
         "02" => %{
-          "key" => :user_name,
+          "key" => :nombre_del_usuario,
           "type" => "string"
         },
         "03" => %{
-          "key" => :user_phone_number,
+          "key" => :numero_telefonico_del_usuario,
           "type" => "string"
         },
         "04" => %{
-          "key" => :account_number,
+          "key" => :numero_de_cuenta,
           "type" => "string"
         },
         "05" => %{
-          "key" => :responsability_type,
+          "key" => :tipo_de_responsabilidad_de_la_cuenta,
           "type" => "string"
         },
         "06" => %{
-          "key" => :account_type,
+          "key" => :tipo_de_cuenta,
           "type" => "string"
         },
         "07" => %{
-          "key" => :product,
+          "key" => :tipo_de_producto,
           "type" => "string"
         },
         "08" => %{
-          "key" => :currency,
+          "key" => :moneda_del_credito,
           "type" => "string"
         },
         "09" => %{
-          "key" => :valuation_amount,
+          "key" => :importe_del_avaluo,
           "type" => "float"
         },
         "10" => %{
-          "key" => :number_of_payments,
+          "key" => :numero_de_pagos,
           "type" => "integer"
         },
         "11" => %{
-          "key" => :payment_frequency,
+          "key" => :frecuencia_de_pagos,
           "type" => "string"
         },
         "12" => %{
-          "key" => :amount_to_pay,
+          "key" => :monto_a_pagar,
           "type" => "float"
         },
         "13" => %{
-          "key" => :date_of_account_opening,
+          "key" => :fecha_de_apertura_de_cuenta,
           "type" => "date"
         },
         "14" => %{
-          "key" => :last_date_of_payment,
+          "key" => :fecha_de_ultimo_pago,
           "type" => "date"
         },
         "15" => %{
-          "key" => :last_date_of_use,
+          "key" => :fecha_de_ultima_compra,
           "type" => "date"
         },
         "16" => %{
-          "key" => :date_of_close,
+          "key" => :fecha_de_cierre,
           "type" => "date"
         },
         "17" => %{
-          "key" => :date_of_report,
+          "key" => :fecha_de_reporte_de_informacion,
           "type" => "date"
         },
         "18" => %{
-          "key" => :reporting_mode,
+          "key" => :modo_de_reportar,
           "type" => "string"
         },
         "19" => %{
-          "key" => :last_date_of_nil_balance,
+          "key" => :ultima_fecha_de_saldo_cero,
           "type" => "date"
         },
         "20" => %{
-          "key" => :warranty,
+          "key" => :garantia,
           "type" => "string"
         },
         "21" => %{
-          "key" => :maximum_credit_authorized,
+          "key" => :credito_maximo_autorizado,
           "type" => "float"
         },
         "22" => %{
-          "key" => :current_balance,
+          "key" => :saldo_actual,
           "type" => "float"
         },
         "23" => %{
-          "key" => :credit_limit,
+          "key" => :limite_de_credito,
           "type" => "float"
         },
         "24" => %{
-          "key" => :balance_due,
+          "key" => :saldo_vencido,
           "type" => "float"
         },
         "25" => %{
-          "key" => :number_of_payments_due,
+          "key" => :numero_de_pagos_vencidos,
           "type" => "integer"
         },
         "26" => %{
-          "key" => :manner_of_payment,
+          "key" => :clasificacion_de_puntualidad_de_pago,
           "type" => "string"
         },
         "27" => %{
-          "key" => :payments_history,
+          "key" => :historico_de_pagos,
           "type" => "string"
         },
         "28" => %{
-          "key" => :last_date_of_payments_history,
+          "key" => :fecha_mas_reciente_del_historico_de_pagos,
           "type" => "date"
         },
         "29" => %{
-          "key" => :older_date_payments_history,
+          "key" => :fecha_mas_antigua_del_historico_de_pagos,
           "type" => "date"
         },
         "30" => %{
-          "key" => :observation_code,
+          "key" => :clave_de_observacion,
           "type" => "string"
         },
         "31" => %{
-          "key" => :total_number_of_payments_reported,
+          "key" => :total_de_pagos_reportados,
           "type" => "integer"
         },
         "32" => %{
-          "key" => :total_number_of_payments_with_MOP_02,
+          "key" => :total_de_pagos_con_MOP_02,
           "type" => "integer"
         },
         "33" => %{
-          "key" => :total_number_of_payments_with_MOP_03,
+          "key" => :total_de_pagos_con_MOP_03,
           "type" => "integer"
         },
         "34" => %{
-          "key" => :total_number_of_payments_with_MOP_04,
+          "key" => :total_de_pagos_con_MOP_04,
           "type" => "integer"
         },
         "35" => %{
-          "key" => :total_number_of_payments_with_MOP_05_or_more,
+          "key" => :total_de_pagos_con_MOP_05_o_mayor,
           "type" => "integer"
         },
         "36" => %{
-          "key" => :maximum_balance_of_defaulting,
+          "key" => :saldo_de_la_morosidad_historica_mas_alta,
           "type" => "float"
         },
         "37" => %{
-          "key" => :date_of_maximum_defaulting,
+          "key" => :fecha_de_la_morosidad_historica_mas_alta,
           "type" => "date"
         },
         "38" => %{
-          "key" => :slowness_in_pay_MOP,
+          "key" => :MOP_de_la_morosidad_mas_alta,
           "type" => "string"
         },
         "42" => %{
-          "key" => :init_date_of_the_debt_reestructuring,
+          "key" => :fecha_de_inicio_de_la_reestructura,
           "type" => "date"
         },
         "45" => %{
-          "key" => :amount_of_last_payment,
+          "key" => :monto_del_ultimo_pago,
           "type" => "float"
         }
       }
     },
     "IQ" => %{
-      "key" => :queries,
-      "struct" => Burox.Response.Query,
+      "key" => :consultas,
+      "struct" => Burox.Response.Consulta,
       "type" => "list",
       "tags" => %{
         "" => %{
-          "key" => :date_of_query,
+          "key" => :fecha_de_consulta,
           "type" => "date"
         },
         "00" => %{
@@ -440,39 +436,35 @@ defmodule Burox.Parser.ResponseMap do
           "type" => "string"
         },
         "01" => %{
-          "key" => :member_code,
+          "key" => :clave_del_usuario,
           "type" => "string"
         },
         "02" => %{
-          "key" => :user_name,
+          "key" => :nombre_del_usuario,
           "type" => "string"
         },
         "03" => %{
-          "key" => :user_phone_number,
+          "key" => :numero_telefonico_del_usuario,
           "type" => "string"
         },
         "04" => %{
-          "key" => :product,
+          "key" => :tipo_de_producto,
           "type" => "string"
         },
         "05" => %{
-          "key" => :currency,
+          "key" => :moneda_del_credito,
           "type" => "string"
         },
         "06" => %{
-          "key" => :credit_amount,
-          "type" => "date"
-        },
-        "06" => %{
-          "key" => :contract_value,
+          "key" => :importe_del_credito,
           "type" => "string"
         },
         "07" => %{
-          "key" => :responsability_type,
+          "key" => :tipo_de_responsabilidad_de_la_cuenta,
           "type" => "string"
         },
         "08" => %{
-          "key" => :new_client_indicator,
+          "key" => :indicador_de_cliente_nuevo,
           "type" => "string"
         },
         "09" => %{
@@ -482,180 +474,180 @@ defmodule Burox.Parser.ResponseMap do
       }
     },
     "RS" => %{
-      "key" => :summary,
-      "struct" => Burox.Response.Summary,
+      "key" => :resumen,
+      "struct" => Burox.Response.Resumen,
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :date_of_integration,
-          "type" => "string"
+          "key" => :fecha_de_integracion,
+          "type" => "date"
         },
         "00" => %{
-          "key" => :number_of_accounts_with_MOP_07,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_07,
+          "type" => "integer"
         },
         "01" => %{
-          "key" => :number_of_accounts_with_MOP_06,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_06,
+          "type" => "integer"
         },
         "02" => %{
-          "key" => :number_of_accounts_with_MOP_05,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_05,
+          "type" => "integer"
         },
         "03" => %{
-          "key" => :number_of_accounts_with_MOP_04,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_03,
+          "type" => "integer"
         },
         "04" => %{
           "key" => :number_of_accounts_with_MOP_03,
-          "type" => "string"
+          "type" => "integer"
         },
         "05" => %{
-          "key" => :number_of_accounts_with_MOP_02,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_02,
+          "type" => "integer"
         },
         "06" => %{
-          "key" => :number_of_accounts_with_MOP_01,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_01,
+          "type" => "integer"
         },
         "07" => %{
-          "key" => :number_of_accounts_with_MOP_00,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_00,
+          "type" => "integer"
         },
         "08" => %{
-          "key" => :number_of_accounts_with_MOP_UR,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_MOP_UR,
+          "type" => "integer"
         },
         "09" => %{
-          "key" => :number_of_accounts,
-          "type" => "string"
+          "key" => :numero_de_cuentas,
+          "type" => "integer"
         },
         "10" => %{
-          "key" => :number_of_accounts_of_mortage_or_fixed_payments,
-          "type" => "string"
+          "key" => :numero_de_cuentas_de_pagos_fijos_e_hipotecario,
+          "type" => "integer"
         },
         "11" => %{
-          "key" => :number_of_accounts_with_revolving_credit,
-          "type" => "string"
+          "key" => :numero_de_cuentas_revolventes_y_sin_limite_establecido,
+          "type" => "integer"
         },
         "12" => %{
-          "key" => :number_of_closed_accounts,
-          "type" => "string"
+          "key" => :numero_de_cuentas_cerradas,
+          "type" => "integer"
         },
         "13" => %{
-          "key" => :number_of_accounts_with_current_slowness_in_pay,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_morosidad_actual,
+          "type" => "integer"
         },
         "14" => %{
-          "key" => :number_of_accounts_with_slowness_in_pay_history,
-          "type" => "string"
+          "key" => :numero_de_cuentas_con_historial_de_morosidad_actual,
+          "type" => "integer"
         },
         "15" => %{
-          "key" => :number_of_accounts_in_clarification,
-          "type" => "string"
+          "key" => :numero_de_cuentas_en_aclaracion,
+          "type" => "integer"
         },
         "16" => %{
-          "key" => :number_of_requests_to_client_record,
-          "type" => "string"
+          "key" => :numero_de_solicitudes_de_consulta,
+          "type" => "integer"
         },
         "17" => %{
-          "key" => :new_address_in_last_60_days,
+          "key" => :nueva_direccion_en_los_ultimos_60_dias,
           "type" => "string"
         },
         "18" => %{
-          "key" => :alert_message,
+          "key" => :mensaje_de_alerta,
           "type" => "string"
         },
         "19" => %{
-          "key" => :customer_declaration,
+          "key" => :declarativa,
           "type" => "string"
        },
         "20" => %{
-          "key" => :credit_currency,
+          "key" => :moneda_del_credito,
           "type" => "string"
         },
         "21" => %{
-          "key" => :total_maximum_credit_of_accounts_with_revolving_credit,
+          "key" => :total_de_creditos_maximos_para_cuentas_revolventes,
           "type" => "float"
         },
         "22" => %{
-          "key" => :total_limit_credit_of_accounts_with_revolving_credit,
+          "key" => :total_de_limites_de_credito_para_cuentas_revolventes,
           "type" => "float"
         },
         "23" => %{
-          "key" => :total_current_balance_of_accounts_with_revolving_credit,
+          "key" => :total_de_saldos_actuales_para_cuentas_revolventes,
           "type" => "float"
         },
         "24" => %{
-          "key" => :total_balance_due_of_accounts_with_revolving_credit,
+          "key" => :total_de_saldos_vencidos_para_cuentas_revolventes,
           "type" => "float"
         },
         "25" => %{
-          "key" => :total_payment_amount_of_accounts_with_revolving_credit,
+          "key" => :total_de_importe_de_pago_para_cuentas_revolventes,
           "type" => "float"
         },
         "26" => %{
-          "key" => :percentage_of_limit_credit_of_accounts_with_revolving_credit,
+          "key" => :porcentaje_del_limite_de_credito_utilizado_para_cuentas_revolventes,
           "type" => "float"
         },
         "27" => %{
-          "key" => :total_maximum_credit_of_accounts_of_mortage_or_fixed_payments,
+          "key" => :total_de_creditos_maximos_para_cuentas_de_pagos_fijos_e_hipotecarios,
           "type" => "integer"
         },
         "28" => %{
-          "key" => :total_current_balance_of_accounts_of_mortage_or_fixed_payments,
+          "key" => :total_de_saldos_actuales_para_cuentas_de_pagos_fijos_e_hipotecarios,
           "type" => "float"
         },
         "29" => %{
-          "key" => :total_balance_due_of_accounts_of_mortage_or_fixed_payments,
+          "key" => :total_de_saldos_vencidos_para_cuentas_de_pagos_fijos_e_hipotecarios,
           "type" => "integer"
         },
         "30" => %{
-          "key" => :total_payment_amount_of_accounts_of_mortage_or_fixed_payments,
+          "key" => :total_de_importe_de_pago_para_cuentas_de_pagos_fijos_e_hipotecarios,
           "type" => "integer"
         },
         "31" => %{
-          "key" => :number_of_accounts_with_MOP_96,
+          "key" => :numero_de_cuentas_con_MOP_96,
           "type" => "integer"
         },
         "32" => %{
-          "key" => :number_of_accounts_with_MOP_97,
+          "key" => :numero_de_cuentas_con_MOP_97,
           "type" => "integer"
         },
         "33" => %{
-          "key" => :number_of_accounts_with_MOP_98,
+          "key" => :numero_de_cuentas_con_MOP_98,
           "type" => "integer"
         },
         "34" => %{
-          "key" => :opening_date_of_older_account,
+          "key" => :fecha_de_apertura_de_cuenta_mas_antigua,
           "type" => "date"
         },
         "35" => %{
-          "key" => :opening_date_of_newest_account,
+          "key" => :fecha_de_apertura_de_cuenta_mas_reciente,
           "type" => "date"
         },
         "36" => %{
-          "key" => :number_of_buro_request,
+          "key" => :numero_de_solicitudes_de_informe_de_buro,
           "type" => "integer"
         },
         "37" => %{
-          "key" => :date_of_latest_request,
+          "key" => :fecha_de_la_consulta_mas_reciente,
           "type" => "integer"
         },
         "38" => %{
-          "key" => :number_of_accounts_in_collection_agencies,
+          "key" => :numero_de_cuentas_en_despacho_de_cobranza,
           "type" => "integer"
         },
         "39" => %{
-          "key" => :most_recent_openning_date_of_account_in_collection_agency,
+          "key" => :fecha_de_apertura_mas_reciente_de_una_cuenta_en_despacho_de_cobranza,
           "type" => "date"
         },
         "40" => %{
-          "key" => :number_of_buro_requests_made_by_collection_agencies,
+          "key" => :numero_de_solicitudes_del_informe_buro_realizadas_por_despachos_de_cobranza,
           "type" => "integer"
         },
         "41" => %{
-          "key" => :date_of_last_request_of_buro_made_by_a_collection_agency,
+          "key" => :fecha_de_la_consulta_mas_reciente_realizada_por_un_despacho_de_cobranza,
           "type" => "date"
         }
       }
@@ -727,50 +719,50 @@ defmodule Burox.Parser.ResponseMap do
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :name,
+          "key" => :nombre_del_score,
           "type" => "string"
         },
         "00" => %{
-          "key" => :score_code,
+          "key" => :codigo_del_score,
           "type" => "string"
         },
         "01" => %{
-          "key" => :score_value,
+          "key" => :valor_del_score,
           "type" => "integer"
         },
         "02" => %{
-          "key" => :first_reason_code,
+          "key" => :primer_codigo_de_razon,
           "type" => "string"
         },
         "03" => %{
-          "key" => :second_reason_code,
+          "key" => :segundo_codigo_de_razon,
           "type" => "string"
         },
         "04" => %{
-          "key" => :third_reason_code,
+          "key" => :tercer_codigo_de_razon,
           "type" => "string"
         },
         "06" => %{
-          "key" => :error_code,
+          "key" => :codigo_de_error,
           "type" => "string"
         },
       }
     },
     "ES" => %{
-      "key" => :end,
-      "struct" => Burox.Response.DeclarativaConsumidor,
+      "key" => :fin,
+      "struct" => Burox.Response.Fin,
       "type" => "map",
       "tags" => %{
         "" => %{
-          "key" => :longitude,
+          "key" => :longitud_de_transmision,
           "type" => "integer"
         },
         "00" => %{
-          "key" => :request_id,
+          "key" => :numero_de_control_de_la_consulta,
           "type" => "string"
         },
         "01" => %{
-          "key" => :end,
+          "key" => :fin_del_registro_de_respuesta,
           "type" => "string"
         },
       }

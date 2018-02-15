@@ -99,7 +99,7 @@ defmodule Burox.Parser do
 
   defp _match_section(section, tail, tag, values, sections) do
 
-    # Remove tag
+    # Elimina el tag
     tail = tail
       |> String.split_at(2)
       |> elem(1)
@@ -130,8 +130,12 @@ defmodule Burox.Parser do
         |> Map.get("type")
         |> case  do
              "integer" -> String.to_integer(value)
-             "float" -> String.to_float(value)
-             "date" -> parse_string_to_date(value)
+             "float" ->
+               value
+               |> Float.parse()
+               |> elem(0)
+             "date" ->
+               parse_string_to_date(value)
              _ -> value
            end
 
@@ -197,19 +201,6 @@ defmodule Burox.Parser do
     |> elem(1)
 
   end
-
-  # Parse a string to Date(), 'yyyymmmdd'
-  defp parse_string_to_date("000000000"), do: Date.new(1900, 01, 01)
-  defp parse_string_to_date(str_date) do
-    [d, m, y1, y2] = for <<x::binary-2 <- str_date>>, do: x
-
-    y1 <> y2
-    |> String.to_integer
-    |> Date.new(String.to_integer(m), String.to_integer(d))
-    |> elem(1)
-
-  end
-
 
   # Esta función ayuda a separar las declarativas de credito
   # Estan estan en una sola cadena separadas por ##CREDITO
