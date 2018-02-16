@@ -78,4 +78,23 @@ defmodule ParserTest do
         primer_nombre: "HECTOR"}, ""}
   end
 
+  test "parse multiple sintetiza features" do
+    string = "CL02150001101019020523432CL021500011010210020820100203"
+    assert match_section(string, "CL", ["CL"]) == {
+      [%{
+          identificador_de_caracteristica_de_plantilla: "1",
+          numero_de_caracteristica: 9,
+          plantilla_solicitada: "15",
+          valor_de_la_caracteristica: "23432"
+       } |
+       %{
+         identificador_de_caracteristica_de_plantilla: "1",
+         numero_de_caracteristica: 10,
+         plantilla_solicitada: "15",
+         valor_de_la_caracteristica: "20100203"
+       }
+      ], ""}
+
+  end
+
 end

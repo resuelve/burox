@@ -16,6 +16,7 @@ defmodule Burox.Parser do
     "HR",    # HR Hawk Alert
     "CR",    # Declarativa
     "SC",    # BC-Score
+    "CL",    # Sintetiza
     "ES"     # End
   ]
 
@@ -134,8 +135,7 @@ defmodule Burox.Parser do
                value
                |> Float.parse()
                |> elem(0)
-             "date" ->
-               parse_string_to_date(value)
+             "date" -> parse_string_to_date(value)
              _ -> value
            end
 
@@ -190,8 +190,8 @@ defmodule Burox.Parser do
     {String.slice(string, value_start, length), tail}
   end
 
-  # Parse a string to Date(), 'yyyymmmdd'
-  defp parse_string_to_date("000000000"), do: Date.new(1900, 01, 01)
+  # Convierte una cadena a Fecha, 'yyyymmmdd'
+  defp parse_string_to_date("000000000"), do: nil
   defp parse_string_to_date(str_date) do
     [d, m, y1, y2] = for <<x::binary-2 <- str_date>>, do: x
 
