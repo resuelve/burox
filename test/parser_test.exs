@@ -9,7 +9,405 @@ defmodule ParserTest do
 
   test "parse succesful response" do
     assert process_response(@success_response) ==
-    %Burox.Response{consultas: [%{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2016-05-19], importe_del_credito: "0", nombre_del_usuario: "RESUELVE", reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2016-05-19], importe_del_credito: "000000000", moneda_del_credito: "MX", nombre_del_usuario: "BURO DE CREDITO", reserved: "1", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-12-06], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-09-08], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-07-10], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "CONSUMIDOR FINAL", reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-07-10], importe_del_credito: "000000000", moneda_del_credito: "MX", nombre_del_usuario: "SIC", reserved: "1", tipo_de_producto: "01", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-05-01], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-01-15], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-12-02], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-12-02], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-12-02], importe_del_credito: "000000000", moneda_del_credito: "MX", nombre_del_usuario: "BURO DE CREDITO", reserved: "1", tipo_de_producto: "01", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-09-19], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "CONSUMIDOR FINAL", reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-09-19], importe_del_credito: "000000000", moneda_del_credito: "MX", nombre_del_usuario: "SIC", reserved: "1", tipo_de_producto: "01", tipo_de_responsabilidad_de_la_cuenta: "I"} | %{clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-07-10], importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "CONSUMIDOR FINAL", reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"}], creditos: [%{clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12090.0, fecha_de_actualizacion: ~D[2016-05-16], fecha_de_apertura_de_cuenta: ~D[2012-04-01], fecha_de_reporte_de_informacion: ~D[2016-05-02], fecha_de_ultima_compra: ~D[2016-04-22], fecha_de_ultimo_pago: ~D[2016-05-02], fecha_mas_antigua_del_historico_de_pagos: ~D[2012-04-29], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-04-30], frecuencia_de_pagos: "Z", historico_de_pagos: "111111111111111111111111", limite_de_credito: 1.75e4, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 212.0, monto_del_ultimo_pago: 500.0, nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 4433.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "UR", credito_maximo_autorizado: 7276.0, fecha_de_actualizacion: ~D[2016-05-06], fecha_de_apertura_de_cuenta: ~D[2011-01-02], fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31], fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2011-08-28], fecha_de_ultimo_pago: ~D[2012-06-16], fecha_mas_antigua_del_historico_de_pagos: ~D[2011-01-30], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z", historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU", limite_de_credito: 8.4e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "UR", clave_de_observacion: "IA", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2016-05-03], fecha_de_apertura_de_cuenta: ~D[2010-11-06], fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31], fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2011-08-28], fecha_de_ultimo_pago: ~D[2012-06-16], fecha_mas_antigua_del_historico_de_pagos: ~D[2010-11-30], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z", historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU", limite_de_credito: 1.0e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_telefonico_del_usuario: "0", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "UR", clave_de_observacion: "IA", credito_maximo_autorizado: 224.0, fecha_de_actualizacion: ~D[2016-05-03], fecha_de_apertura_de_cuenta: ~D[2009-10-27], fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31], fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2013-11-29], fecha_de_ultimo_pago: ~D[2010-06-03], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-11-30], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z", historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU", limite_de_credito: 1.1e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_telefonico_del_usuario: "0", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "IA", credito_maximo_autorizado: 17233.0, fecha_de_actualizacion: ~D[2016-05-04], fecha_de_apertura_de_cuenta: ~D[2010-03-24], fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31], fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2016-04-18], fecha_de_ultimo_pago: ~D[2016-04-28], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-11-30], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z", historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU", limite_de_credito: 3.03e4, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 379.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 459.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "IA", credito_maximo_autorizado: 933.0, fecha_de_actualizacion: ~D[2016-05-05], fecha_de_apertura_de_cuenta: ~D[2013-05-19], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2016-04-13], fecha_de_ultimo_pago: ~D[2016-04-18], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-02-22], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-22], frecuencia_de_pagos: "M", historico_de_pagos: "111111111111111111111111", limite_de_credito: 2.0e4, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "COMUNICACIONES", numero_telefonico_del_usuario: "0", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "O", tipo_de_producto: "CL", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "IA", credito_maximo_autorizado: 17233.0, fecha_de_actualizacion: ~D[2016-05-11], fecha_de_apertura_de_cuenta: ~D[2010-03-24], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2016-04-18], fecha_de_ultimo_pago: ~D[2016-04-28], fecha_mas_antigua_del_historico_de_pagos: ~D[2011-06-30], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z", historico_de_pagos: "111111111111111111111111", limite_de_credito: 3.03e4, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 379.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 459.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "IA", credito_maximo_autorizado: 5836.0, fecha_de_actualizacion: ~D[2016-05-09], fecha_de_apertura_de_cuenta: ~D[2014-12-10], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2016-04-29], fecha_de_ultima_compra: ~D[2016-04-24], fecha_de_ultimo_pago: ~D[2016-04-24], fecha_mas_antigua_del_historico_de_pagos: ~D[2014-12-29], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-29], frecuencia_de_pagos: "Z", historico_de_pagos: "1111111111111111", limite_de_credito: 1.76e4, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 220.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 1423.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "IA", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2016-03-18], fecha_de_apertura_de_cuenta: ~D[2015-09-05], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2016-02-29], fecha_de_ultima_compra: ~D[2016-02-01], fecha_de_ultimo_pago: ~D[2016-02-22], fecha_mas_antigua_del_historico_de_pagos: ~D[2015-10-29], fecha_mas_reciente_del_historico_de_pagos: ~D[2016-01-29], frecuencia_de_pagos: "M", historico_de_pagos: "1111", limite_de_credito: 0.0, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 400.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "SERVICIOS", numero_telefonico_del_usuario: "0", saldo_actual: 400.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "O", tipo_de_producto: "CL", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "CC", credito_maximo_autorizado: 2954.0, fecha_de_actualizacion: ~D[2011-09-24], fecha_de_apertura_de_cuenta: ~D[2010-03-24], fecha_de_cierre: ~D[2011-08-31], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2011-08-31], fecha_de_ultima_compra: ~D[2011-08-27], fecha_de_ultimo_pago: ~D[2011-08-31], fecha_mas_antigua_del_historico_de_pagos: ~D[2010-06-30], fecha_mas_reciente_del_historico_de_pagos: ~D[2011-07-02], frecuencia_de_pagos: "Z", historico_de_pagos: "11111111111111", limite_de_credito: 3.0e3, modo_de_reportar: "A", moneda_del_credito: "N$", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-01-10], fecha_de_cierre: ~D[2010-03-09], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-01-10], fecha_de_ultimo_pago: ~D[2010-03-09], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01], fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M", historico_de_pagos: "1111UUUUU11", limite_de_credito: 5.1e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-02-24], fecha_de_cierre: ~D[2010-07-06], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-02-24], fecha_de_ultimo_pago: ~D[2010-07-06], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01], fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M", historico_de_pagos: "UUUUU1", limite_de_credito: 5.1e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-04-18], fecha_de_cierre: ~D[2010-07-17], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-04-18], fecha_de_ultimo_pago: ~D[2010-07-17], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01], fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M", historico_de_pagos: "UUUUU1", limite_de_credito: 5.1e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"}, %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-05-16], fecha_de_cierre: ~D[2010-08-11], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-05-16], fecha_de_ultimo_pago: ~D[2010-08-11], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01], fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M", historico_de_pagos: "UUUUU1", limite_de_credito: 5.1e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"} | %{MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-10-10], fecha_de_cierre: ~D[2010-10-28], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31], fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-10-10], fecha_de_ultimo_pago: ~D[2010-10-28], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01], fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M", historico_de_pagos: "U1", limite_de_credito: 5.1e3, modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1", saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"}], declarativa_consumidor: %{}, direcciones: [%{ciudad: "CD DE MEXICO", codigo_postal: "04369", colonia: "PEDREGAL DE STO DOMINGO", estado: "DF", fecha_de_reporte_de_la_direccion: ~D[2014-09-19], municipio: "COYOACAN", numero_de_telefono: "5545432291", primera_linea_de_direccion: "ILAMA 313", tipo_de_domicilio: "H"}, %{ciudad: "CD DE MEXICO", codigo_postal: "03500", colonia: "PEDREGAL DE STO DOMINGO", estado: "DF", fecha_de_reporte_de_la_direccion: ~D[2013-02-07], municipio: "BENITO JUAREZ", numero_de_telefono: "5545432291", primera_linea_de_direccion: "FILIPINAS 613 A", segunda_linea_de_direccion: "PORTALES", tipo_de_domicilio: "H"}, %{ciudad: "CD DE MEXICO", codigo_postal: "73160", colonia: "LLANO DE BUENAVISTA", estado: "PUE", fecha_de_reporte_de_la_direccion: ~D[2010-03-16], fecha_de_residencia: ~D[1989-01-01], municipio: "HUAUCHINANGO", numero_de_telefono: "7627789", origen_del_domicilio: "MX", primera_linea_de_direccion: "14 DE FEB 9", segunda_linea_de_direccion: "5 DE OCT", tipo_de_domicilio: "H"} | %{ciudad: "PUE", codigo_postal: "72000", colonia: "LLANO DE BUENAVISTA", estado: "PUE", fecha_de_reporte_de_la_direccion: ~D[2009-10-31], fecha_de_residencia: ~D[1989-01-01], municipio: "HUAUCHINANGO", numero_de_telefono: "7767627789", origen_del_domicilio: "MX", primera_linea_de_direccion: "CTO DE LA UNION 34", segunda_linea_de_direccion: "MISIONES DE SN FRAN", tipo_de_domicilio: "H"}], direcciones_de_trabajo: [%{fecha_de_contratacion: ~D[2005-05-05], fecha_de_reporte_de_empleo: ~D[2015-09-08], ocupacion: "AUX", origen_de_la_razon_social: "MX", primera_linea_de_direccion: "GEOTECNIA Y SUPERVICION TECNICA SA", segunda_linea_de_direccion: ""} | %{fecha_de_contratacion: ~D[2005-05-05], fecha_de_reporte_de_empleo: ~D[2015-09-08], ocupacion: "AUX", origen_de_la_razon_social: "MX", primera_linea_de_direccion: "RESUELVE TU DEUDA", segunda_linea_de_direccion: ""}], fin: %{fin_del_registro_de_respuesta: "**", longitud_de_transmision: 4822, numero_de_control_de_la_consulta: "1179250939"}, hawk_inquiry: %{}, hawk_response: %{}, persona: %{apellido_materno: "MAZA", apellido_paterno: "URBANO", curp: "UAMH880216HPLRZC09", estado_civil: "S", fecha_de_nacimiento: ~D[1988-02-16], genero: "M", nacionalidad: "MX", primer_nombre: "HECTOR", rfc: "UAMH880216S19", tipo_de_residencia: "1"}, resumen: %{number_of_accounts_with_MOP_03: 0, porcentaje_del_limite_de_credito_utilizado_para_cuentas_revolventes: 6.0, numero_de_cuentas_con_MOP_96: 0, numero_de_cuentas: 15, numero_de_cuentas_con_MOP_00: 0, numero_de_solicitudes_de_consulta: 2, numero_de_cuentas_con_MOP_06: 0, total_de_limites_de_credito_para_cuentas_revolventes: 1.062e5, fecha_de_apertura_de_cuenta_mas_antigua: ~D[2009-10-27], mensaje_de_alerta: "NNNNN", numero_de_cuentas_con_MOP_05: 0, numero_de_cuentas_con_MOP_02: 0, total_de_creditos_maximos_para_cuentas_revolventes: 60825.0, declarativa: "N", total_de_saldos_actuales_para_cuentas_de_pagos_fijos_e_hipotecarios: 0.0, numero_de_cuentas_con_MOP_UR: 3, numero_de_cuentas_con_MOP_97: 0, fecha_de_la_consulta_mas_reciente_realizada_por_un_despacho_de_cobranza: :invalid_date, total_de_saldos_vencidos_para_cuentas_revolventes: 0.0, numero_de_cuentas_revolventes_y_sin_limite_establecido: 10, fecha_de_apertura_de_cuenta_mas_reciente: ~D[2015-09-05], total_de_importe_de_pago_para_cuentas_revolventes: 1590.0, total_de_creditos_maximos_para_cuentas_de_pagos_fijos_e_hipotecarios: 0, moneda_del_credito: "MX", numero_de_cuentas_con_MOP_07: 0, numero_de_solicitudes_del_informe_buro_realizadas_por_despachos_de_cobranza: 0, numero_de_cuentas_con_morosidad_actual: 0, total_de_saldos_actuales_para_cuentas_revolventes: 7174.0, fecha_de_la_consulta_mas_reciente: 19052016, total_de_importe_de_pago_para_cuentas_de_pagos_fijos_e_hipotecarios: 0, numero_de_cuentas_con_MOP_03: 0, numero_de_solicitudes_de_informe_de_buro: 13, numero_de_cuentas_en_despacho_de_cobranza: 0, numero_de_cuentas_en_aclaracion: 0, numero_de_cuentas_de_pagos_fijos_e_hipotecario: 5, nueva_direccion_en_los_ultimos_60_dias: "N", numero_de_cuentas_cerradas: 6, numero_de_cuentas_con_MOP_01: 12, numero_de_cuentas_con_MOP_98: 0, numero_de_cuentas_con_historial_de_morosidad_actual: 0, fecha_de_integracion: ~D[2009-11-06], total_de_saldos_vencidos_para_cuentas_de_pagos_fijos_e_hipotecarios: 0, fecha_de_apertura_mas_reciente_de_una_cuenta_en_despacho_de_cobranza: :invalid_date}, score: %{codigo_del_score: "007", nombre_del_score: "BC SCORE", primer_codigo_de_razon: "04", valor_del_score: 725}}
+      %Burox.Response{
+        consultas: [
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2016-05-19],
+            importe_del_credito: "0", nombre_del_usuario: "RESUELVE", reserved: "0", tipo_de_producto: "CC",
+            tipo_de_responsabilidad_de_la_cuenta: "I"},
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2016-05-19],
+            importe_del_credito: "000000000", moneda_del_credito: "MX",
+            nombre_del_usuario: "BURO DE CREDITO", reserved: "1",
+            tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001",
+            fecha_de_consulta: ~D[2015-12-06], importe_del_credito: "0",
+            moneda_del_credito: "MX", nombre_del_usuario: "BANCO",
+            reserved: "0", tipo_de_producto: "UK",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-09-08],
+            importe_del_credito: "0", moneda_del_credito: "MX",
+            nombre_del_usuario: "BANCO", reserved: "0",
+            tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001",
+            fecha_de_consulta: ~D[2015-07-10], importe_del_credito: "0",
+            moneda_del_credito: "MX", nombre_del_usuario: "CONSUMIDOR FINAL",
+            reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001",
+            fecha_de_consulta: ~D[2015-07-10], importe_del_credito: "000000000",
+            moneda_del_credito: "MX",
+            nombre_del_usuario: "SIC",
+            reserved: "1", tipo_de_producto: "01",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-05-01],
+            importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO",
+            reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2015-01-15], importe_del_credito: "0",
+            moneda_del_credito: "MX", nombre_del_usuario: "BANCO", reserved: "0",
+            tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-12-02],
+            importe_del_credito: "0", moneda_del_credito: "MX",
+            nombre_del_usuario: "BANCO", reserved: "0", tipo_de_producto: "CC",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-12-02],
+            importe_del_credito: "0", moneda_del_credito: "MX", nombre_del_usuario: "BANCO",
+            reserved: "0", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-12-02],
+            importe_del_credito: "000000000", moneda_del_credito: "MX",
+            nombre_del_usuario: "BURO DE CREDITO", reserved: "1",
+            tipo_de_producto: "01", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-09-19], importe_del_credito: "0",
+            moneda_del_credito: "MX", nombre_del_usuario: "CONSUMIDOR FINAL",
+            reserved: "0", tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-09-19],
+            importe_del_credito: "000000000", moneda_del_credito: "MX", nombre_del_usuario: "SIC",
+            reserved: "1", tipo_de_producto: "01", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            clave_del_usuario: "FF47361001", fecha_de_consulta: ~D[2014-07-10],
+            importe_del_credito: "0", moneda_del_credito: "MX",
+            nombre_del_usuario: "CONSUMIDOR FINAL", reserved: "0",
+            tipo_de_producto: "UK", tipo_de_responsabilidad_de_la_cuenta: "I"
+          }],
+        creditos: [
+          %{
+            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12090.0, 
+            fecha_de_actualizacion: ~D[2016-05-16], fecha_de_apertura_de_cuenta: ~D[2012-04-01],
+            fecha_de_reporte_de_informacion: ~D[2016-05-02], fecha_de_ultima_compra: ~D[2016-04-22],
+            fecha_de_ultimo_pago: ~D[2016-05-02], fecha_mas_antigua_del_historico_de_pagos: ~D[2012-04-29],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-04-30],
+            frecuencia_de_pagos: "Z", historico_de_pagos: "111111111111111111111111",
+            limite_de_credito: 1.75e4, modo_de_reportar: "A", moneda_del_credito: "MX",
+            monto_a_pagar: 212.0, monto_del_ultimo_pago: 500.0, nombre_del_usuario: "BANCO",
+            numero_telefonico_del_usuario: "0", saldo_actual: 4433.0, saldo_vencido: 0.0,
+            tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "UR",
+            credito_maximo_autorizado: 7276.0, fecha_de_actualizacion: ~D[2016-05-06],
+            fecha_de_apertura_de_cuenta: ~D[2011-01-02],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-30],
+            fecha_de_ultima_compra: ~D[2011-08-28], fecha_de_ultimo_pago: ~D[2012-06-16],
+            fecha_mas_antigua_del_historico_de_pagos: ~D[2011-01-30],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30],
+            frecuencia_de_pagos: "Z", historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU",
+            limite_de_credito: 8.4e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0",
+            saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0,
+            tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "UR",
+            clave_de_observacion: "IA", credito_maximo_autorizado: 0.0,
+            fecha_de_actualizacion: ~D[2016-05-03], fecha_de_apertura_de_cuenta: ~D[2010-11-06],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-30],
+            fecha_de_ultima_compra: ~D[2011-08-28], fecha_de_ultimo_pago: ~D[2012-06-16],
+            fecha_mas_antigua_del_historico_de_pagos: ~D[2010-11-30],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30],
+            frecuencia_de_pagos: "Z", historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU",
+            limite_de_credito: 1.0e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL",
+            numero_telefonico_del_usuario: "0", saldo_actual: 0.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0,
+            saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "UR",
+            clave_de_observacion: "IA", credito_maximo_autorizado: 224.0,
+            fecha_de_actualizacion: ~D[2016-05-03],
+            fecha_de_apertura_de_cuenta: ~D[2009-10-27],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2013-11-29],
+            fecha_de_ultimo_pago: ~D[2010-06-03], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-11-30],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z",
+            historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU", limite_de_credito: 1.1e3,
+            modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL",
+            numero_telefonico_del_usuario: "0", saldo_actual: 0.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0,
+            saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "IA", credito_maximo_autorizado: 17233.0, fecha_de_actualizacion: ~D[2016-05-04],
+            fecha_de_apertura_de_cuenta: ~D[2010-03-24], fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2016-04-18],
+            fecha_de_ultimo_pago: ~D[2016-04-28], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-11-30],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30], frecuencia_de_pagos: "Z",
+            historico_de_pagos: "UUUUUUUUUUUUUUUUUUUUUUUU", limite_de_credito: 3.03e4, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 379.0, monto_del_ultimo_pago: 610.0, nombre_del_usuario: "BANCO",
+            numero_telefonico_del_usuario: "0", saldo_actual: 459.0, saldo_de_la_morosidad_historica_mas_alta: 0.0,
+            saldo_vencido: 0.0, tipo_de_cuenta: "R", tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "IA", credito_maximo_autorizado: 933.0,
+            fecha_de_actualizacion: ~D[2016-05-05],
+            fecha_de_apertura_de_cuenta: ~D[2013-05-19],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2016-04-13],
+            fecha_de_ultimo_pago: ~D[2016-04-18], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-02-22],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-22], frecuencia_de_pagos: "M",
+            historico_de_pagos: "111111111111111111111111", limite_de_credito: 2.0e4,
+            modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 0.0,
+            monto_del_ultimo_pago: 610.0, nombre_del_usuario: "COMUNICACIONES",
+            numero_telefonico_del_usuario: "0", saldo_actual: 0.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0,
+            saldo_vencido: 0.0, tipo_de_cuenta: "O", tipo_de_producto: "CL",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "IA", credito_maximo_autorizado: 17233.0,
+            fecha_de_actualizacion: ~D[2016-05-11], fecha_de_apertura_de_cuenta: ~D[2010-03-24],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-30],
+            fecha_de_ultima_compra: ~D[2016-04-18], fecha_de_ultimo_pago: ~D[2016-04-28],
+            fecha_mas_antigua_del_historico_de_pagos: ~D[2011-06-30],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-30],
+            frecuencia_de_pagos: "Z", historico_de_pagos: "111111111111111111111111",
+            limite_de_credito: 3.03e4,
+            modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 379.0,
+            monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 459.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R",
+            tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02",
+            clasificacion_de_puntualidad_de_pago: "01", clave_de_observacion: "IA",
+            credito_maximo_autorizado: 5836.0,
+            fecha_de_actualizacion: ~D[2016-05-09], fecha_de_apertura_de_cuenta: ~D[2014-12-10],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2016-04-29],
+            fecha_de_ultima_compra: ~D[2016-04-24], fecha_de_ultimo_pago: ~D[2016-04-24],
+            fecha_mas_antigua_del_historico_de_pagos: ~D[2014-12-29],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-03-29],
+            frecuencia_de_pagos: "Z", historico_de_pagos: "1111111111111111", limite_de_credito: 1.76e4,
+            modo_de_reportar: "A", moneda_del_credito: "MX", monto_a_pagar: 220.0,
+            monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 1423.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R",
+            tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          }, %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "IA", credito_maximo_autorizado: 0.0,
+            fecha_de_actualizacion: ~D[2016-03-18], fecha_de_apertura_de_cuenta: ~D[2015-09-05],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2016-02-29], fecha_de_ultima_compra: ~D[2016-02-01],
+            fecha_de_ultimo_pago: ~D[2016-02-22], fecha_mas_antigua_del_historico_de_pagos: ~D[2015-10-29],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2016-01-29], frecuencia_de_pagos: "M",
+            historico_de_pagos: "1111", limite_de_credito: 0.0, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 400.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "SERVICIOS", numero_telefonico_del_usuario: "0", saldo_actual: 400.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "O",
+            tipo_de_producto: "CL", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "CC", credito_maximo_autorizado: 2954.0,
+            fecha_de_actualizacion: ~D[2011-09-24], fecha_de_apertura_de_cuenta: ~D[2010-03-24],
+            fecha_de_cierre: ~D[2011-08-31], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2011-08-31], fecha_de_ultima_compra: ~D[2011-08-27],
+            fecha_de_ultimo_pago: ~D[2011-08-31], fecha_mas_antigua_del_historico_de_pagos: ~D[2010-06-30],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2011-07-02], frecuencia_de_pagos: "Z",
+            historico_de_pagos: "11111111111111", limite_de_credito: 3.0e3, modo_de_reportar: "A",
+            moneda_del_credito: "N$", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "BANCO", numero_telefonico_del_usuario: "0", saldo_actual: 0.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "R",
+            tipo_de_producto: "CC", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31],
+            fecha_de_apertura_de_cuenta: ~D[2010-01-10], fecha_de_cierre: ~D[2010-03-09],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-01-10],
+            fecha_de_ultimo_pago: ~D[2010-03-09], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M",
+            historico_de_pagos: "1111UUUUU11", limite_de_credito: 5.1e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1",
+            saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0,
+            saldo_vencido: 0.0, tipo_de_cuenta: "I", tipo_de_producto: "AF",
+            tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31],
+            fecha_de_apertura_de_cuenta: ~D[2010-02-24], fecha_de_cierre: ~D[2010-07-06],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-02-24],
+            fecha_de_ultimo_pago: ~D[2010-07-06], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M",
+            historico_de_pagos: "UUUUU1", limite_de_credito: 5.1e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1",
+            saldo_actual: 0.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I",
+            tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "CC", credito_maximo_autorizado: 0.0, fecha_de_actualizacion: ~D[2011-03-31],
+            fecha_de_apertura_de_cuenta: ~D[2010-04-18], fecha_de_cierre: ~D[2010-07-17],
+            fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-04-18],
+            fecha_de_ultimo_pago: ~D[2010-07-17], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M",
+            historico_de_pagos: "UUUUU1", limite_de_credito: 5.1e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12,
+            numero_telefonico_del_usuario: "1", saldo_actual: 0.0,
+            saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0, tipo_de_cuenta: "I",
+            tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "CC", credito_maximo_autorizado: 0.0,
+            fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-05-16],
+            fecha_de_cierre: ~D[2010-08-11], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-05-16],
+            fecha_de_ultimo_pago: ~D[2010-08-11], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M",
+            historico_de_pagos: "UUUUU1", limite_de_credito: 5.1e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1",
+            saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0,
+            tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"
+          },
+          %{
+            MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
+            clave_de_observacion: "CC", credito_maximo_autorizado: 0.0,
+            fecha_de_actualizacion: ~D[2011-03-31], fecha_de_apertura_de_cuenta: ~D[2010-10-10],
+            fecha_de_cierre: ~D[2010-10-28], fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
+            fecha_de_reporte_de_informacion: ~D[2011-03-31], fecha_de_ultima_compra: ~D[2010-10-10],
+            fecha_de_ultimo_pago: ~D[2010-10-28], fecha_mas_antigua_del_historico_de_pagos: ~D[1901-01-01],
+            fecha_mas_reciente_del_historico_de_pagos: ~D[2011-03-31], frecuencia_de_pagos: "M",
+            historico_de_pagos: "U1", limite_de_credito: 5.1e3, modo_de_reportar: "A",
+            moneda_del_credito: "MX", monto_a_pagar: 0.0, monto_del_ultimo_pago: 610.0,
+            nombre_del_usuario: "TIENDA COMERCIAL", numero_de_pagos: 12, numero_telefonico_del_usuario: "1",
+            saldo_actual: 0.0, saldo_de_la_morosidad_historica_mas_alta: 0.0, saldo_vencido: 0.0,
+            tipo_de_cuenta: "I", tipo_de_producto: "AF", tipo_de_responsabilidad_de_la_cuenta: "I"
+          }],
+        declarativa_consumidor: %{},
+        direcciones: [
+          %{
+            ciudad: "CD DE MEXICO", codigo_postal: "04369", colonia: "PEDREGAL DE STO DOMINGO",
+            estado: "DF", fecha_de_reporte_de_la_direccion: ~D[2014-09-19], municipio: "COYOACAN",
+            numero_de_telefono: "5545432291", primera_linea_de_direccion: "ILAMA 313", tipo_de_domicilio: "H"
+           },
+          %{
+            ciudad: "CD DE MEXICO", codigo_postal: "03500", colonia: "PEDREGAL DE STO DOMINGO",
+            estado: "DF", fecha_de_reporte_de_la_direccion: ~D[2013-02-07], municipio: "BENITO JUAREZ",
+            numero_de_telefono: "5545432291", primera_linea_de_direccion: "FILIPINAS 613 A",
+            segunda_linea_de_direccion: "PORTALES", tipo_de_domicilio: "H"
+          },
+          %{
+            ciudad: "CD DE MEXICO", codigo_postal: "73160", colonia: "LLANO DE BUENAVISTA",
+            estado: "PUE", fecha_de_reporte_de_la_direccion: ~D[2010-03-16],
+            fecha_de_residencia: ~D[1989-01-01], municipio: "HUAUCHINANGO",
+            numero_de_telefono: "7627789", origen_del_domicilio: "MX",
+            primera_linea_de_direccion: "14 DE FEB 9", segunda_linea_de_direccion: "5 DE OCT",
+            tipo_de_domicilio: "H"},
+          %{
+            ciudad: "PUE", codigo_postal: "72000", colonia: "LLANO DE BUENAVISTA", estado: "PUE",
+            fecha_de_reporte_de_la_direccion: ~D[2009-10-31], fecha_de_residencia: ~D[1989-01-01],
+            municipio: "HUAUCHINANGO", numero_de_telefono: "7767627789", origen_del_domicilio: "MX",
+            primera_linea_de_direccion: "CTO DE LA UNION 34",
+            segunda_linea_de_direccion: "MISIONES DE SN FRAN",
+            tipo_de_domicilio: "H"
+          }],
+        direcciones_de_trabajo: [
+          %{
+            fecha_de_contratacion: ~D[2005-05-05],
+            fecha_de_reporte_de_empleo: ~D[2015-09-08],
+            ocupacion: "AUX", origen_de_la_razon_social: "MX",
+            primera_linea_de_direccion: "GEOTECNIA Y SUPERVICION TECNICA SA",
+            segunda_linea_de_direccion: ""},
+          %{
+            fecha_de_contratacion: ~D[2005-05-05], fecha_de_reporte_de_empleo: ~D[2015-09-08],
+            ocupacion: "AUX", origen_de_la_razon_social: "MX",
+            primera_linea_de_direccion: "RESUELVE TU DEUDA", segunda_linea_de_direccion: ""
+          }],
+        fin: %{
+          fin_del_registro_de_respuesta: "**", longitud_de_transmision: 4822,
+          numero_de_control_de_la_consulta: "1179250939"
+        },
+        hawk_inquiry: %{},
+        hawk_response: %{},
+        persona: %{
+          apellido_materno: "MAZA", apellido_paterno: "URBANO", curp: "UAMH880216HPLRZC09",
+          estado_civil: "S", fecha_de_nacimiento: ~D[1988-02-16], genero: "M",
+          nacionalidad: "MX", primer_nombre: "HECTOR", rfc: "UAMH880216S19", tipo_de_residencia: "1"
+        },
+        resumen: %{
+          number_of_accounts_with_MOP_03: 0,
+          porcentaje_del_limite_de_credito_utilizado_para_cuentas_revolventes: 6.0,
+          numero_de_cuentas_con_MOP_96: 0, numero_de_cuentas: 15, numero_de_cuentas_con_MOP_00: 0,
+          numero_de_solicitudes_de_consulta: 2, numero_de_cuentas_con_MOP_06: 0,
+          total_de_limites_de_credito_para_cuentas_revolventes: 1.062e5,
+          fecha_de_apertura_de_cuenta_mas_antigua: ~D[2009-10-27],
+          mensaje_de_alerta: "NNNNN", numero_de_cuentas_con_MOP_05: 0, numero_de_cuentas_con_MOP_02: 0,
+          total_de_creditos_maximos_para_cuentas_revolventes: 60825.0, declarativa: "N",
+          total_de_saldos_actuales_para_cuentas_de_pagos_fijos_e_hipotecarios: 0.0,
+          numero_de_cuentas_con_MOP_UR: 3,
+          numero_de_cuentas_con_MOP_97: 0,
+          fecha_de_la_consulta_mas_reciente_realizada_por_un_despacho_de_cobranza: :invalid_date,
+          total_de_saldos_vencidos_para_cuentas_revolventes: 0.0,
+          numero_de_cuentas_revolventes_y_sin_limite_establecido: 10,
+          fecha_de_apertura_de_cuenta_mas_reciente: ~D[2015-09-05],
+          total_de_importe_de_pago_para_cuentas_revolventes: 1590.0,
+          total_de_creditos_maximos_para_cuentas_de_pagos_fijos_e_hipotecarios: 0,
+          moneda_del_credito: "MX",
+          numero_de_cuentas_con_MOP_07: 0,
+          numero_de_solicitudes_del_informe_buro_realizadas_por_despachos_de_cobranza: 0,
+          numero_de_cuentas_con_morosidad_actual: 0,
+          total_de_saldos_actuales_para_cuentas_revolventes: 7174.0,
+          fecha_de_la_consulta_mas_reciente: 19052016,
+          total_de_importe_de_pago_para_cuentas_de_pagos_fijos_e_hipotecarios: 0,
+          numero_de_cuentas_con_MOP_03: 0, numero_de_solicitudes_de_informe_de_buro: 13,
+          numero_de_cuentas_en_despacho_de_cobranza: 0, numero_de_cuentas_en_aclaracion: 0,
+          numero_de_cuentas_de_pagos_fijos_e_hipotecario: 5, nueva_direccion_en_los_ultimos_60_dias: "N",
+          numero_de_cuentas_cerradas: 6, numero_de_cuentas_con_MOP_01: 12, numero_de_cuentas_con_MOP_98: 0,
+          numero_de_cuentas_con_historial_de_morosidad_actual: 0, fecha_de_integracion: ~D[2009-11-06],
+          total_de_saldos_vencidos_para_cuentas_de_pagos_fijos_e_hipotecarios: 0,
+          fecha_de_apertura_mas_reciente_de_una_cuenta_en_despacho_de_cobranza: :invalid_date
+        },
+        score: %{
+          codigo_del_score: "007", nombre_del_score: "BC SCORE",
+          primer_codigo_de_razon: "04", valor_del_score: 725
+        }
+      }
   end
 
   test "parse failed response" do
@@ -86,7 +484,7 @@ defmodule ParserTest do
           numero_de_caracteristica: 9,
           plantilla_solicitada: "15",
           valor_de_la_caracteristica: "23432"
-       } |
+       },
        %{
          identificador_de_caracteristica_de_plantilla: "1",
          numero_de_caracteristica: 10,

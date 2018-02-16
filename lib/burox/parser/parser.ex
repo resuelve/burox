@@ -159,9 +159,11 @@ defmodule Burox.Parser do
         {next_values, final_tail} =
           _match_section(section, tail, "", values, sections)
 
-        {[values] ++ next_values, final_tail}
+        {List.flatten([values] ++ [next_values]) , final_tail}
+
       is_member ->
         {values, tail}
+
       true ->
         _match_section(section, tail, next_tag, values, sections)
     end
