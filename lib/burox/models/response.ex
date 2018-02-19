@@ -1,192 +1,191 @@
-defmodule Burox.Response.Person do
+defmodule Burox.Response.Persona do
   @moduledoc false
 
   defstruct [
-    :first_name,
-    :second_name,
-    :last_name,
-    :last_name_2,
-    :aditional_last_name,
-    :birth_date,
+    :primer_nombre,
+    :segundo_nombre,
+    :apellido_paterno,
+    :apellido_materno,
+    :apellido_adicional,
+    :fecha_de_nacimiento,
     :rfc,
-    :title,
-    :suffix,
-    :nationality,
-    :residential_type,
-    :license_id,
-    :marital_status,
-    :genre,
-    :professional_license_id,
-    :identity_id,
+    :prefijo_personal,
+    :sufijo_personal,
+    :nacionalidad,
+    :tipo_de_residencia,
+    :numero_de_licencia_de_conducir,
+    :estado_civil,
+    :genero,
+    :numero_de_cedula_profesional,
+    :numero_de_registro_electoral,
     :curp,
-    :country_code,
-    :dependents_number,
-    :dependents_ages,
-    :dependents_registration_date,
-    :date_of_death
+    :clave_de_pais,
+    :numero_de_dependientes,
+    :edades_de_los_dependientes,
+    :fecha_de_recepcion_de_informacion_de_los_dependientes,
+    :fecha_de_defuncion
   ]
 end
 
-defmodule Burox.Response.Address do
+defmodule Burox.Response.Direccion do
   @moduledoc false
   defstruct [
-    :street,
-    :street_2,
-    :settlement,
-    :municipality,
-    :city,
-    :state,
-    :zip_code,
-    :date_of_residence,
-    :phone_number,
-    :ext,
+    :primera_linea_de_direccion,
+    :segunda_linea_de_direccion,
+    :colonia,
+    :municipio,
+    :ciudad,
+    :estado,
+    :codigo_postal,
+    :fecha_de_residencia,
+    :numero_de_telefono,
+    :extension_telefonica,
     :fax,
-    :type,
-    :special_indicator,
-    :date_of_registration,
-    :country_code
+    :tipo_de_domicilio,
+    :indicador_especial,
+    :fecha_de_reporte_de_la_direccion,
+    :origen_del_domicilio
   ]
 end
 
-defmodule Burox.Response.WorkAddress do
+defmodule Burox.Response.DireccionDeTrabajo do
   @moduledoc false
   defstruct [
-    :street,
-    :street_2,
-    :settlement,
-    :municipality,
-    :city,
-    :state,
-    :zip_code,
-    :date_of_residence,
-    :phone_number,
-    :ext,
+    :primera_linea_de_direccion,
+    :segunda_linea_de_direccion,
+    :colonia,
+    :municipio,
+    :ciudad,
+    :estado,
+    :codigo_postal,
+    :fecha_de_residencia,
+    :numero_de_telefono,
+    :extension_telefonica,
     :fax,
-    :occupation,
-    :date_of_hire,
-    :currency_of_salary,
-    :salary,
-    :payment_period,
-    :employee_number,
-    :last_day_of_employment,
-    :date_of_registration,
-    :date_of_verification,
-    :verification_method,
-    :country_code
+    :ocupacion,
+    :fecha_de_contratacion,
+    :clave_de_la_moneda_del_sueldo,
+    :monto_del_sueldo,
+    :perido_de_pago,
+    :numero_de_empleado,
+    :fecha_de_ultimo_dia_de_empleo,
+    :fecha_de_reporte_de_empleo,
+    :fecha_de_verificacion_de_empleo,
+    :modo_de_verificacion,
+    :origen_de_la_razon_social
   ]
 end
 
-defmodule Burox.Response.Credit do
+defmodule Burox.Response.Credito do
   @moduledoc false
   defstruct [
-    :date_update,
-    :record_disputed,
-    :member_code,
-    :user_name,
-    :user_phone_number,
-    :account_number,
-    :responsability_type,
-    :account_type,
-    :product,
+    :fecha_de_actualizacion,
+    :registro_impugando,
+    :clave_del_usuario,
+    :nombre_del_usuario,
+    :numero_telefonico_del_usuario,
+    :numero_de_cuenta,
+    :tipo_de_responsabilidad_de_la_cuenta,
+    :tipo_de_cuenta,
+    :tipo_de_producto,
     :currency,
-    :valuation_amount,
-    :number_of_payments,
-    :payment_frequency,
-    :amount_to_pay,
-    :date_of_account_opening,
-    :last_date_of_payment,
-    :last_date_of_use,
-    :date_of_close,
-    :date_of_last_report,
-    :reporting_mode,
-    :last_date_of_nil_balance,
-    :warranty,
-    :maximum_credit_authorized,
-    :current_balance,
-    :credit_limit,
-    :balance_due,
-    :number_of_payments_due,
-    :manner_of_payment,
-    :payments_history,
-    :last_date_of_payments_history,
-    :older_date_payments_history,
-    :observation_code,
-    :total_number_of_payments_reported,
-    :total_number_of_payments_with_MOP_02,
-    :total_number_of_payments_with_MOP_03,
-    :total_number_of_payments_with_MOP_04,
-    :total_number_of_payments_with_MOP_05_or_more,
-    :maximum_balance_of_defaulting,
-    :date_of_maximum_defaulting,
-    :slowness_in_pay_MOP,
-    :init_date_of_the_debt_reestructuring,
-    :amount_of_last_payment
+    :moneda_del_credito,
+    :importe_del_avaluo,
+    :numero_de_pagos,
+    :frecuencia_de_pagos,
+    :monto_a_pagar,
+    :fecha_de_apertura_de_cuenta,
+    :fecha_del_ultimo_pago,
+    :fecha_de_ultima_compra,
+    :fecha_de_cierre,
+    :fecha_de_reporte_de_informacion,
+    :modo_de_reportar,
+    :ultima_fecha_de_saldo_cero,
+    :garantia,
+    :credito_maximo_autorizado,
+    :saldo_actual,
+    :limite_de_credito,
+    :saldo_vencido,
+    :numero_de_pagos_vencidos,
+    :clasificacion_de_puntualidad_de_pago,
+    :historico_de_pagos,
+    :fecha_mas_reciente_del_historico_de_pagos,
+    :fecha_mas_antigua_del_historico_de_pagos,
+    :clave_de_observacion,
+    :total_de_pagos_reportados,
+    :total_de_pagos_con_MOP_02,
+    :total_de_pagos_con_MOP_03,
+    :total_de_pagos_con_MOP_04,
+    :total_de_pagos_con_MOP_05_o_mayor,
+    :saldo_en_la_morosidad_historica_mas_alta,
+    :fecha_de_la_morosidad_historica_mas_alta,
+    :MOP_de_la_morosidad_mas_alta,
+    :fecha_de_inicio_de_la_reestructura,
+    :monto_del_ultimo_pago
   ]
 end
 
-defmodule Burox.Response.Query do
+defmodule Burox.Response.Consulta do
   @moduledoc false
   defstruct [
-    :date_of_query,
-    :member_code,
-    :user_name,
-    :user_phone_number,
-    :product,
-    :currency,
-    :credit_amount,
-    :contract_value,
-    :responsability_type,
-    :new_client_indicator,
-    :reserved
+    :fecha_de_consulta,
+    :clave_del_usuario,
+    :nombre_del_usuario,
+    :numero_telefonico_del_usuario,
+    :tipo_de_producto,
+    :moneda_del_credito,
+    :importe_del_contrato,
+    :tipo_de_responsabilidad_de_la_cuenta,
+    :indicador_de_cliente_nuevo,
+    :reservado
   ]
 end
 
-defmodule Burox.Response.Summary do
+defmodule Burox.Response.Resumen do
   @moduledoc false
   defstruct [
-    :date_of_integration,
-    :number_of_accounts_with_MOP_07,
-    :number_of_accounts_with_MOP_06,
-    :number_of_accounts_with_MOP_05,
-    :number_of_accounts_with_MOP_04,
-    :number_of_accounts_with_MOP_03,
-    :number_of_accounts_with_MOP_02,
-    :number_of_accounts_with_MOP_01,
-    :number_of_accounts_with_MOP_00,
-    :number_of_accounts_with_MOP_UR,
-    :number_of_accounts,
-    :number_of_accounts_of_mortage_or_fixed_payments,
-    :number_of_accounts_with_revolving_credit,
-    :number_of_closed_accounts,
-    :number_of_accounts_with_current_slowness_in_pay,
-    :number_of_accounts_with_slowness_in_pay_history,
-    :number_of_accounts_in_clarification,
-    :number_of_requests_to_client_record,
-    :new_address_in_last_60_days,
-    :alert_message,
-    :customer_declaration,
-    :credit_currency,
-    :total_maximum_credit_of_accounts_with_revolving_credit,
-    :total_limit_credit_of_accounts_with_revolving_credit,
-    :total_current_balance_of_accounts_with_revolving_credit,
-    :total_balance_due_of_accounts_with_revolving_credit,
-    :total_payment_amount_of_accounts_with_revolving_credit,
-    :percentage_of_limit_credit_of_accounts_with_revolving_credit,
-    :total_maximum_credit_of_accounts_of_mortage_or_fixed_payments,
-    :total_current_balance_of_accounts_of_mortage_or_fixed_payments,
-    :total_balance_due_of_accounts_of_mortage_or_fixed_payments,
-    :total_payment_amount_of_accounts_of_mortage_or_fixed_payments,
-    :number_of_accounts_with_MOP_96,
-    :number_of_accounts_with_MOP_97,
-    :number_of_accounts_with_MOP_98,
-    :opening_date_of_older_account,
-    :opening_date_of_newest_account,
-    :number_of_buro_request,
-    :date_of_latest_request,
-    :number_of_accounts_in_collection_agencies,
-    :most_recent_openning_date_of_account_in_collection_agency,
-    :number_of_buro_requests_made_by_collection_agencies,
-    :date_of_last_request_of_buro_made_by_a_collection_agency
+    :fecha_de_integracion,
+    :numero_de_cuentas_con_MOP_07,
+    :numero_de_cuentas_con_MOP_06,
+    :numero_de_cuentas_con_MOP_05,
+    :numero_de_cuentas_con_MOP_04,
+    :numero_de_cuentas_con_MOP_03,
+    :numero_de_cuentas_con_MOP_02,
+    :numero_de_cuentas_con_MOP_01,
+    :numero_de_cuentas_con_MOP_00,
+    :numero_de_cuentas_con_MOP_UR,
+    :numero_de_cuentas_de_pagos_fijos_e_hipotecario,
+    :numero_de_cuentas_revolventes_y_sin_limite_establecido,
+    :numero_de_cuentas_cerradas,
+    :numero_de_cuentas_con_morosidad_actual,
+    :numero_de_cuentas_con_historial_de_morosidad_actual,
+    :numero_de_cuentas_en_aclaracion,
+    :numero_de_solicitudes_de_consulta,
+    :nueva_direccion_en_los_ultimos_60_dias,
+    :mensaje_de_alerta,
+    :declarativa,
+    :moneda_del_credito,
+    :total_de_creditos_maximos_para_cuentas_revolventes,
+    :total_de_limites_de_credito_para_cuentas_revolventes,
+    :total_de_saldos_actuales_para_cuentas_revolventes,
+    :total_de_saldos_vencidos_para_cuentas_revolventes,
+    :total_de_importe_de_pago_para_cuentas_revolventes,
+    :porcentaje_del_limite_de_credito_utilizado_para_cuentas_revolventes,
+    :total_de_creditos_maximos_para_cuentas_de_pagos_fijos_e_hipotecarios,
+    :total_de_saldos_actuales_para_cuentas_de_pagos_fijos_e_hipotecarios,
+    :total_de_saldos_vencidos_para_cuentas_de_pagos_fijos_e_hipotecarios,
+    :total_de_importe_de_pago_para_cuentas_de_pagos_fijos_e_hipotecarios,
+    :numero_de_cuentas_con_MOP_96,
+    :numero_de_cuentas_con_MOP_97,
+    :numero_de_cuentas_con_MOP_98,
+    :fecha_de_apertura_de_cuenta_mas_antigua,
+    :fecha_de_apertura_de_cuenta_mas_reciente,
+    :numero_de_solicitudes_de_informe_de_buro,
+    :fecha_de_la_consulta_mas_reciente,
+    :numero_de_cuentas_en_despacho_de_cobranza,
+    :fecha_de_apertura_mas_reciente_de_una_cuenta_en_despacho_de_cobranza,
+    :numero_de_solicitudes_del_informe_buro_realizadas_por_despachos_de_cobranza,
+    :fecha_de_la_consulta_mas_reciente_realizada_por_un_despacho_de_cobranza
   ]
 end
 
@@ -221,13 +220,22 @@ end
 defmodule Burox.Response.Score do
   @moduledoc false
   defstruct [
-    :name,
-    :score_code,
-    :score_value,
-    :first_reason_code,
-    :second_reason_code,
-    :third_reason_code,
-    :error_code
+    :nombre_del_score,
+    :codigo_del_score,
+    :valor_del_score,
+    :primer_codigo_de_razon,
+    :segundo_codigo_de_razon,
+    :tercer_codigo_de_razon,
+    :codigo_de_error
+  ]
+end
+
+defmodule Burox.Response.Fin do
+  @moduledoc false
+  defstruct [
+    :longitud_de_transmision,
+    :numero_de_control_de_la_consulta,
+    :fin_del_registro_de_respuesta
   ]
 end
 
@@ -250,16 +258,17 @@ defmodule Burox.Response do
   alias Burox.Response
 
   defstruct [
-    person: %Response.Person{},
-    addresses: [%Response.Address{}],
-    work_addresses: [%Response.WorkAddress{}],
-    credits: [%Response.Credit{}],
-    queries: [%Response.Query{}],
-    summary: %Response.Summary{},
+    persona: %Response.Persona{},
+    direcciones: [%Response.Direccion{}],
+    direcciones_de_trabajo: [%Response.DireccionDeTrabajo{}],
+    creditos: [%Response.Credito{}],
+    consultas: [%Response.Consulta{}],
+    resumen: %Response.Resumen{},
     hawk_inquiry: %Response.HawkInquiry{},
     hawk_response: %Response.HawkInquiry{},
     declarativa_consumidor: [%Response.DeclarativaConsumidor{}],
-    score: %Response.Score{}
+    score: %Response.Score{},
+    fin: %Response.Fin{}
   ]
 
 end
