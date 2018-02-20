@@ -1,7 +1,7 @@
-## ¿Cuál es el problema?
+### ¿Cuál es el problema?
 
-## ¿Qué debo hacer?
+### ¿Qué debo hacer?
 - [ ]
 - [ ]
 
-## Imágenes y referencias
+### Imágenes y referencias
