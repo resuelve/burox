@@ -1,4 +1,4 @@
-defmodule Burox.Parser.ResponseMap do
+defmodule Burox.Response.Config do
   @moduledoc false
 
   @sections_map %{

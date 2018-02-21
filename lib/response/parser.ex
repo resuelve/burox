@@ -1,7 +1,7 @@
-defmodule Burox.Parser do
+defmodule Burox.Response.Parser do
   @moduledoc false
 
-  import Burox.Parser.ResponseMap
+  import Burox.Response.Config
   alias Burox.Response
 
   @success_sections [
