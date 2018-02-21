@@ -1,6 +1,5 @@
 defmodule BuroxTest do
   use ExUnit.Case
-  # doctest Burox
   alias Burox.Request
 
   @valid_person_data %{
@@ -48,11 +47,11 @@ defmodule BuroxTest do
   }
 
   test "Gets the information of a person in Buro de Crédito" do
-    assert Burox.request(@valid_person_data) == {:ok}
+    assert Burox.solicitar(@valid_person_data) == {:ok}
   end
 
   test "Gets an error trying to get information of a person in Buro de Crédito" do
-    assert Burox.request(@invalid_person_data) == {:invalid}
+    assert Burox.solicitar(@invalid_person_data) == {:invalid}
   end
 
 end

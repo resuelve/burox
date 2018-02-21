@@ -30,3 +30,7 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :burox, buro_url: System.get_env("BURO_URL")
+config :burox, buro_user: System.get_env("BURO_USER")
+config :burox, buro_password: System.get_env("BURO_PASSWORD")
+
+

@@ -4,18 +4,17 @@ defmodule Burox do
   alias Burox.Request
 
   @doc """
-  Request the credit information to the Buro de Crédito
+  Solicita la información crediticia de una persona al buró de crédito
+  ## Ejemplos
 
-  ## Examples
-
-      iex> Burox.request{%Burox.Request{}}
+      iex> Burox.solicitar{%Burox.Request{}}
       {:ok, term}
 
   """
-  @spec request(Burox.Request.t) :: {:ok, term} | {:error, term}
-  def request(data) do
-    request = struct(Request, data)
-    case request do
+  @spec solicitar(Request.t) :: {:ok, term} | {:error, term}
+  def solicitar(data) do
+    peticion = struct(Request, data)
+    case peticion do
       %Request{} -> {:ok}
       _ -> {:error}
     end
