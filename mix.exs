@@ -13,7 +13,7 @@ defmodule Burox.Mixfile do
 
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :mox]
     ]
   end
 
@@ -22,7 +22,7 @@ defmodule Burox.Mixfile do
       {:credo,                    "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
       {:ex_doc,                   "~> 0.16", only: :dev, runtime: false},
       {:socket,                   "~> 0.3"},
-      {:mox,                     "~> 0.3.1", only: :test}
+      {:mox,                     "~> 0.3", only: :test}
     ]
   end
 end
