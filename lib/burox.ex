@@ -20,11 +20,9 @@ defmodule Burox do
   def solicitar(data) do
     peticion = Utils.to_struct(data, Burox.Request)
 
-    IO.inspect @buro_service
-
     request_string = Encoder.encode_buro(peticion)
 
-    with {:ok, buro_response} <- @buro_service.post(request_string) do
+    with {:ok, buro_response} <- Burox.BuroService.Socket.post(request_string) do
       response = Parser.process_response(buro_response)
 
       case peticion do
