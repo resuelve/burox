@@ -16,7 +16,7 @@ defmodule Burox.Request.Encoder do
 
     # TODO: Validar datos de entrada
     "#{build_header(peticion.encabezado)}" <>
-    "#{build_body(peticion)}"
+    "#{build_body(peticion)}"
 
   end
 
