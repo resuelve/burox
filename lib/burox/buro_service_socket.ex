@@ -25,7 +25,6 @@ defmodule Burox.BuroService.Socket do
       Socket.Stream.send!(sock, data)
       response = sock
       |> Socket.Stream.recv!()
-      |> IO.inspect
 
       {:ok, response}
     else

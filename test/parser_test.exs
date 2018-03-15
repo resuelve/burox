@@ -94,7 +94,7 @@ defmodule ParserTest do
           }],
         creditos: [
           %{
-            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12090.0, 
+            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12_090.0, 
             fecha_de_actualizacion: ~D[2016-05-16], fecha_de_apertura_de_cuenta: ~D[2012-04-01],
             fecha_de_reporte_de_informacion: ~D[2016-05-02], fecha_de_ultima_compra: ~D[2016-04-22],
             fecha_de_ultimo_pago: ~D[2016-05-02], fecha_mas_antigua_del_historico_de_pagos: ~D[2012-04-29],
@@ -159,7 +159,7 @@ defmodule ParserTest do
           },
           %{
             MOP_de_la_morosidad_mas_alta: "00", clasificacion_de_puntualidad_de_pago: "01",
-            clave_de_observacion: "IA", credito_maximo_autorizado: 17233.0, fecha_de_actualizacion: ~D[2016-05-04],
+            clave_de_observacion: "IA", credito_maximo_autorizado: 17_233.0, fecha_de_actualizacion: ~D[2016-05-04],
             fecha_de_apertura_de_cuenta: ~D[2010-03-24], fecha_de_la_morosidad_historica_mas_alta: ~D[2011-01-31],
             fecha_de_reporte_de_informacion: ~D[2016-04-30], fecha_de_ultima_compra: ~D[2016-04-18],
             fecha_de_ultimo_pago: ~D[2016-04-28], fecha_mas_antigua_del_historico_de_pagos: ~D[2013-11-30],
@@ -188,7 +188,7 @@ defmodule ParserTest do
           },
           %{
             MOP_de_la_morosidad_mas_alta: "02", clasificacion_de_puntualidad_de_pago: "01",
-            clave_de_observacion: "IA", credito_maximo_autorizado: 17233.0,
+            clave_de_observacion: "IA", credito_maximo_autorizado: 17_233.0,
             fecha_de_actualizacion: ~D[2016-05-11], fecha_de_apertura_de_cuenta: ~D[2010-03-24],
             fecha_de_la_morosidad_historica_mas_alta: ~D[2014-05-31],
             fecha_de_reporte_de_informacion: ~D[2016-04-30],
@@ -379,7 +379,7 @@ defmodule ParserTest do
           total_de_limites_de_credito_para_cuentas_revolventes: 1.062e5,
           fecha_de_apertura_de_cuenta_mas_antigua: ~D[2009-10-27],
           mensaje_de_alerta: "NNNNN", numero_de_cuentas_con_MOP_05: 0, numero_de_cuentas_con_MOP_02: 0,
-          total_de_creditos_maximos_para_cuentas_revolventes: 60825.0, declarativa: "N",
+          total_de_creditos_maximos_para_cuentas_revolventes: 60_825.0, declarativa: "N",
           total_de_saldos_actuales_para_cuentas_de_pagos_fijos_e_hipotecarios: 0.0,
           numero_de_cuentas_con_MOP_UR: 3,
           numero_de_cuentas_con_MOP_97: 0,
@@ -394,7 +394,7 @@ defmodule ParserTest do
           numero_de_solicitudes_del_informe_buro_realizadas_por_despachos_de_cobranza: 0,
           numero_de_cuentas_con_morosidad_actual: 0,
           total_de_saldos_actuales_para_cuentas_revolventes: 7174.0,
-          fecha_de_la_consulta_mas_reciente: 19052016,
+          fecha_de_la_consulta_mas_reciente: ~D[2016-05-19],
           total_de_importe_de_pago_para_cuentas_de_pagos_fijos_e_hipotecarios: 0,
           numero_de_cuentas_con_MOP_03: 0, numero_de_solicitudes_de_informe_de_buro: 13,
           numero_de_cuentas_en_despacho_de_cobranza: 0, numero_de_cuentas_en_aclaracion: 0,

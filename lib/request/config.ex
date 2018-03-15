@@ -1,11 +1,6 @@
 defmodule Burox.Request.Config do
   @moduledoc false
 
-  @sections_sorted [
-    :persona,
-    :direccion
-  ]
-
   @sections_list [
     persona: %{
       key: "PN",
