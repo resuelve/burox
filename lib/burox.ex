@@ -27,6 +27,7 @@ defmodule Burox do
     Logger.info "Request:\n#{inspect request_string}"
 
     with {:ok, buro_response} <- Burox.BuroService.Socket.post(request_string) do
+      Logger.info "Buro response: \n #{buro_response}"
       response = Parser.process_response(buro_response)
       Logger.info "Response:\n#{inspect response}"
 

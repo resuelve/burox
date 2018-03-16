@@ -632,7 +632,7 @@ defmodule Burox.Response.Config do
         },
         "37" => %{
           "key" => :fecha_de_la_consulta_mas_reciente,
-          "type" => "integer"
+          "type" => "date"
         },
         "38" => %{
           "key" => :numero_de_cuentas_en_despacho_de_cobranza,
@@ -793,6 +793,73 @@ defmodule Burox.Response.Config do
           "type" => "string"
         },
       }
+    },
+    "UR" => %{
+      "key" => :error,
+      "struct" => Burox.Response.ErrorUser,
+      "type" => "map",
+      "tags" => %{
+        "" => %{
+          "key" => :numero_de_referencia_del_operador,
+          "type" => "string"
+        },
+        "00" => %{
+         "key" => :solicitud_del_cliente_erronea,
+         "type" => "string"
+        },
+        "01" => %{
+          "key" => :version_proporcionada_erronea,
+          "type" => "string"
+           },
+        "02" => %{
+          "key" => :producto_solicitado_erroneo,
+          "type" => "string"
+           },
+        "03" => %{
+          "key" => :clave_de_usuario_o_contrasena_erronea,
+          "type" => "string"
+           },
+        "04" => %{
+          "key" => :segmento_requerido_no_proporcionado,
+          "type" => "string"
+           },
+        "05" => %{
+          "key" => :ultima_informacion_valida_del_cliente,
+          "type" => "string"
+           },
+        "06" => %{
+          "key" => :informacion_erronea_para_consulta,
+          "type" => "string"
+           },
+        "07" => %{
+          "key" => :valor_erroneo_en_una_campo_relacionado,
+          "type" => "string"
+           },
+        "11" => %{
+          "key" => :error_en_el_sistema_de_buro_de_credito,
+          "type" => "string"
+           },
+        "12" => %{
+          "key" => :etiqueta_de_segmento__erronea,
+          "type" => "string"
+           },
+        "13" => %{
+          "key" => :orden_erroneo_del_segmento,
+          "type" => "string"
+           },
+        "14" => %{
+          "key" => :numero_erroneo_de_segmentos,
+          "type" => "string"
+           },
+        "16" => %{
+          "key" => :falta_campo_requerido,
+          "type" => "string"
+           },
+        "20" => %{
+          "key" => :expediente_bloqueado_para_consulta,
+          "type" => "string"
+           }
+        }
     }
   }
 

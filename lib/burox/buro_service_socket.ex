@@ -23,7 +23,10 @@ defmodule Burox.BuroService.Socket do
     with {:ok, sock} <- Socket.connect(buro_url) do
       Logger.info "Connected"
       Socket.Stream.send!(sock, data)
-      Socket.Stream.recv!(sock)
+      response = sock
+      |> Socket.Stream.recv!()
+
+      {:ok, response}
     else
       {:error, reason} -> {:error, reason}
     _ -> {:error, "No se puede conectar al Buro de Crédito"}

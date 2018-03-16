@@ -21,7 +21,7 @@ defmodule Burox.Response.Parser do
   ]
 
   @error_sections [
-    "ERRR",
+    "UR",
     "ES"
   ]
 
@@ -35,12 +35,13 @@ defmodule Burox.Response.Parser do
     response
     |> String.starts_with?("INTL")
     |> if  do
-      response
-      |> _process_response(@success_sections)
-      |> Map.to_list()
-      |> (&struct(Response, &1)).()
+      success = response
+        |> _process_response(@success_sections)
+        |> Map.to_list()
+        |> (&struct(Response, &1)).()
+      {:ok, success}
     else
-      _process_response(response, @error_sections)
+      {:error, _process_response(response, @error_sections)}
     end
 
   end
@@ -81,8 +82,8 @@ defmodule Burox.Response.Parser do
         {String.slice(value_string, 31, 15), tail}
 
       String.starts_with?(string, "ERRR") ->
-        {value_string, tail} = String.split_at(string, 43)
-        {String.slice(value_string, 31, 10), tail}
+        {_, tail} = String.split_at(string, 4)
+        _match_section(section, tail, "", section_values, sections_keys)
 
       String.starts_with?(string, section) ->
         _match_section(section, string, "", section_values, sections_keys)

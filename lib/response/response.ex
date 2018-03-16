@@ -239,6 +239,27 @@ defmodule Burox.Response.Fin do
   ]
 end
 
+defmodule Burox.Response.ErrorUser do
+  @moduledoc false
+  defstruct [
+    :numero_de_referencia_del_operador,
+    :solicitud_del_cliente_erronea,
+    :version_proporcionada_erronea,
+    :producto_solicitado_erroneo,
+    :clave_de_usuario_o_contrasena_erronea,
+    :segmento_requerido_no_proporcionado,
+    :ultima_informacion_valida_del_cliente,
+    :informacion_erronea_para_consulta,
+    :valor_erroneo_en_una_campo_relacionado,
+    :error_en_el_sistema_de_buro_de_credito,
+    :etiqueta_de_segmento__erronea,
+    :orden_erroneo_del_segmento,
+    :numero_erroneo_de_segmentos,
+    :falta_campo_requerido,
+    :expediente_bloqueado_para_consulta
+  ]
+end
+
 defmodule Burox.Response.Sintetiza do
   @moduledoc false
   defstruct [
@@ -265,10 +286,11 @@ defmodule Burox.Response do
     consultas: [%Response.Consulta{}],
     resumen: %Response.Resumen{},
     hawk_inquiry: %Response.HawkInquiry{},
-    hawk_response: %Response.HawkInquiry{},
+    hawk_response: %Response.HawkResponse{},
     declarativa_consumidor: [%Response.DeclarativaConsumidor{}],
     score: %Response.Score{},
-    fin: %Response.Fin{}
+    fin: %Response.Fin{},
+    error: %Response.ErrorUser{}
   ]
 
 end

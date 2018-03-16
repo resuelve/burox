@@ -16,7 +16,7 @@ defmodule Burox.Request.Encoder do
 
     # TODO: Validar datos de entrada
     "#{build_header(peticion.encabezado)}" <>
-    "#{build_body(peticion)}"
+    "#{build_body(peticion)}"
 
   end
 
@@ -51,24 +51,30 @@ defmodule Burox.Request.Encoder do
       fn({segmento, config}, acc) ->
         values = request_map[segmento]
 
+        # ¿Hay valores del segmento?
         if values != nil do
           # Agrega la llave del segmento
           acc = acc <> config[:key]
 
-          body = Enum.reduce(config[:tags], "", fn({key, tag}, acc) ->
-              value = values[key]
-
-              if value != nil do
-                acc <> tag <> size_of(value) <> value
-              else
-                acc
-              end
-            end)
-
           # Agrega los valores
-          acc <> body
+          acc <> build_tag_values(config[:tags], values)
         end
       end)
+  end
+
+  # Función para construir los valores de las etiquetas de un segmento
+  # Nombre + tamaño + valor
+  defp build_tag_values(tags, values) do
+    Enum.reduce(tags, "", fn({key, tag}, acc) ->
+      value = values[key]
+
+      if value != nil do
+        acc <> tag <> size_of(value) <> value
+      else
+        acc
+      end
+
+    end)
   end
 
   # Retorna el numero de caracteres de una cadena
