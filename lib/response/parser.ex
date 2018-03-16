@@ -48,7 +48,8 @@ defmodule Burox.Response.Parser do
 
   # Process the response depending if it was succesful or failed.
   defp _process_response(response, sections) do
-    Enum.reduce(sections, %{"tail" => response}, fn(tag, section_values) ->
+    sections
+    |> Enum.reduce(%{"tail" => response}, fn(tag, section_values) ->
         # Seek for sections and their values
         {values, tail} = match_section(section_values["tail"], tag, sections)
 
@@ -67,6 +68,7 @@ defmodule Burox.Response.Parser do
         Map.merge(section_values, %{section_key => values, "tail" => tail})
       end
     )
+    |> Map.delete("tail")
   end
 
   @doc """
@@ -194,6 +196,7 @@ defmodule Burox.Response.Parser do
   end
 
   # Convierte una cadena a Fecha, 'yyyymmmdd'
+  defp parse_string_to_date("00000000"), do: nil
   defp parse_string_to_date("000000000"), do: nil
   defp parse_string_to_date(str_date) do
     [d, m, y1, y2] = for <<x::binary-2 <- str_date>>, do: x

@@ -29,11 +29,10 @@ defmodule EncoderTest do
     }
   }
 
-  @sample_response "INTL13                         007MX0000ICCMX000050000SP01     000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MX"
+  @sample_response "INTL13                         507MX0000userpasswordICCMX000000000SP01     000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MX"
 
   test "Encode Request to string used in Buro de Crédito" do
-    # IO.inspect "#{encode_buro(@sample_request)}"
-    assert encode_buro(@sample_request) == @sample_response
+    assert encode_buro(@sample_request, "507") == @sample_response
   end
 
 end

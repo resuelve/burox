@@ -11,33 +11,34 @@ defmodule Burox.Request.Encoder do
   Convierte una estructura de respuesta al formato
   recibido por el buró de crédito
   """
-  @spec encode_buro(Request) :: {:ok, term} | {:error, term}
-  def encode_buro(peticion) do
+  @spec encode_buro(Request.t, String.t) :: {:ok, term} | {:error, term}
+  def encode_buro(peticion, codigo_de_producto) do
 
-    # TODO: Validar datos de entrada
-    "#{build_header(peticion.encabezado)}" <>
+    "#{build_header(codigo_de_producto)}" <>
     "#{build_body(peticion)}"
 
   end
 
-  # Crea el encabezado de la peticion,
+  # Crea el encabezado de la petición,
   # solo esta soportada la versión 13
-  defp build_header(encabezado) do
+ defp build_header(codigo_de_producto) do
+
     "INTL13                         "
-    <> encabezado.codigo_de_producto
-    <> encabezado.pais
+    <> codigo_de_producto
+    <> "MX"
     <> "0000"
-    <> encabezado.buro_user
-    <> encabezado.buro_password
+    <> Application.get_env(:burox, :buro_user)
+    <> Application.get_env(:burox, :buro_password)
     <> "I"
     <> "CC"
     <> "MX"
-    <> "000050000"
+    <> "000000000"
     <> "SP"
     <> "01"
     <> " "
     <> "    "
     <> "000000"
+
   end
 
   # Crea el cuerpo de la petición
@@ -66,7 +67,7 @@ defmodule Burox.Request.Encoder do
   # Nombre + tamaño + valor
   defp build_tag_values(tags, values) do
     Enum.reduce(tags, "", fn({key, tag}, acc) ->
-      value = values[key]
+      value = Map.get(values, key)
 
       if value != nil do
         acc <> tag <> size_of(value) <> value
