@@ -49,7 +49,7 @@ defmodule Burox do
       retorno = %{
         cadena_peticion: request_string,
         respuesta: response,
-        cadena_respuesta: String.slice(buro_response, 0..-2)
+        cadena_respuesta: buro_response
       }
 
       case peticion do
