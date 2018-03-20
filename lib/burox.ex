@@ -47,9 +47,9 @@ defmodule Burox do
       Logger.info "Respuesta:\n#{inspect response}"
 
       retorno = %{
-        "cadena_peticion" => request_string,
-        "respuesta" => response,
-        "cadena_respuesta" => buro_response
+        cadena_peticion: request_string,
+        respuesta: response,
+        cadena_respuesta: buro_response
       }
 
       case peticion do

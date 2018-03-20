@@ -1,8 +1,6 @@
 defmodule Burox.Request.Encabezado do
   @moduledoc false
 
-  # @enforce_keys [:codigo_de_producto]
-
   defstruct [
     :codigo_de_producto,
     :pais,
@@ -12,8 +10,6 @@ end
 
 defmodule Burox.Request.Persona do
   @moduledoc false
-
-  # @enforce_keys [:apellido_paterno, :apellido_materno, :primer_nombre]
 
   defstruct [
     :apellido_paterno,
@@ -27,15 +23,6 @@ end
 
 defmodule Burox.Request.Direccion do
   @moduledoc false
-
-  # @enforce_keys [
-  #   :primera_linea_de_direccion,
-  #   :municipio,
-  #   :ciudad,
-  #   :estado,
-  #   :codigo_postal,
-  #   :origen_del_domicilio
-  # ]
 
   defstruct [
     :primera_linea_de_direccion,

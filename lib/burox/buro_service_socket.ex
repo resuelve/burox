@@ -26,7 +26,11 @@ defmodule Burox.BuroService.Socket do
       response = sock
       |> Socket.Stream.recv!()
 
-      {:ok, response}
+      if response = "" do
+        {:error, "No se pudo obtener respuesta del buro"}
+      else
+        {:ok, response}
+      end
     else
       {:error, reason} -> {:error, reason}
     _ -> {:error, "No se puede conectar al Buro de Crédito"}
