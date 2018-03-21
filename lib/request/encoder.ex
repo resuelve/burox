@@ -1,7 +1,7 @@
 defmodule Burox.Request.Encoder do
   @moduledoc """
-  Este modulo contiene la especificación de los datos
-  que pueden ir en la petición del buro
+  Este módulo contiene la especificación de los datos
+  que pueden ir en la petición del Buró de Crédito
   """
 
   import Burox.Request.Config
@@ -27,7 +27,7 @@ defmodule Burox.Request.Encoder do
     buro_password = Application.get_env(:burox, :buro_password)
 
     if is_nil(buro_user) or is_nil(buro_password) do
-      raise Burox.Error, message: "Deben configurarse las credenciales del buro"
+      raise Burox.Error, message: "Deben configurarse las credenciales del Buró de Crédito"
     end
 
     "INTL13                         "

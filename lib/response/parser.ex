@@ -26,12 +26,12 @@ defmodule Burox.Response.Parser do
   ]
 
   @doc """
-  Procesa y parsea la cadena recibida del Buro
+  Procesa y parsea la cadena recibida del Buró de Crédito
   """
   @spec process_response(String.t) :: map
   def process_response(response) do
 
-    # La respuesta del buro esta divida en segmentos
+    # La respuesta del Buró de Crédito esta divida en segmentos
     response
     |> String.starts_with?("INTL")
     |> if  do
@@ -152,10 +152,10 @@ defmodule Burox.Response.Parser do
 
     next_tag = String.slice(tail, 0, 2)
 
-    # Check if we reach the end of section
+    # Revisa si realmente se llegó al final de la sección
     is_member = Enum.member?(sections, next_tag)
 
-    # Section could be a list instead of a map_tag
+    # La sección puede ser una lista o un mapa
     is_same_section = section == next_tag
     cond do
       is_same_section ->
@@ -173,9 +173,9 @@ defmodule Burox.Response.Parser do
 
   end
 
-  # Parse the length of a value and return the slice that contains it
+  # Regrese la cadena con el valor y su tamaño
   defp read_value(string) do
-    # The length of the value is after the tag, 2 digits always
+    # El tamaño del valor esta despúes de la etiqueta, siempre son 2 dígitos
     {length, _} = string
     |> String.slice(0, 2)
     |> Integer.parse()
@@ -184,10 +184,10 @@ defmodule Burox.Response.Parser do
   end
 
   defp read_value(string, length) do
-    # Value starts after the lenght info
+    # El valor esta siempre despúes del tamaño
     value_start = 0 + 2
 
-    # Return the string not processed yet
+    # Regresa la cadena no procesada
     tail = string
     |> String.split_at(value_start + length)
     |> elem(1)
@@ -208,14 +208,14 @@ defmodule Burox.Response.Parser do
 
   end
 
-  # Esta función ayuda a separar las declarativas de credito
-  # Estan estan en una sola cadena separadas por ##CREDITO
+  # Esta función ayuda a separar las declarativas de crédito
+  # Estas estan en una sola cadena separadas por ##CREDITO
   def extract_declarations(string, length) do
     {string, tail} = String.split_at(string, length)
     only_credits? = String.starts_with?(string, "##")
 
     # Las declarativas se presentan de acuerdo a la secuencia de los
-    # créditos mostrados en el buro
+    # créditos mostrados en el Buró de Crédito
 
     value = string
       |> String.split(~r(##CREDITO))
