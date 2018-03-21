@@ -383,7 +383,7 @@ defmodule ParserTest do
           total_de_saldos_actuales_para_cuentas_de_pagos_fijos_e_hipotecarios: 0.0,
           numero_de_cuentas_con_MOP_UR: 3,
           numero_de_cuentas_con_MOP_97: 0,
-          fecha_de_la_consulta_mas_reciente_realizada_por_un_despacho_de_cobranza: :invalid_date,
+          fecha_de_la_consulta_mas_reciente_realizada_por_un_despacho_de_cobranza: :nil,
           total_de_saldos_vencidos_para_cuentas_revolventes: 0.0,
           numero_de_cuentas_revolventes_y_sin_limite_establecido: 10,
           fecha_de_apertura_de_cuenta_mas_reciente: ~D[2015-09-05],
@@ -402,7 +402,7 @@ defmodule ParserTest do
           numero_de_cuentas_cerradas: 6, numero_de_cuentas_con_MOP_01: 12, numero_de_cuentas_con_MOP_98: 0,
           numero_de_cuentas_con_historial_de_morosidad_actual: 0, fecha_de_integracion: ~D[2009-11-06],
           total_de_saldos_vencidos_para_cuentas_de_pagos_fijos_e_hipotecarios: 0,
-          fecha_de_apertura_mas_reciente_de_una_cuenta_en_despacho_de_cobranza: :invalid_date
+          fecha_de_apertura_mas_reciente_de_una_cuenta_en_despacho_de_cobranza: :nil
         },
         score: %{
           codigo_del_score: "007", nombre_del_score: "BC SCORE",
@@ -412,9 +412,8 @@ defmodule ParserTest do
   end
 
   test "parse failed response" do
-    assert {:error, response} = process_response(@error_response)
-    assert response = %{
-      "tail" => "",
+    {:error, response} = process_response(@error_response)
+    assert response == %{
       :error => %{
         error_en_el_sistema_de_buro_de_credito: "Y",
         numero_de_referencia_del_operador: "                         "},

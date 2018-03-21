@@ -8,32 +8,53 @@ defmodule Burox do
 
   require Logger
 
-  @buro_service Application.get_env(:burox, :buro_service)
+  @doc """
+  Solicita la información crediticia de una persona al buró de crédito
+  ## Ejemplos
+
+  iex> Burox.solicitar{%Burox.Request{}}
+  {:ok, term}
+
+  """
+  @spec solicitar(Request.t) :: {:ok, term} | {:error, term}
+  def solicitar(peticion) do
+    solicitar(peticion, "507")
+  end
+
 
   @doc """
   Solicita la información crediticia de una persona al buró de crédito
   ## Ejemplos
 
-      iex> Burox.solicitar{%Burox.Request{}}
+      iex> Burox.solicitar{%Burox.Request{}, "507"}
       {:ok, term}
 
   """
-  @spec solicitar(Request.t) :: {:ok, term} | {:error, term}
-  def solicitar(data) do
+  @spec solicitar(Request.t, String.t) :: {:ok, term} | {:error, term}
+  def solicitar(data, codigo_producto) do
     peticion = Utils.to_struct(data, Burox.Request)
-    Logger.info "Peticion:\n#{inspect peticion}"
+    Logger.info "Petición:\n#{inspect peticion}"
 
-    request_string = Encoder.encode_buro(peticion)
-    Logger.info "Request:\n#{inspect request_string}"
+    request_string = Encoder.encode_buro(peticion, codigo_producto)
+    Logger.info "Cadena de petición:\n#{inspect request_string}"
 
-    with {:ok, buro_response} <- Burox.BuroService.Socket.post(request_string) do
-      Logger.info "Buro response: \n #{buro_response}"
+    buro_service = Application.get_env(:burox, :buro_service)
+
+    with {:ok, buro_response} <- buro_service.post(request_string) do
+      Logger.info "Respuesta del buro: \n #{buro_response}"
+
       response = Parser.process_response(buro_response)
-      Logger.info "Response:\n#{inspect response}"
+      Logger.info "Respuesta:\n#{inspect response}"
+
+      retorno = %{
+        "cadena_peticion" => request_string,
+        "respuesta" => response,
+        "cadena_respuesta" => buro_response
+      }
 
       case peticion do
-        %Request{} -> {:ok, response}
-        _ -> {:error, "error"}
+        %Request{} -> {:ok, retorno}
+        _ -> {:error, retorno}
       end
     end
 
