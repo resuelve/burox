@@ -51,11 +51,11 @@ defmodule EncoderTest do
   @sample_response_auth "AU03RCN000120125                         0201V040478900701F1101VINTL13                         007MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05003140002**"
 
   test "Encode Request to string used in Buro de Crédito" do
-    assert @sample_response == encode_buro(@sample_request, "507")
+    assert @sample_response == @sample_request |> encode_buro("507") |> String.slice(0..-2)
   end
 
   test "Encode Request with authentication" do
-    assert @sample_response_auth == encode_buro(@sample_request_auth, "007")
+    assert @sample_response_auth == @sample_request_auth |> encode_buro("007") |> String.slice(0..-2)
   end
 
 end

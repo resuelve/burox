@@ -54,7 +54,7 @@ defmodule BuroxTest do
     assert Burox.solicitar(@valid_person_data) ==
     {:ok,
      %{
-       cadena_peticion: "INTL13                         507MX0000userpasswordICCMX000000000SP01     000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MX",
+       cadena_peticion: "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**",
        cadena_respuesta: @success_return_string,
        respuesta: {:ok,
                        %Burox.Response{
@@ -150,7 +150,7 @@ defmodule BuroxTest do
     assert Burox.solicitar(@invalid_person_data) ==
     {:ok,
      %{
-       cadena_peticion: "INTL13                         507MX0000userpasswordICCMX000000000SP01     000000PNPA",
+       cadena_peticion: "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PNPAES05001030002**",
        cadena_respuesta: "ERRRUR25                         1101YES05000530002**",
        respuesta: {:error,
                        %{
