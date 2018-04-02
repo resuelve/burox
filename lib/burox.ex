@@ -36,7 +36,7 @@ defmodule Burox do
     Logger.info "Petición:\n#{inspect peticion}"
 
     request_string = Encoder.encode_buro(peticion, codigo_producto)
-    Logger.info "Cadena de petición:\n#{inspect request_string}"
+    Logger.info "Cadena de petición:\n#{inspect String.slice(request_string, 0..-2)}"
 
     buro_service = Application.get_env(:burox, :buro_service)
 
@@ -47,9 +47,9 @@ defmodule Burox do
       Logger.info "Respuesta:\n#{inspect response}"
 
       retorno = %{
-        "cadena_peticion" => request_string,
-        "respuesta" => response,
-        "cadena_respuesta" => buro_response
+        cadena_peticion: String.slice(request_string, 0..-2),
+        respuesta: response,
+        cadena_respuesta: String.slice(buro_response, 0..-2)
       }
 
       case peticion do

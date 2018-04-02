@@ -1,8 +1,6 @@
 defmodule Burox.Request.Encabezado do
   @moduledoc false
 
-  # @enforce_keys [:codigo_de_producto]
-
   defstruct [
     :codigo_de_producto,
     :pais,
@@ -10,10 +8,21 @@ defmodule Burox.Request.Encabezado do
   ]
 end
 
+defmodule Burox.Request.Autenticacion do
+@moduledoc false
+  defstruct [
+    :tipo_reporte,
+    :tipo_salida,
+    :referencia_del_operador,
+    :cuenta_con_tarjeta_de_credito,
+    :ultimos_cuatro_digitos,
+    :ha_ejercido_un_credito_hipotecario,
+    :ha_ejercido_un_credito_automotriz_en_los_ultimos_24_meses,
+  ]
+end
+
 defmodule Burox.Request.Persona do
   @moduledoc false
-
-  # @enforce_keys [:apellido_paterno, :apellido_materno, :primer_nombre]
 
   defstruct [
     :apellido_paterno,
@@ -27,15 +36,6 @@ end
 
 defmodule Burox.Request.Direccion do
   @moduledoc false
-
-  # @enforce_keys [
-  #   :primera_linea_de_direccion,
-  #   :municipio,
-  #   :ciudad,
-  #   :estado,
-  #   :codigo_postal,
-  #   :origen_del_domicilio
-  # ]
 
   defstruct [
     :primera_linea_de_direccion,
@@ -57,6 +57,7 @@ defmodule Burox.Request do
   @enforce_keys [:persona, :direccion]
 
   defstruct [
+    autenticacion: %Request.Autenticacion{},
     encabezado: %Request.Encabezado{},
     persona: %Request.Persona{},
     direccion: %Request.Direccion{}

@@ -353,12 +353,14 @@ defmodule ParserTest do
             fecha_de_contratacion: ~D[2005-05-05],
             fecha_de_reporte_de_empleo: ~D[2015-09-08],
             ocupacion: "AUX", origen_de_la_razon_social: "MX",
-            primera_linea_de_direccion: "GEOTECNIA Y SUPERVICION TECNICA SA",
-            segunda_linea_de_direccion: ""},
+            primera_linea_de_direccion: "",
+            nombre_o_razon_social_del_empleador: "GEOTECNIA Y SUPERVICION TECNICA SA"
+          },
           %{
             fecha_de_contratacion: ~D[2005-05-05], fecha_de_reporte_de_empleo: ~D[2015-09-08],
             ocupacion: "AUX", origen_de_la_razon_social: "MX",
-            primera_linea_de_direccion: "RESUELVE TU DEUDA", segunda_linea_de_direccion: ""
+            primera_linea_de_direccion: "",
+            nombre_o_razon_social_del_empleador: "RESUELVE TU DEUDA"
           }],
         fin: %{
           fin_del_registro_de_respuesta: "**", longitud_de_transmision: 4822,
