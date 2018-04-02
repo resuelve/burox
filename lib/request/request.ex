@@ -8,6 +8,19 @@ defmodule Burox.Request.Encabezado do
   ]
 end
 
+defmodule Burox.Request.Autenticacion do
+@moduledoc false
+  defstruct [
+    :tipo_reporte,
+    :tipo_salida,
+    :referencia_del_operador,
+    :cuenta_con_tarjeta_de_credito,
+    :ultimos_cuatro_digitos,
+    :ha_ejercido_un_credito_hipotecario,
+    :ha_ejercido_un_credito_automotriz_en_los_ultimos_24_meses,
+  ]
+end
+
 defmodule Burox.Request.Persona do
   @moduledoc false
 
@@ -44,6 +57,7 @@ defmodule Burox.Request do
   @enforce_keys [:persona, :direccion]
 
   defstruct [
+    autenticacion: %Request.Autenticacion{},
     encabezado: %Request.Encabezado{},
     persona: %Request.Persona{},
     direccion: %Request.Direccion{}

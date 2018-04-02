@@ -33,7 +33,7 @@ defmodule Burox.BuroService.Socket do
       end
     else
       {:error, reason} -> {:error, reason}
-    _ -> {:error, "No se puede conectar al Buró de Crédito"}
+      _ -> {:error, "No se puede conectar al Buró de Crédito"}
     end
   end
 
