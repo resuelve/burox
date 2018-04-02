@@ -1,6 +1,19 @@
 defmodule Burox.Request.Config do
   @moduledoc false
 
+  @authentication %{
+    key: "AU",
+    tags: [
+      tipo_reporte: "",
+      tipo_salida: "00",
+      referencia_del_operador: "01",
+      cuenta_con_tarjeta_de_credito: "02",
+      ultimos_cuatro_digitos: "04",
+      ha_ejercido_un_credito_hipotecario: "07",
+      ha_ejercido_un_credito_automotriz_en_los_ultimos_24_meses: "11"
+    ]
+  }
+
   @sections_list [
     persona: %{
       key: "PN",
@@ -27,5 +40,7 @@ defmodule Burox.Request.Config do
   ]
 
   def sections_list, do: @sections_list
+
+  def autenticacion, do: @authentication
 
 end
