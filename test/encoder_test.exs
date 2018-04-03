@@ -5,13 +5,6 @@ defmodule EncoderTest do
   alias Burox.Request
 
   @sample_request %Request{
-    encabezado: %{
-      codigo_de_producto: "007",
-      pais: "MX",
-      clave_del_usuario: "Resuelve",
-      buro_user: "",
-      buro_password: ""
-    },
     persona: %{
       apellido_paterno: "MENDEZ",
       apellido_materno: "GONZALEZ",

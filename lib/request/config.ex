@@ -28,5 +28,4 @@ defmodule Burox.Request.Config do
 
   def sections_list, do: @sections_list
 
-
 end

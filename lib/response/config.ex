@@ -15,6 +15,10 @@ defmodule Burox.Response.Config do
           "key" => :apellido_materno,
           "type" => "string"
         },
+        "01" => %{
+          "key" => :apellido_adicional,
+          "type" => "string"
+        },
         "02" => %{
           "key" => :primer_nombre,
           "type" => "string"
@@ -80,6 +84,14 @@ defmodule Burox.Response.Config do
           "type" => "string"
         },
         "18" => %{
+          "key" => :edades_de_los_dependientes,
+          "type" => "string"
+        },
+        "19" => %{
+          "key" => :fecha_de_recepcion_de_informacion_de_los_dependientes,
+          "type" => "date"
+        },
+        "20" => %{
           "key" => :fecha_de_defuncion,
           "type" => "date"
         }
