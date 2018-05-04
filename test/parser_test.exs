@@ -94,7 +94,7 @@ defmodule ParserTest do
           }],
         creditos: [
           %{
-            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12_090.0, 
+            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12_090.0,
             fecha_de_actualizacion: ~D[2016-05-16], fecha_de_apertura_de_cuenta: ~D[2012-04-01],
             fecha_de_reporte_de_informacion: ~D[2016-05-02], fecha_de_ultima_compra: ~D[2016-04-22],
             fecha_de_ultimo_pago: ~D[2016-05-02], fecha_mas_antigua_del_historico_de_pagos: ~D[2012-04-29],
