@@ -51,6 +51,7 @@ end
 defmodule Burox.Response.DireccionDeTrabajo do
   @moduledoc false
   defstruct [
+    :nombre_o_razon_social_del_empleador,
     :primera_linea_de_direccion,
     :segunda_linea_de_direccion,
     :colonia,
@@ -58,7 +59,6 @@ defmodule Burox.Response.DireccionDeTrabajo do
     :ciudad,
     :estado,
     :codigo_postal,
-    :fecha_de_residencia,
     :numero_de_telefono,
     :extension_telefonica,
     :fax,

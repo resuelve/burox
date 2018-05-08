@@ -170,36 +170,36 @@ defmodule Burox.Response.Config do
       "type" => "list",
       "tags" => %{
         "" => %{
+        "key" => :nombre_o_razon_social_del_empleador,
+        "type" => "string"
+        },
+        "00" => %{
           "key" => :primera_linea_de_direccion,
           "type" => "string"
         },
-        "00" => %{
+        "01" => %{
           "key" => :segunda_linea_de_direccion,
           "type" => "string"
         },
-        "01" => %{
+        "02" => %{
           "key" => :colonia,
           "type" => "string"
         },
-        "02" => %{
+        "03" => %{
           "key" => :municipio,
           "type" => "string"
         },
-        "03" => %{
+        "04" => %{
           "key" => :ciudad,
           "type" => "string"
         },
-        "04" => %{
+        "05" => %{
           "key" => :estado,
           "type" => "string"
         },
-        "05" => %{
+        "06" => %{
           "key" => :codigo_postal,
           "type" => "string"
-        },
-        "06" => %{
-          "key" => :fecha_de_residencia,
-          "type" => "date"
         },
         "07" => %{
           "key" => :numero_de_telefono,

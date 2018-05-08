@@ -94,7 +94,7 @@ defmodule ParserTest do
           }],
         creditos: [
           %{
-            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12_090.0, 
+            clasificacion_de_puntualidad_de_pago: "01", credito_maximo_autorizado: 12_090.0,
             fecha_de_actualizacion: ~D[2016-05-16], fecha_de_apertura_de_cuenta: ~D[2012-04-01],
             fecha_de_reporte_de_informacion: ~D[2016-05-02], fecha_de_ultima_compra: ~D[2016-04-22],
             fecha_de_ultimo_pago: ~D[2016-05-02], fecha_mas_antigua_del_historico_de_pagos: ~D[2012-04-29],
@@ -353,12 +353,14 @@ defmodule ParserTest do
             fecha_de_contratacion: ~D[2005-05-05],
             fecha_de_reporte_de_empleo: ~D[2015-09-08],
             ocupacion: "AUX", origen_de_la_razon_social: "MX",
-            primera_linea_de_direccion: "GEOTECNIA Y SUPERVICION TECNICA SA",
-            segunda_linea_de_direccion: ""},
+            primera_linea_de_direccion: "",
+            nombre_o_razon_social_del_empleador: "GEOTECNIA Y SUPERVICION TECNICA SA"
+          },
           %{
             fecha_de_contratacion: ~D[2005-05-05], fecha_de_reporte_de_empleo: ~D[2015-09-08],
             ocupacion: "AUX", origen_de_la_razon_social: "MX",
-            primera_linea_de_direccion: "RESUELVE TU DEUDA", segunda_linea_de_direccion: ""
+            primera_linea_de_direccion: "",
+            nombre_o_razon_social_del_empleador: "RESUELVE TU DEUDA"
           }],
         fin: %{
           fin_del_registro_de_respuesta: "**", longitud_de_transmision: 4822,

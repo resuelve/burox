@@ -22,18 +22,25 @@ defmodule Burox.BuroService.Socket do
 
     with {:ok, sock} <- Socket.connect(buro_url) do
       Logger.info "Connected"
-      Socket.Stream.send!(sock, data)
-      response = sock
-      |> Socket.Stream.recv!()
+      Socket.Stream.send!(sock, data <> <<19>>)
+      response = get_response(sock)
 
       if response == "" do
-        {:error, "No se pudo obtener respuesta del Buró de Crédito"}
+        {:error, %{error: %{message: "No se pudo obtener respuesta del Buró de Crédito"}}}
       else
-        {:ok, response}
+           {:ok, response}
       end
     else
       {:error, reason} -> {:error, reason}
-      _ -> {:error, "No se puede conectar al Buró de Crédito"}
+       _ -> {:error, %{error: %{message: "No se puede conectar al Buró de Crédito"}}}
+    end
+  end
+
+  # Concatena toda la respuesta del Stream
+  defp get_response(sock) do
+    case Socket.Stream.recv!(sock) do
+      nil -> ""
+      chunk -> chunk <> get_response(sock)
     end
   end
 

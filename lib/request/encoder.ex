@@ -105,7 +105,7 @@ defmodule Burox.Request.Encoder do
 
     "ES05"
     <> number_with_pad
-    <> "0002**"
+    <> "0002**"
   end
 
   # Función para construir los valores de las etiquetas de un segmento

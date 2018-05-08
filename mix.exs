@@ -21,7 +21,7 @@ defmodule Burox.Mixfile do
     [
       {:credo,                    "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
       {:ex_doc,                   "~> 0.16", only: :dev, runtime: false},
-      {:socket,                   "~> 0.3"},
+      {:socket,                   "~> 0.3.2"},
       {:mox,                     "~> 0.3", only: :test}
     ]
   end
