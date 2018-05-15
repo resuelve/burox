@@ -11,34 +11,42 @@ defmodule Burox.Request.Encoder do
   Convierte una estructura de respuesta al formato
   recibido por el buró de crédito
   """
-  @spec encode_buro(Request.t, String.t) :: {:ok, term} | {:error, term}
+  @spec encode_buro(Request.t(), String.t()) :: {:ok, term} | {:error, term}
   def encode_buro(peticion, codigo_de_producto) do
     body =
       if peticion.autenticacion.cuenta_con_tarjeta_de_credito != nil do
         "#{build_authentication(peticion.autenticacion)}" <>
-        "#{build_header(codigo_de_producto)}" <>
-        "#{build_body(peticion)}"
+          "#{build_header(codigo_de_producto)}" <> "#{build_body(peticion)}"
       else
-        "#{build_header(codigo_de_producto)}" <>
-        "#{build_body(peticion)}"
+        "#{build_header(codigo_de_producto)}" <> "#{build_body(peticion)}"
       end
 
     body <> build_end(body)
-
   end
 
   # Crea el encabezado de la petición,
-  # solo esta soportada la versión 13
   defp build_header(codigo_de_producto) do
 
-    buro_user = Application.get_env(:burox, :buro_user)
-    buro_password = Application.get_env(:burox, :buro_password)
+    {buro_user, buro_password, version} =
+      case codigo_de_producto do
+        "107" ->
+          # El servicio de prospector solo esta disponible en la versión 11
+          {Application.get_env(:burox, :burox_user_prospector),
+           Application.get_env(:burox, :buro_password_prospector),
+           "11"}
+        _ ->
+          {Application.get_env(:burox, :burox_user),
+           Application.get_env(:burox, :burox_password),
+           "13"}
+      end
 
     if is_nil(buro_user) or is_nil(buro_password) do
       raise Burox.Error, message: "Deben configurarse las credenciales del Buró de Crédito"
     end
 
     "INTL13                         "
+    <> version
+    <> "                         "
     <> codigo_de_producto
     <> "MX"                             # Clave de pais
     <> "0000"                           # Reservado
@@ -53,7 +61,6 @@ defmodule Burox.Request.Encoder do
     <> " "                              # Tamaño de bloque de salida
     <> "    "                           # Identificación de la impresora
     <> "0000000"                        # Reservado para uso futuro
-
   end
 
   # Crea el cuerpo de la petición
@@ -63,19 +70,18 @@ defmodule Burox.Request.Encoder do
 
     # Reduce sobre la lista de configuración y no sobre los
     # parametros, para mantener el orden en la cadena de salida
-    Enum.reduce(sections_list(), "",
-      fn({segmento, config}, acc) ->
-        values = request_map[segmento]
+    Enum.reduce(sections_list(), "", fn {segmento, config}, acc ->
+      values = request_map[segmento]
 
-        # ¿Hay valores del segmento?
-        if values != nil do
-          # Agrega la llave del segmento
-          acc = acc <> config[:key]
+      # ¿Hay valores del segmento?
+      if values != nil do
+        # Agrega la llave del segmento
+        acc = acc <> config[:key]
 
-          # Agrega los valores
-          acc <> build_tag_values(config[:tags], values)
-        end
-      end)
+        # Agrega los valores
+        acc <> build_tag_values(config[:tags], values)
+      end
+    end)
   end
 
   # Función para construir los valores de segmento de autenticación del cliente
@@ -85,7 +91,6 @@ defmodule Burox.Request.Encoder do
 
     # ¿Hay valores del segmento?
     if values != nil do
-
       # Agrega los valores
       acc <> build_tag_values(auth[:tags], values)
     end
@@ -93,25 +98,23 @@ defmodule Burox.Request.Encoder do
 
   # Funcion para construir el segmento de fin de petición
   defp build_end(request_string) do
-
     # Retorna el tamaño de la cadena de petición
     # Siempre es una cadena de 5 caracteres, si hace
     # falta se agregan ceros a la izquierda
-    number_with_pad = request_string
-    |> String.length
-    |> Kernel.+(100_017)      # 17 del tamaño de este segmento
-    |> to_string()
-    |> String.slice(1..-1)
+    number_with_pad =
+      request_string
+      |> String.length() # 17 del tamaño de este segmento
+      |> Kernel.+(100_017)
+      |> to_string()
+      |> String.slice(1..-1)
 
-    "ES05"
-    <> number_with_pad
-    <> "0002**"
+    "ES05" <> number_with_pad <> "0002**"
   end
 
   # Función para construir los valores de las etiquetas de un segmento
   # Nombre + tamaño + valor
   defp build_tag_values(tags, values) do
-    Enum.reduce(tags, "", fn({key, tag}, acc) ->
+    Enum.reduce(tags, "", fn {key, tag}, acc ->
       value = Map.get(values, key)
 
       if value != nil do
@@ -119,7 +122,6 @@ defmodule Burox.Request.Encoder do
       else
         acc
       end
-
     end)
   end
 
@@ -136,6 +138,5 @@ defmodule Burox.Request.Encoder do
       size > 99 -> raise "El valor es demasiado grande para ser codificado"
       true -> "#{size}"
     end
-
   end
 end

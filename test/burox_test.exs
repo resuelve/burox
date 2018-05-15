@@ -47,8 +47,8 @@ defmodule BuroxTest do
 
   test "Gets the information of a person in Buro de Crédito" do
     Burox.BuroService.Mock
-    |> expect(:post, fn _ ->
-      {:ok, @success_return_string <> ""}
+    |> expect(:post, fn (_,_) ->
+      {:ok, @success_return_string <> <<19>>}
     end)
 
     assert Burox.solicitar(@valid_person_data) ==
@@ -189,7 +189,7 @@ defmodule BuroxTest do
 
   test "Gets an error trying to get information of a person in Buro de Crédito" do
     Burox.BuroService.Mock
-    |> expect(:post, fn _ ->
+    |> expect(:post, fn(_, _) ->
       {:ok, "ERRRUR25                         1101YES05000530002**"}
     end)
 
@@ -216,7 +216,7 @@ defmodule BuroxTest do
 
   test "Gets an error trying to autenticate a client in Buro de Crédito" do
     Burox.BuroService.Mock
-    |> expect(:post, fn _ ->
+    |> expect(:post, fn(_, _) ->
       {:ok, "ERRRAR25                         0014NO AUTENTICADOES05000660002**"}
     end)
 
