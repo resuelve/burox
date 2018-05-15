@@ -40,7 +40,7 @@ defmodule Burox do
 
     buro_service = Application.get_env(:burox, :buro_service)
 
-    with {:ok, buro_response} <- buro_service.post(request_string) do
+    with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
       Logger.info "Respuesta del buro: \n #{buro_response}"
 
       response = Parser.process_response(buro_response)

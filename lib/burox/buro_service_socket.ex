@@ -11,9 +11,11 @@ defmodule Burox.BuroService.Socket do
   Función para consultar información del Buró de Crédito
   De manera síncrona
   """
-  @spec post(String.t) :: String.t
-  def post(data) do
-    buro_url = Application.get_env(:burox, :buro_url)
+  @spec post(String.t, String.t) :: String.t
+  def post(data, codigo_producto) do
+
+    config_url = if codigo_producto == "107", do: :buro_url_prospector, else: :buro_url
+    buro_url = Application.get_env(:burox, config_url)
     Logger.info "URL del Buró: #{buro_url}"
 
     if is_nil(buro_url) do
@@ -28,7 +30,7 @@ defmodule Burox.BuroService.Socket do
       if response == "" do
         {:error, %{error: %{message: "No se pudo obtener respuesta del Buró de Crédito"}}}
       else
-           {:ok, response}
+        {:ok, response}
       end
     else
       {:error, reason} -> {:error, reason}
