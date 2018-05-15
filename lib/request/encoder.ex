@@ -40,33 +40,27 @@ defmodule Burox.Request.Encoder do
            "13"}
       end
 
-    buro_user = Application.get_env(:burox, :buro_user)
-    buro_password = Application.get_env(:burox, :buro_password)
-
     if is_nil(buro_user) or is_nil(buro_password) do
       raise Burox.Error, message: "Deben configurarse las credenciales del Buró de Crédito"
     end
 
-    # Clave de pais
-    # Reservado
-    # Tipo de responsabilidad(I: Individual)
-    # Tipo de contrato
-    # Mondea del crédito
-    # Importe del contrato
-    # Idioma (SP: ingles)
-    # Tipo de salida (01: Archivo de cadena de datos)
-    # Tamaño de bloque de salida
-    # Identificación de la impresora
-    # Reservado para uso futuro
-    "INTL" <>
-      version <>
-      "                         " <>
-      codigo_de_producto <>
-      "MX" <>
-      "0000" <>
-      buro_user <>
-      buro_password <>
-      "I" <> "CC" <> "MX" <> "000000000" <> "SP" <> "01" <> " " <> "    " <> "0000000"
+    "INTL13                         "
+    <> version
+    <> "                         "
+    <> codigo_de_producto
+    <> "MX"                             # Clave de pais
+    <> "0000"                           # Reservado
+    <> buro_user
+    <> buro_password
+    <> "I"                              # Tipo de responsabilidad(I: Individual)
+    <> "CC"                             # Tipo de contrato
+    <> "MX"                             # Mondea del crédito
+    <> "000000000"                      # Importe del contrato
+    <> "SP"                             # Idioma (SP: ingles)
+    <> "01"                             # Tipo de salida (01: Archivo de cadena de datos)
+    <> " "                              # Tamaño de bloque de salida
+    <> "    "                           # Identificación de la impresora
+    <> "0000000"                        # Reservado para uso futuro
   end
 
   # Crea el cuerpo de la petición
@@ -109,8 +103,7 @@ defmodule Burox.Request.Encoder do
     # falta se agregan ceros a la izquierda
     number_with_pad =
       request_string
-      |> String.length()
-      # 17 del tamaño de este segmento
+      |> String.length() # 17 del tamaño de este segmento
       |> Kernel.+(100_017)
       |> to_string()
       |> String.slice(1..-1)
