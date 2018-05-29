@@ -31,12 +31,12 @@ defmodule Burox.Request.Encoder do
       case codigo_de_producto do
         "107" ->
           # El servicio de prospector solo esta disponible en la versión 11
-          {Application.get_env(:burox, :burox_user_prospector),
+          {Application.get_env(:burox, :buro_user_prospector),
            Application.get_env(:burox, :buro_password_prospector),
            "11"}
         _ ->
-          {Application.get_env(:burox, :burox_user),
-           Application.get_env(:burox, :burox_password),
+          {Application.get_env(:burox, :buro_user),
+           Application.get_env(:burox, :buro_password),
            "13"}
       end
 
@@ -44,7 +44,7 @@ defmodule Burox.Request.Encoder do
       raise Burox.Error, message: "Deben configurarse las credenciales del Buró de Crédito"
     end
 
-    "INTL13                         "
+    "INTL"
     <> version
     <> "                         "
     <> codigo_de_producto
