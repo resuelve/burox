@@ -40,9 +40,12 @@ defmodule Burox.BuroService.Socket do
 
   # Concatena toda la respuesta del Stream
   defp get_response(sock) do
-    case Socket.Stream.recv!(sock) do
-      nil -> ""
-      chunk -> chunk <> get_response(sock)
+    response = Socket.Stream.recv!(sock)
+
+    if String.ends_with? response, <<19>> do
+      response
+    else
+      response <> get_response(sock)
     end
   end
 

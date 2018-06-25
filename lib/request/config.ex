@@ -21,6 +21,7 @@ defmodule Burox.Request.Config do
         apellido_paterno: "",
         apellido_materno: "00",
         primer_nombre: "02",
+        segundo_nombre: "03",
         rfc: "05"
       ]
     },
