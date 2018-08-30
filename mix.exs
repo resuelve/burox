@@ -4,9 +4,9 @@ defmodule Burox.Mixfile do
   def project do
     [
       app: :burox,
-      version: "0.1.0",
-      elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      version: "0.2.0",
+      elixir: "~> 1.7",
+      start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
@@ -19,10 +19,11 @@ defmodule Burox.Mixfile do
 
   defp deps do
     [
-      {:credo,                    "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
-      {:ex_doc,                   "~> 0.16", only: :dev, runtime: false},
-      {:socket,                   "~> 0.3.2"},
-      {:mox,                     "~> 0.3", only: :test}
+      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:socket, "~> 0.3.2"},
+      {:mox, "~> 0.4", only: :test},
+      {:vex, "~> 0.7"}
     ]
   end
 end

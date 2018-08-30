@@ -20,3 +20,6 @@ erl_crash.dump
 *.ez
 .idea/
 *.iml
+
+# Variables de Entorno
+.env
