@@ -1,15 +1,14 @@
 defmodule Burox.Request.Encabezado do
   @moduledoc false
-
   defstruct [
     :codigo_de_producto,
     :pais,
-    :clave_del_usuario,
+    :clave_del_usuario
   ]
 end
 
 defmodule Burox.Request.Autenticacion do
-@moduledoc false
+  @moduledoc false
   defstruct [
     :tipo_reporte,
     :tipo_salida,
@@ -17,7 +16,7 @@ defmodule Burox.Request.Autenticacion do
     :cuenta_con_tarjeta_de_credito,
     :ultimos_cuatro_digitos,
     :ha_ejercido_un_credito_hipotecario,
-    :ha_ejercido_un_credito_automotriz_en_los_ultimos_24_meses,
+    :ha_ejercido_un_credito_automotriz_en_los_ultimos_24_meses
   ]
 end
 
@@ -32,6 +31,8 @@ defmodule Burox.Request.Persona do
     :fecha_de_nacimiento,
     :rfc
   ]
+
+  use Vex.Struct
 end
 
 defmodule Burox.Request.Direccion do
@@ -46,6 +47,50 @@ defmodule Burox.Request.Direccion do
     :codigo_postal,
     :origen_del_domicilio
   ]
+
+  use Vex.Struct
+
+  validates(:primera_linea_de_direccion,
+    presence: true,
+    length: [max: 40],
+    format: ~r(^[[:alnum:]\s]+$)
+  )
+
+  validates(:colonia,
+    presence: true,
+    length: [max: 40],
+    format: ~r(^[[:alpha:]\s]+$)
+  )
+
+  validates(:municipio,
+    presence: true,
+    length: [max: 40],
+    format: ~r(^[[:alpha:]\s]+$)
+  )
+
+  validates(:ciudad,
+    presence: true,
+    length: [max: 40],
+    format: ~r(^[[:alpha:]\s]+$)
+  )
+
+  validates(:estado,
+    presence: true,
+    length: [max: 4],
+    format: ~r(^[[:alpha:]\s]+$)
+  )
+
+  validates(:codigo_postal,
+    presence: true,
+    length: [is: 5],
+    format: ~r(^[[:digit:]]+$)
+  )
+
+  validates(:origen_del_domicilio,
+    presence: true,
+    length: [is: 2],
+    format: ~r(^[A-Z]+$)
+  )
 end
 
 defmodule Burox.Request do
@@ -56,10 +101,13 @@ defmodule Burox.Request do
 
   @enforce_keys [:persona, :direccion]
 
-  defstruct [
-    autenticacion: %Request.Autenticacion{},
-    encabezado: %Request.Encabezado{},
-    persona: %Request.Persona{},
-    direccion: %Request.Direccion{}
-  ]
+  defstruct autenticacion: %Request.Autenticacion{},
+            encabezado: %Request.Encabezado{},
+            persona: %Request.Persona{},
+            direccion: %Request.Direccion{}
+
+  use Vex.Struct
+
+  validates(:persona, presence: true)
+  validates(:direccion, presence: true)
 end

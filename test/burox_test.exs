@@ -22,22 +22,40 @@ defmodule BuroxTest do
     }
   }
 
-  @invalid_person_data %{
-    person: %{
-      name: nil,
-      middle_name: nil,
-      last_name: nil,
-      last_name_2: nil,
-      birth_date: nil,
-      rfc: nil
+  @invalid_state_data %{
+    persona: %{
+      apellido_paterno: "MENDEZ",
+      apellido_materno: "GONZALEZ",
+      primer_nombre: "ANTUANET",
+      rfc: "MEGA510503RE3"
     },
-    address: %{
-      street: nil,
-      settlement: nil,
-      municipality: nil,
-      city: nil,
-      state: nil,
-      zip_code: nil
+    direccion: %{
+      primera_linea_de_direccion: "PICO DE VERAPAZ 435 PISO 5",
+      colonia: "JARDINES EN LA MONTANA",
+      municipio: "TLALPAN",
+      ciudad: "MEXICO",
+      estado: "Ciudad de México",
+      codigo_postal: "14210",
+      origen_del_domicilio: "MX"
+    }
+  }
+
+  @invalid_address_data %{
+    persona: %{
+      apellido_paterno: "MENDEZ",
+      apellido_materno: "GONZALEZ",
+      primer_nombre: "ANTUANET",
+      rfc: "MEGA510503RE3"
+    },
+    direccion: %{
+      primera_linea_de_direccion:
+        "Una direccion con una larga descripcion sin importancia. No es aceptada XD XD XD",
+      colonia: "JARDINES EN LA MONTANA No 54",
+      municipio: "TLALPAN",
+      ciudad: "MEXICO",
+      estado: "Ciudad de México",
+      codigo_postal: "14210",
+      origen_del_domicilio: "MX"
     }
   }
 
@@ -47,7 +65,7 @@ defmodule BuroxTest do
 
   test "Gets the information of a person in Buro de Crédito" do
     Burox.BuroService.Mock
-    |> expect(:post, fn (_,_) ->
+    |> expect(:post, fn _, _ ->
       {:ok, @success_return_string <> <<19>>}
     end)
 
@@ -189,42 +207,37 @@ defmodule BuroxTest do
 
   test "Gets an error trying to get information of a person in Buro de Crédito" do
     Burox.BuroService.Mock
-    |> expect(:post, fn(_, _) ->
+    |> expect(:post, fn _, _ ->
       {:ok, "ERRRUR25                         1101YES05000530002**"}
     end)
 
-    assert Burox.solicitar(@invalid_person_data) ==
+    assert Burox.solicitar(@valid_person_data) ==
              {:ok,
               %{
-                cadena_peticion:
-                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PNPAES05001030002**",
                 cadena_respuesta: "ERRRUR25                         1101YES05000530002**",
                 respuesta:
                   {:error,
                    %{
-                     :error => %{
+                     error: %{
                        error_en_el_sistema_de_buro_de_credito: "Y",
                        numero_de_referencia_del_operador: "                         "
                      },
-                     :fin => %{
-                       longitud_de_transmision: 53,
-                       numero_de_control_de_la_consulta: "**"
-                     }
-                   }}
+                     fin: %{longitud_de_transmision: 53, numero_de_control_de_la_consulta: "**"}
+                   }},
+                cadena_peticion:
+                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**"
               }}
   end
 
   test "Gets an error trying to autenticate a client in Buro de Crédito" do
     Burox.BuroService.Mock
-    |> expect(:post, fn(_, _) ->
+    |> expect(:post, fn _, _ ->
       {:ok, "ERRRAR25                         0014NO AUTENTICADOES05000660002**"}
     end)
 
-    assert Burox.solicitar(@invalid_person_data) ==
+    assert Burox.solicitar(@valid_person_data) ==
              {:ok,
               %{
-                cadena_peticion:
-                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PNPAES05001030002**",
                 cadena_respuesta:
                   "ERRRAR25                         0014NO AUTENTICADOES05000660002**",
                 respuesta:
@@ -234,8 +247,26 @@ defmodule BuroxTest do
                        numero_de_referencia_del_operador: "                         ",
                        solicitud_del_cliente_erronea: "NO AUTENTICADO"
                      },
-                     fin: %{numero_de_control_de_la_consulta: "**", longitud_de_transmision: 66}
-                   }}
+                     fin: %{longitud_de_transmision: 66, numero_de_control_de_la_consulta: "**"}
+                   }},
+                cadena_peticion:
+                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**"
               }}
+  end
+
+  test "Gets an error trying to send an invalid address" do
+    assert Burox.solicitar(@invalid_address_data) ==
+{:error, [{:error, :colonia, :format, "must have the correct format"}, {:error, :primera_linea_de_direccion, :length, "must have a length of no more than 40"}, {:error, :primera_linea_de_direccion, :format, "must have the correct format"}]}
+
+  end
+
+  test "Change the code when trying to send an invalid state" do
+    Burox.BuroService.Mock
+    |> expect(:post, fn _, _ ->
+      {:ok, @success_return_string <> <<19>>}
+    end)
+
+    result = Burox.solicitar(@invalid_state_data)
+    assert elem(result, 0) == :ok
   end
 end
