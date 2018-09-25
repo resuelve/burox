@@ -3,15 +3,17 @@ defmodule BuroxTest do
 
   import Mox
   alias Burox.Request
+  alias Burox.Request.Persona
+  alias Burox.Request.Direccion
 
   @valid_person_data %Request{
-    persona: %{
+    persona: %Persona{
       apellido_paterno: "MENDEZ",
       apellido_materno: "GONZALEZ",
       primer_nombre: "ANTUANET",
       rfc: "MEGA510503RE3"
     },
-    direccion: %{
+    direccion: %Direccion{
       primera_linea_de_direccion: "PICO DE VERAPAZ 435 PISO 5",
       colonia: "JARDINES EN LA MONTANA",
       municipio: "TLALPAN",
@@ -22,14 +24,14 @@ defmodule BuroxTest do
     }
   }
 
-  @invalid_state_data %{
-    persona: %{
+  @invalid_state_data %Request{
+    persona: %Persona{
       apellido_paterno: "MENDEZ",
       apellido_materno: "GONZALEZ",
       primer_nombre: "ANTUANET",
       rfc: "MEGA510503RE3"
     },
-    direccion: %{
+    direccion: %Direccion{
       primera_linea_de_direccion: "PICO DE VERAPAZ 435 PISO 5",
       colonia: "JARDINES EN LA MONTANA",
       municipio: "TLALPAN",
@@ -40,14 +42,14 @@ defmodule BuroxTest do
     }
   }
 
-  @invalid_address_data %{
-    persona: %{
+  @invalid_address_data %Request{
+    persona: %Persona{
       apellido_paterno: "MENDEZ",
       apellido_materno: "GONZALEZ",
       primer_nombre: "ANTUANET",
       rfc: "MEGA510503RE3"
     },
-    direccion: %{
+    direccion: %Direccion{
       primera_linea_de_direccion:
         "Una direccion con una larga descripcion sin importancia. No es aceptada XD XD XD",
       colonia: "JARDINES EN LA MONTANA No 54",
@@ -61,26 +63,30 @@ defmodule BuroxTest do
 
   setup [:verify_on_exit!]
 
-  @success_return_string "INTL13                         MX0010FF4736100100PN06AVELAR0009HERNANDEZ0204JOSE0304LUIS0408131019830513AEHL8310136J6PA08HUERTA 10121VILLAS DE LA HACIENDA0220TLAJOMULCO DE ZUNIGA0320TLAJOMULCO DE ZUNIGA0403JAL0505456541208180720161302MXIQ08180720160110FF473610010208RESUELVE031055864796020402CC060100701I0801Y09010IQ0818072016000400000215BURO DE CREDITO0402CC0502MX06090000000000801Y09011RS08180720160002000102000202000302000402000502000602000702000802000904000010040000110400001204000013040000140400001502001602011701Y1805NNNNN1901N210900000000022090000000002310000000000+24090000000002509000000000260300027090000000002810000000000+29090000000003009000000000310200320200330200340800000000350800000000360201370818072016380200390800000000400200410800000000SC08BC SCORE00030070104-009ES0500811001012123420590102**"
+  @valid_person_data_string "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**"
+
+  @success_response "INTL13                         MX0010Usuario12300PN06AVELAR0009HERNANDEZ0204JOSE0304LUIS0408131019830513AEHL8310136J6PA08HUERTA 10121VILLAS DE LA HACIENDA0220TLAJOMULCO DE ZUNIGA0320TLAJOMULCO DE ZUNIGA0403JAL0505456541208180720161302MXIQ08180720160110Usuario1230208RESUELVE031055864796020402CC060100701I0801Y09010IQ0818072016000400000215BURO DE CREDITO0402CC0502MX06090000000000801Y09011RS08180720160002000102000202000302000402000502000602000702000802000904000010040000110400001204000013040000140400001502001602011701Y1805NNNNN1901N210900000000022090000000002310000000000+24090000000002509000000000260300027090000000002810000000000+29090000000003009000000000310200320200330200340800000000350800000000360201370818072016380200390800000000400200410800000000SC08BC SCORE00030070104-009ES0500811001012123420590102**"
+
+  @invalid_user_response "ERRRUR25                         0312UserPasswordES05000700002**"
+
 
   test "Gets the information of a person in Buro de Crédito" do
     Burox.BuroService.Mock
     |> expect(:post, fn _, _ ->
-      {:ok, @success_return_string <> <<19>>}
+      {:ok, @success_response <> <<19>>}
     end)
 
     assert Burox.solicitar(@valid_person_data) ==
              {:ok,
               %{
-                cadena_peticion:
-                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**",
-                cadena_respuesta: @success_return_string,
+                cadena_peticion: @valid_person_data_string,
+                cadena_respuesta: @success_response,
                 respuesta:
                   {:ok,
                    %Burox.Response{
                      consultas: [
                        %{
-                         clave_del_usuario: "FF47361001",
+                         clave_del_usuario: "Usuario123",
                          fecha_de_consulta: ~D[2016-07-18],
                          importe_del_credito: "0",
                          indicador_de_cliente_nuevo: "Y",
@@ -91,7 +97,7 @@ defmodule BuroxTest do
                          tipo_de_responsabilidad_de_la_cuenta: "I"
                        },
                        %{
-                         clave_del_usuario: "FF47361001",
+                         clave_del_usuario: "Usuario123",
                          fecha_de_consulta: ~D[2016-07-18],
                          importe_del_credito: "000000000",
                          indicador_de_cliente_nuevo: "Y",
@@ -205,7 +211,7 @@ defmodule BuroxTest do
               }}
   end
 
-  test "Gets an error trying to get information of a person in Buro de Crédito" do
+  test "Gets a generic error when trying to get information of a person in Buro de Crédito" do
     Burox.BuroService.Mock
     |> expect(:post, fn _, _ ->
       {:ok, "ERRRUR25                         1101YES05000530002**"}
@@ -217,15 +223,37 @@ defmodule BuroxTest do
                 cadena_respuesta: "ERRRUR25                         1101YES05000530002**",
                 respuesta:
                   {:error,
-                   %{
+                  %{
                      error: %{
                        error_en_el_sistema_de_buro_de_credito: "Y",
                        numero_de_referencia_del_operador: "                         "
                      },
                      fin: %{longitud_de_transmision: 53, numero_de_control_de_la_consulta: "**"}
                    }},
-                cadena_peticion:
-                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**"
+                cadena_peticion: @valid_person_data_string
+              }}
+  end
+
+  test "Gets an error when the request sent is invalid" do
+    Burox.BuroService.Mock
+    |> expect(:post, fn _, _ ->
+      {:ok, @invalid_user_response <> <<19>>}
+    end)
+
+    assert Burox.solicitar(@valid_person_data) ==
+             {:ok,
+              %{
+                cadena_peticion: @valid_person_data_string,
+                cadena_respuesta: @invalid_user_response,
+                respuesta:
+                  {:error,
+                   %{
+                     error: %{
+                       numero_de_referencia_del_operador: "                         ",
+                       clave_de_usuario_o_contrasena_erronea: "UserPassword"
+                     },
+                     fin: %{numero_de_control_de_la_consulta: "**", longitud_de_transmision: 70}
+                   }}
               }}
   end
 
@@ -249,21 +277,24 @@ defmodule BuroxTest do
                      },
                      fin: %{longitud_de_transmision: 66, numero_de_control_de_la_consulta: "**"}
                    }},
-                cadena_peticion:
-                  "INTL13                         507MX0000userpasswordICCMX000000000SP01     0000000PN06MENDEZ0008GONZALEZ0208ANTUANET0513MEGA510503RE3PA26PICO DE VERAPAZ 435 PISO 50122JARDINES EN LA MONTANA0207TLALPAN0306MEXICO0404CDMX0505142101302MXES05002500002**"
+                cadena_peticion: @valid_person_data_string
               }}
   end
 
   test "Gets an error trying to send an invalid address" do
     assert Burox.solicitar(@invalid_address_data) ==
-{:error, [{:error, :colonia, :format, "must have the correct format"}, {:error, :primera_linea_de_direccion, :length, "must have a length of no more than 40"}, {:error, :primera_linea_de_direccion, :format, "must have the correct format"}]}
-
+             {:error,
+              [
+                {:error, :primera_linea_de_direccion, :length,
+                 "must have a length of no more than 40"},
+                {:error, :primera_linea_de_direccion, :format, "must have the correct format"}
+              ]}
   end
 
   test "Change the code when trying to send an invalid state" do
     Burox.BuroService.Mock
     |> expect(:post, fn _, _ ->
-      {:ok, @success_return_string <> <<19>>}
+      {:ok, @success_response <> <<19>>}
     end)
 
     result = Burox.solicitar(@invalid_state_data)
