@@ -59,19 +59,19 @@ defmodule Burox.Request.Direccion do
   validates(:colonia,
     presence: true,
     length: [max: 40],
-    format: ~r(^[[:alpha:]\s]+$)
+    format: ~r(^[[:alnum:]\s]+$)
   )
 
   validates(:municipio,
     presence: true,
     length: [max: 40],
-    format: ~r(^[[:alpha:]\s]+$)
+    format: ~r(^[[:alnum:]\s]+$)
   )
 
   validates(:ciudad,
     presence: true,
     length: [max: 40],
-    format: ~r(^[[:alpha:]\s]+$)
+    format: ~r(^[[:alnum:]\s]+$)
   )
 
   validates(:estado,

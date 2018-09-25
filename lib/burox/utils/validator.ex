@@ -39,7 +39,6 @@ defmodule Burox.Utils.Validator do
   def validate_state(request) do
     with %Request{direccion: address} <- request,
          %{estado: state_code} <- address do
-      address = struct(Direccion, address)
 
       new_code = if StateCode.valid?(state_code), do: state_code, else: StateCode.assign(state_code)
         %Request{request | direccion: %Direccion{address | estado: new_code}}
