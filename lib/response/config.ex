@@ -690,7 +690,7 @@ defmodule Burox.Response.Config do
     "HR" => %{
       "key" => :hawk_response,
       "struct" => Burox.Response.HawkResponse,
-      "type" => "map",
+      "type" => "list",
       "tags" => %{
         "" => %{
           "key" => :fecha_de_reporte,

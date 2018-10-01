@@ -50,7 +50,7 @@ defmodule Burox.Response.Parser do
   defp _process_response(response, sections) do
     sections
     |> Enum.reduce(%{"tail" => response}, fn(tag, section_values) ->
-        # Buscca las secciones y sus valores
+        # Busca las secciones y sus valores
         {values, tail} = match_section(section_values["tail"], tag, sections)
 
         # Lee la configuración para mapear la respuesta
