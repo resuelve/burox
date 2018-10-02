@@ -147,7 +147,7 @@ defmodule BuroxTest do
                        numero_de_control_de_la_consulta: "1212342059"
                      },
                      hawk_inquiry: %{},
-                     hawk_response: %{},
+                     hawk_response: [],
                      persona: %{
                        apellido_materno: "HERNANDEZ",
                        apellido_paterno: "AVELAR",
