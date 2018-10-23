@@ -25,13 +25,12 @@ defmodule Burox.BuroService.Socket do
       response = get_response(sock)
 
       if response == "" do
-        {:error, %{error: %{message: "No se pudo obtener respuesta del Buró de Crédito"}}}
+        {:error, respuesta: {:error, [message: "No se pudo obtener respuesta del Buró de Crédito"]}
       else
         {:ok, response}
       end
     else
-      {:error, reason} -> {:error, reason}
-      _ -> {:error, %{error: %{message: "No se puede conectar al Buró de Crédito"}}}
+      _ -> {:error, respuesta: {:error, [message: "No se pudo conectar al Buró de Crédito"]}
     end
   end
 

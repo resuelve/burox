@@ -1,5 +1,8 @@
 defmodule Burox.Response.Parser do
-  @moduledoc false
+  @moduledoc """
+  Este modulo es el encargado de mapear la cadena del Buró a la estructura de:
+  %Response
+  """
 
   import Burox.Response.Config
   alias Burox.Response
@@ -33,6 +36,7 @@ defmodule Burox.Response.Parser do
 
     # La respuesta del Buró de Crédito esta divida en segmentos
     response
+    # Si la cadena comienza con INTL, quiere decir que se obtuvieron los datos solicitados
     |> String.starts_with?("INTL")
     |> if  do
       success = response
@@ -41,7 +45,12 @@ defmodule Burox.Response.Parser do
         |> (&struct(Response, &1)).()
       {:ok, success}
     else
-      {:error, _process_response(response, @error_sections)}
+      errors = response
+        |> _process_response(@error_sections)
+        |> Map.get(:error)
+        |> Map.to_list()
+
+      {:error, errors}
     end
 
   end
@@ -209,8 +218,9 @@ defmodule Burox.Response.Parser do
   end
 
   # Esta función ayuda a separar las declarativas de crédito
+  # Es un proceso diferente a las otras secciones
   # Estas estan en una sola cadena separadas por ##CREDITO
-  def extract_declarations(string, length) do
+  defp extract_declarations(string, length) do
     {string, tail} = String.split_at(string, length)
     only_credits? = String.starts_with?(string, "##")
 
