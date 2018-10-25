@@ -742,7 +742,7 @@ defmodule ParserTest do
                score: %{
                  codigo_del_score: "007",
                  nombre_del_score: "BC SCORE",
-                 primer_codigo_de_razon: "04",
+                 primer_codigo_de_razon: "Consulta reciente",
                  valor_del_score: 725
                }
              }

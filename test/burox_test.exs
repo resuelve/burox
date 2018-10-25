@@ -205,7 +205,8 @@ defmodule BuroxTest do
                      score: %{
                        codigo_del_score: "007",
                        nombre_del_score: "BC SCORE",
-                       valor_del_score: -9
+                       valor_del_score: -9,
+                       valor_de_exclusion: "Expediente sin cuentas para cálculo de BC-Score"
                      }
                    }}
               }}
