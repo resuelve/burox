@@ -221,15 +221,9 @@ defmodule BuroxTest do
              {:ok,
               %{
                 cadena_respuesta: "ERRRUR25                         1101YES05000530002**",
-                respuesta:
-                  {:error,
-                  %{
-                     error: %{
-                       error_en_el_sistema_de_buro_de_credito: "Y",
-                       numero_de_referencia_del_operador: "                         "
-                     },
-                     fin: %{longitud_de_transmision: 53, numero_de_control_de_la_consulta: "**"}
-                   }},
+                respuesta: {:error, [
+                               error_en_el_sistema_de_buro_de_credito: "Y",
+                               numero_de_referencia_del_operador: "                         "]},
                 cadena_peticion: @valid_person_data_string
               }}
   end
@@ -245,16 +239,12 @@ defmodule BuroxTest do
               %{
                 cadena_peticion: @valid_person_data_string,
                 cadena_respuesta: @invalid_user_response,
-                respuesta:
-                  {:error,
-                   %{
-                     error: %{
-                       numero_de_referencia_del_operador: "                         ",
-                       clave_de_usuario_o_contrasena_erronea: "UserPassword"
-                     },
-                     fin: %{numero_de_control_de_la_consulta: "**", longitud_de_transmision: 70}
-                   }}
-              }}
+                respuesta: {:error, [
+                               clave_de_usuario_o_contrasena_erronea: "UserPassword",
+                               numero_de_referencia_del_operador: "                         "]
+                }
+              }
+             }
   end
 
   test "Gets an error trying to autenticate a client in Buro de Crédito" do
@@ -264,31 +254,26 @@ defmodule BuroxTest do
     end)
 
     assert Burox.solicitar(@valid_person_data) ==
-             {:ok,
-              %{
-                cadena_respuesta:
-                  "ERRRAR25                         0014NO AUTENTICADOES05000660002**",
-                respuesta:
-                  {:error,
-                   %{
-                     error: %{
+    {:ok, %{
+        cadena_peticion:  @valid_person_data_string,
+        cadena_respuesta: "ERRRAR25                         0014NO AUTENTICADOES05000660002**",
+        respuesta: {:error, [
                        numero_de_referencia_del_operador: "                         ",
-                       solicitud_del_cliente_erronea: "NO AUTENTICADO"
-                     },
-                     fin: %{longitud_de_transmision: 66, numero_de_control_de_la_consulta: "**"}
-                   }},
-                cadena_peticion: @valid_person_data_string
-              }}
+                       solicitud_del_cliente_erronea: "NO AUTENTICADO"]}
+     }
+    }
   end
 
   test "Gets an error trying to send an invalid address" do
     assert Burox.solicitar(@invalid_address_data) ==
-             {:error,
-              [
-                {:error, :primera_linea_de_direccion, :length,
-                 "must have a length of no more than 40"},
-                {:error, :primera_linea_de_direccion, :format, "must have the correct format"}
-              ]}
+    {:error, %{
+        cadena_peticion: "",
+        cadena_respuesta: "",
+        respuesta: [
+          {"primera_linea_de_direccion(length)", "must have a length of no more than 40"},
+          {"primera_linea_de_direccion(format)", "must have the correct format"}]}
+    }
+
   end
 
   test "Change the code when trying to send an invalid state" do

@@ -751,16 +751,11 @@ defmodule ParserTest do
   test "parse failed response" do
     {:error, response} = process_response(@error_response)
 
-    assert response == %{
-             :error => %{
-               error_en_el_sistema_de_buro_de_credito: "Y",
-               numero_de_referencia_del_operador: "                         "
-             },
-             :fin => %{
-               longitud_de_transmision: 53,
-               numero_de_control_de_la_consulta: "**"
-             }
-           }
+    assert response ==
+      [
+        error_en_el_sistema_de_buro_de_credito: "Y",
+        numero_de_referencia_del_operador: "                         "
+      ]
   end
 
   test "match section value" do
