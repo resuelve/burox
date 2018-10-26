@@ -1,7 +1,71 @@
 defmodule Burox.Response.Config do
   @moduledoc false
 
-  @sections_map %{
+  @score_reasons %{
+    "1" => "Nivel de endeudamiento",
+    "4" => "Consulta reciente",
+    "5" => "Pago vencido reciente",
+    "7" => "Cuentas abiertas con morosidad",
+    "9" => "Bajo promedio de antigüedad en créditos abiertos",
+    "12" => "Tipo de crédito con mayor riesgo",
+    "13" => "Número de cuentas abiertas",
+    "14" => "Relación entre créditos revolventes y no revolventes",
+    "15" => "Utilización significativa de límites de crédito revolventes",
+    "16" => "Tiempo desde última cuenta aperturada",
+    "17" => "Meses desde último atraso",
+    "18" => "Duración de cuenta abierta más antigua",
+    "20" => "Relación entre cuentas con morosidad y sin morosidad",
+    "21" => "Atrasos frecuentes o recientes",
+    "24" => "Créditos con morosidad importante",
+    "27" => "Varios créditos cerrados",
+    "28" => "Proporción alta de saldos contra crédito máximo ",
+    "29" => "Proporción de cuentas nuevas en los últimos 24 meses",
+    "31" => "Atrasos frecuentes o recientes",
+    "32" => "Relación entre experiencias con y sin morosidad",
+    "33" => "Tipo de crédito con mayor riesgo",
+    "34" => "Cuentas con morosidad reciente",
+    "51" => "Pago adecuado del crédito",
+    "52" => "Pago adecuado del crédito",
+    "53" => "Pagos adecuados de los créditos",
+    "54" => "Pagos adecuados de los créditos",
+    "55" => "Créditos con morosidad",
+    "56" => "Créditos nuevos con morosidad",
+    "57" => "Créditos con historial de morosidad",
+    "58" => "Créditos con atrasos",
+    "59" => "Créditos con atrasos mayores a 90 días",
+    "60" => "Créditos con atrasos mayores a 90 días",
+    "61" => "Créditos con atrasos mayores a 90 días"
+  }
+
+  @score_errors %{
+    "1" => "Solicitud No Autorizada",
+    "2" => "Solicitud de Score Invalida",
+    "3" => "Score No Disponible"
+  }
+
+  @score_exclusion %{
+    "-1" => "☠️Consumidor fallecido",
+    "-5" => "Expediente con todas las cuentas cerradas y por lo menos con una en atraso mayor o igual a 90 días",
+    "-6" => "Expediente con todas sus cuentas con antigüedad menor a 6 meses y al menos una tiene MOP >= 03",
+    "-7" => "Expediente con todas sus cuentas con antigüedad menor a 6 meses y al menos una tiene MOP >= 02",
+    "-8" => "Expediente no tiene al menos una cuenta actualizada en el último año o con antigüedad mínima de 6 meses, y/o con cuentas que no se incluyen en el cálculo del BC-Score",
+    "-9" => "Expediente sin cuentas para cálculo de BC-Score"
+  }
+
+  @doc """
+  Regresa la descripción del código de exclusión
+  """
+  def score_exclusion(score_value) when is_number(score_value) do
+    Map.get(@score_exclusion, Integer.to_string(score_value))
+  end
+
+  @doc """
+  En este mapa se definen los nombres de los campos y
+  cómo deben tratarse al ser parseados
+  """
+  @spec sections_map() :: map
+  def sections_map do
+  %{
     "PN" => %{
       "key" => :persona,
       "struct" => Burox.Response.Persona,
@@ -740,23 +804,27 @@ defmodule Burox.Response.Config do
         },
         "01" => %{
           "key" => :valor_del_score,
-          "type" => "integer"
+          "type" => "integer",
         },
         "02" => %{
           "key" => :primer_codigo_de_razon,
-          "type" => "string"
+          "type" => "string",
+          "translate" => &(score_translate(&1, @score_reasons))
         },
         "03" => %{
           "key" => :segundo_codigo_de_razon,
-          "type" => "string"
+          "type" => "string",
+          "translate" => &(score_translate(&1, @score_reasons))
         },
         "04" => %{
           "key" => :tercer_codigo_de_razon,
-          "type" => "string"
+          "type" => "string",
+          "translate" => &(score_translate(&1, @score_reasons))
         },
         "06" => %{
           "key" => :codigo_de_error,
-          "type" => "string"
+          "type" => "string",
+          "translate" => &(score_translate(&1, @score_errors))
         },
       }
     },
@@ -874,7 +942,16 @@ defmodule Burox.Response.Config do
         }
     }
   }
+  end
 
-  def sections_map, do: @sections_map
+  # Esta función ayuda a traducir los códigos definidos para el
+  # score en el Buró de Crédito
+  defp score_translate(value, config) do
+    with {number, _} <- Integer.parse(value) do
+        Map.get(config, Integer.to_string(number))
+      else
+        {error} -> value
+      end
+  end
 
 end

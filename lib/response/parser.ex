@@ -6,6 +6,7 @@ defmodule Burox.Response.Parser do
 
   import Burox.Response.Config
   alias Burox.Response
+  alias  Burox.Response.Config
 
   @success_sections [
     "INTL",  # Response header
@@ -42,6 +43,7 @@ defmodule Burox.Response.Parser do
       success = response
         |> _process_response(@success_sections)
         |> Map.to_list()
+        |> add_score_exclusion()
         |> (&struct(Response, &1)).()
       {:ok, success}
     else
@@ -139,17 +141,23 @@ defmodule Burox.Response.Parser do
         |> Map.get(tag)
 
         tag_key = tag_model["key"]
-        value = tag_model
-        |> Map.get("type")
-        |> case  do
-             "integer" -> String.to_integer(value)
-             "float" ->
-               value
-               |> Float.parse()
-               |> elem(0)
-             "date" -> parse_string_to_date(value)
-             _ -> value
-           end
+
+        translation =  Map.get(tag_model, "translate")
+        type = Map.get(tag_model, "type")
+
+        value = cond do
+          is_function(translation) ->
+            translation.(value)
+          type == "integer" ->
+            String.to_integer(value)
+          type == "float" ->
+            value
+            |> Float.parse()
+            |> elem(0)
+          type == "date" ->
+            parse_string_to_date(value)
+          true -> value
+        end
 
         Map.merge(values, %{tag_key => value})
       end
@@ -240,4 +248,19 @@ defmodule Burox.Response.Parser do
     {value, tail}
   end
 
+  # Si el valor del score es negativo, entonces se agrega un campo indicando la razón
+  defp add_score_exclusion(sections) do
+    score_values = Keyword.get(sections, :score)
+
+    %{valor_del_score: score} = score_values
+
+     if score > 0 do
+        sections
+     else
+       new_values = Map.put(score_values, :valor_de_exclusion, Config.score_exclusion(score))
+       Keyword.merge(sections, [score: new_values])
+      end
+  end
+
 end
+
