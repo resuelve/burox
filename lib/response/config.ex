@@ -6,7 +6,7 @@ defmodule Burox.Response.Config do
     "4" => "Consulta reciente",
     "5" => "Pago vencido reciente",
     "7" => "Cuentas abiertas con morosidad",
-    "9" => "Bajo promedio de antigüedad en créditos abiertos Tipo de crédito con mayor riesgo",
+    "9" => "Bajo promedio de antigüedad en créditos abiertos",
     "12" => "Tipo de crédito con mayor riesgo",
     "13" => "Número de cuentas abiertas",
     "14" => "Relación entre créditos revolventes y no revolventes",
@@ -44,7 +44,7 @@ defmodule Burox.Response.Config do
   }
 
   @score_exclusion %{
-    "-1" => "Consumidor Fallecido ",
+    "-1" => "☠️Consumidor fallecido",
     "-5" => "Expediente con todas las cuentas cerradas y por lo menos con una en atraso mayor o igual a 90 días",
     "-6" => "Expediente con todas sus cuentas con antigüedad menor a 6 meses y al menos una tiene MOP >= 03",
     "-7" => "Expediente con todas sus cuentas con antigüedad menor a 6 meses y al menos una tiene MOP >= 02",
@@ -52,17 +52,16 @@ defmodule Burox.Response.Config do
     "-9" => "Expediente sin cuentas para cálculo de BC-Score"
   }
 
-
-  @doc"""
-  Regresa la descripcion del código de exclusión
+  @doc """
+  Regresa la descripción del código de exclusión
   """
   def score_exclusion(score_value) when is_number(score_value) do
     Map.get(@score_exclusion, Integer.to_string(score_value))
   end
 
   @doc """
-  En est mapa se define los nombres de los campos y
-  como deben tratarse al ser parseados
+  En este mapa se definen los nombres de los campos y
+  cómo deben tratarse al ser parseados
   """
   @spec sections_map() :: map
   def sections_map do
