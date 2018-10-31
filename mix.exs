@@ -1,13 +1,20 @@
 defmodule Burox.Mixfile do
-  use Mix.Project
+    use Mix.Project
 
   def project do
     [
       app: :burox,
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      # Docs
+      name: "Burox",
+      source_url: "https://github.com/Resuelve/burox",
+      homepage_url: "https://github.com/Resuelve/burox",
+      docs: [
+        main: "Burox"
+      ]
     ]
   end
 

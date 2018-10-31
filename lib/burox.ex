@@ -4,17 +4,16 @@ defmodule Burox do
   alias Burox.Request
   alias Burox.Request.Encoder
   alias Burox.Response.Parser
-  alias Burox.Utils
   alias Burox.Utils.Validator
 
   require Logger
 
   @doc """
   Solicita la información crediticia de una persona al buró de crédito
-  ## Ejemplos
+  ## Examples
 
-  iex> Burox.solicitar{%Burox.Request{}}
-  {:ok, term}
+      iex> Burox.solicitar{%Burox.Request{}}
+      {:ok, term}
 
   """
   @spec solicitar(Request.t()) :: {:ok, term} | {:error, term}
@@ -24,7 +23,7 @@ defmodule Burox do
 
   @doc """
   Solicita la información crediticia de una persona al buró de crédito
-  ## Ejemplos
+  ## Examples
 
       iex> Burox.solicitar{%Burox.Request{}, "507"}
       {:ok, term}
@@ -37,9 +36,12 @@ defmodule Burox do
       cadena_respuesta: ""
     }
 
+    # Valida los datos de la petición
     with {:ok, request} <- Validator.valid?(data) do
       buro_service = Application.get_env(:burox, :buro_service)
+      # Convierte la petición a una cadena de texto
       request_string = Encoder.encode_buro(request, codigo_producto)
+      # Solicita el buró
       with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
         result = Map.merge(
           response_map,
@@ -54,7 +56,7 @@ defmodule Burox do
     else
       {:error, errors} ->
         # Traduce los errores de validación de campos a un mapa.
-        error_list = Enum.map(errors, fn {e, k, s, v} -> {"#{k}(#{s})", v}end)
+        error_list = Enum.map(errors, fn {_e, k, s, v} -> {"#{k}(#{s})", v}end)
         {:error, Map.put(response_map, :respuesta , error_list)}
     end
 
