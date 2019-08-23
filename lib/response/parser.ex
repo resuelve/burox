@@ -142,8 +142,8 @@ defmodule Burox.Response.Parser do
 
         tag_key = tag_model["key"]
 
-        translation =  Map.get(tag_model, "translate")
-        type = Map.get(tag_model, "type")
+        translation =  Map.get(tag_model || %{}, "translate")
+        type = Map.get(tag_model || %{}, "type")
 
         value = cond do
           is_function(translation) ->
@@ -250,9 +250,10 @@ defmodule Burox.Response.Parser do
 
   # Si el valor del score es negativo, entonces se agrega un campo indicando la razón
   defp add_score_exclusion(sections) do
+    IO.inspect(sections)
     score_values = Keyword.get(sections, :score)
-
-    %{valor_del_score: score} = score_values
+    
+    score = Map.get(score_values, :valor_del_score)
 
      if score > 0 do
         sections
