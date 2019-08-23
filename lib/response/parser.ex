@@ -250,9 +250,8 @@ defmodule Burox.Response.Parser do
 
   # Si el valor del score es negativo, entonces se agrega un campo indicando la razón
   defp add_score_exclusion(sections) do
-    IO.inspect(sections)
     score_values = Keyword.get(sections, :score)
-    
+
     score = Map.get(score_values, :valor_del_score)
 
      if score > 0 do
