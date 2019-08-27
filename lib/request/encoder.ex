@@ -11,21 +11,28 @@ defmodule Burox.Request.Encoder do
   Convierte una estructura de respuesta al formato
   recibido por el buró de crédito
   """
-  @spec encode_buro(Request.t(), String.t()) :: {:ok, term} | {:error, term}
-  def encode_buro(peticion, codigo_de_producto) do
+  @spec encode_buro(Request.t(), String.t(), boolean()) :: {:ok, term} | {:error, term}
+  def encode_buro(peticion, codigo_de_producto, special \\ false) do
     body =
       if peticion.autenticacion.cuenta_con_tarjeta_de_credito != nil do
         "#{build_authentication(peticion.autenticacion)}" <>
-          "#{build_header(codigo_de_producto)}" <> "#{build_body(peticion)}"
+          "#{build_header(codigo_de_producto, special)}" <> "#{build_body(peticion)}"
       else
-        "#{build_header(codigo_de_producto)}" <> "#{build_body(peticion)}"
+        "#{build_header(codigo_de_producto, special)}" <> "#{build_body(peticion)}"
       end
 
     body <> build_end(body)
   end
 
   # Crea el encabezado de la petición,
-  defp build_header(codigo_de_producto) do
+  defp build_header(_, true) do
+    {
+      Application.get_env(:burox, :buro_user_special),
+      Application.get_env(:burox, :buro_password_special),
+      "13"
+    }
+  end
+  defp build_header(codigo_de_producto, false) do
 
     {buro_user, buro_password, version} =
       case codigo_de_producto do
