@@ -142,7 +142,7 @@ defmodule Burox.Response.Parser do
 
         tag_key = tag_model["key"]
 
-        translation =  Map.get(tag_model || %{}, "translate")
+        translation = Map.get(tag_model || %{}, "translate")
         type = Map.get(tag_model || %{}, "type")
 
         value = cond do
