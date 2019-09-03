@@ -12,25 +12,12 @@ defmodule Burox do
   Solicita la información crediticia de una persona al buró de crédito
   ## Examples
 
-      iex> Burox.solicitar{%Burox.Request{}}
-      {:ok, term}
-
-  """
-  @spec solicitar(Request.t()) :: {:ok, term} | {:error, term}
-  def solicitar(peticion) do
-    solicitar(peticion, "507")
-  end
-
-  @doc """
-  Solicita la información crediticia de una persona al buró de crédito
-  ## Examples
-
       iex> Burox.solicitar{%Burox.Request{}, "507"}
       {:ok, term}
 
   """
-  @spec solicitar(Request.t(), String.t()) :: {:ok, term} | {:error, term}
-  def solicitar(data, codigo_producto) do
+  @spec solicitar(Request.t(), String.t(), boolean()) :: {:ok, term} | {:error, term}
+  def solicitar(data, codigo_producto \\"507", special \\ false) do
     response_map = %{
       cadena_peticion: "",
       cadena_respuesta: ""
@@ -40,7 +27,7 @@ defmodule Burox do
     with {:ok, request} <- Validator.valid?(data) do
       buro_service = Application.get_env(:burox, :buro_service)
       # Convierte la petición a una cadena de texto
-      request_string = Encoder.encode_buro(request, codigo_producto)
+      request_string = Encoder.encode_buro(request, codigo_producto, special)
       # Solicita el buró
       with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
         result = Map.merge(
@@ -59,7 +46,6 @@ defmodule Burox do
         error_list = Enum.map(errors, fn {_e, k, s, v} -> {"#{k}(#{s})", v}end)
         {:error, Map.put(response_map, :respuesta , error_list)}
     end
-
   end
 
 end
