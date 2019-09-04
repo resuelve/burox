@@ -25,20 +25,33 @@ defmodule Burox.Request.Encoder do
   end
 
   # Crea el encabezado de la petición,
+<<<<<<< Updated upstream
   defp build_header(codigo_de_producto) do
+=======
+  defp build_header(codigo_de_producto, special) do
+>>>>>>> Stashed changes
 
     {buro_user, buro_password, version} =
-      case codigo_de_producto do
-        "107" ->
-          # El servicio de prospector solo esta disponible en la versión 11
-          {Application.get_env(:burox, :buro_user_prospector),
-           Application.get_env(:burox, :buro_password_prospector),
-           "11"}
-        _ ->
-          {Application.get_env(:burox, :buro_user),
-           Application.get_env(:burox, :buro_password),
-           "13"}
-      end
+    case special do
+      true ->
+        {
+          Application.get_env(:burox, :buro_user_special),
+          Application.get_env(:burox, :buro_password_special),
+          "13"
+        }
+      false ->
+        case codigo_de_producto do
+          "107" ->
+            # El servicio de prospector solo esta disponible en la versión 11
+            {Application.get_env(:burox, :buro_user_prospector),
+              Application.get_env(:burox, :buro_password_prospector),
+              "11"}
+          _ ->
+            {Application.get_env(:burox, :buro_user),
+              Application.get_env(:burox, :buro_password),
+              "13"}
+        end
+    end
 
     if is_nil(buro_user) or is_nil(buro_password) do
       raise Burox.Error, message: "Deben configurarse las credenciales del Buró de Crédito"
