@@ -25,11 +25,7 @@ defmodule Burox.Request.Encoder do
   end
 
   # Crea el encabezado de la petición,
-<<<<<<< Updated upstream
-  defp build_header(codigo_de_producto) do
-=======
   defp build_header(codigo_de_producto, special) do
->>>>>>> Stashed changes
 
     {buro_user, buro_password, version} =
     case special do
