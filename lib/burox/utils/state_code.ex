@@ -5,6 +5,8 @@ defmodule Burox.Utils.StateCode do
   """
 
   @states_codes [
+    Mexico: "EM",
+    CDMX: "CDMX",
     Aguascalientes: "AGS",
     "Baja California": "BCN",
     "Baja California Sur": "BCN",
