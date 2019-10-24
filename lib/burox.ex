@@ -30,15 +30,21 @@ defmodule Burox do
       request_string = Encoder.encode_buro(request, codigo_producto, special)
       # Solicita el buró
       with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
+        parsed_response = Parser.process_response(buro_response)
         result = Map.merge(
           response_map,
           %{
             cadena_peticion: request_string,
             cadena_respuesta: String.slice(buro_response, 0..-2),
-            respuesta: Parser.process_response(buro_response)
+            respuesta: parsed_response
           }
         )
-        {:ok, result}
+        case parsed_response do
+          {:ok, _} ->
+            {:ok, result}
+          {:error, error_list} ->
+            {:error, result |> Map.put(:error, error_list)}
+        end
       end
     else
       {:error, errors} ->
