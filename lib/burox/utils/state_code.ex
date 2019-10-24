@@ -5,14 +5,13 @@ defmodule Burox.Utils.StateCode do
   """
 
   @states_codes [
-    Mexico: "EM",
-    CDMX: "CDMX",
     Aguascalientes: "AGS",
     "Baja California": "BCN",
-    "Baja California Sur": "BCN",
+    "Baja California Sur": "BCS",
     Campeche: "CAM",
     Chiapas: "CHS",
     Chihuahua: "CHI",
+    CDMX: "CDMX",
     "Ciudad de México": "CDMX",
     Coahuila: "COA",
     Colima: "COL",
@@ -22,6 +21,7 @@ defmodule Burox.Utils.StateCode do
     Guerrero: "GRO",
     Hidalgo: "HGO",
     Jalisco: "JAL",
+    Mexico: "EM",
     "Michoacán": "MICH",
     Morelos: "MOR",
     Nayarit: "NAY",
