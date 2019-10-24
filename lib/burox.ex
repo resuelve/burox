@@ -43,7 +43,7 @@ defmodule Burox do
           {:ok, _} ->
             {:ok, result}
           {:error, error_list} ->
-            {:error, result |> Map.put(:error, error_list)}
+            {:error, result}
         end
       end
     else
