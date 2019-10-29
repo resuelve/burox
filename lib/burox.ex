@@ -5,6 +5,7 @@ defmodule Burox do
   alias Burox.Request.Encoder
   alias Burox.Response.Parser
   alias Burox.Utils.Validator
+  alias Burox.Utils.Strip
 
   require Logger
 
@@ -31,11 +32,15 @@ defmodule Burox do
       # Solicita el buró
       with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
         parsed_response = Parser.process_response(buro_response)
+        response_string =
+          buro_response
+          |> Strip.strip_utf()
+          |> String.slice(0..-2)
         result = Map.merge(
           response_map,
           %{
             cadena_peticion: request_string,
-            cadena_respuesta: String.slice(buro_response, 0..-2),
+            cadena_respuesta: response_string,
             respuesta: parsed_response
           }
         )
