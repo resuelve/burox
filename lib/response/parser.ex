@@ -7,6 +7,7 @@ defmodule Burox.Response.Parser do
   import Burox.Response.Config
   alias Burox.Response
   alias  Burox.Response.Config
+  alias Burox.Utils.Strip
 
   @success_sections [
     "INTL",  # Response header
@@ -33,11 +34,12 @@ defmodule Burox.Response.Parser do
   Procesa y parsea la cadena recibida del Buró de Crédito
   """
   @spec process_response(String.t) :: map
-  def process_response(response) do
-
+  def process_response(response) when is_binary(response) do
+    # Si la cadena obtenida contiene caracteres inválidos, se eliminan.
+    response = if String.valid?(response), do: response, else: Strip.strip_utf(response)
     # La respuesta del Buró de Crédito esta divida en segmentos
-    response
     # Si la cadena comienza con INTL, quiere decir que se obtuvieron los datos solicitados
+    response
     |> String.starts_with?("INTL")
     |> if  do
       success = response
@@ -56,6 +58,7 @@ defmodule Burox.Response.Parser do
     end
 
   end
+  def process_response(_), do: {:error, "La respuesta de buró es inválida"}
 
   # Procesa la cadena de respuesta, sin importar si fue exitosa o fallida
   defp _process_response(response, sections) do
