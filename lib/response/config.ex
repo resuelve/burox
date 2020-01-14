@@ -904,7 +904,7 @@ defmodule Burox.Response.Config do
           "type" => "string"
            },
         "05" => %{
-          "key" => :ultima_informacion_valida_del_cliente,
+          "key" => :informacion_a_validar_del_cliente,
           "type" => "string"
            },
         "06" => %{

@@ -137,7 +137,7 @@ defmodule BuroxTest do
                        producto_solicitado_erroneo: nil,
                        segmento_requerido_no_proporcionado: nil,
                        solicitud_del_cliente_erronea: nil,
-                       ultima_informacion_valida_del_cliente: nil,
+                       informacion_a_validar_del_cliente: nil,
                        valor_erroneo_en_una_campo_relacionado: nil,
                        version_proporcionada_erronea: nil
                      },
@@ -219,12 +219,12 @@ defmodule BuroxTest do
     end)
 
     assert Burox.solicitar(@valid_person_data) ==
-             {:ok,
+             {:error,
               %{
                 cadena_respuesta: "ERRRUR25                         1101YES05000530002**",
-                respuesta: {:error, [
+                respuesta: [
                                error_en_el_sistema_de_buro_de_credito: "Y",
-                               numero_de_referencia_del_operador: "                         "]},
+                               numero_de_referencia_del_operador: "                         "],
                 cadena_peticion: @valid_person_data_string
               }}
   end
@@ -236,14 +236,13 @@ defmodule BuroxTest do
     end)
 
     assert Burox.solicitar(@valid_person_data) ==
-             {:ok,
+             {:error,
               %{
                 cadena_peticion: @valid_person_data_string,
                 cadena_respuesta: @invalid_user_response,
-                respuesta: {:error, [
+                respuesta: [
                                clave_de_usuario_o_contrasena_erronea: "UserPassword",
                                numero_de_referencia_del_operador: "                         "]
-                }
               }
              }
   end
@@ -255,12 +254,11 @@ defmodule BuroxTest do
     end)
 
     assert Burox.solicitar(@valid_person_data) ==
-    {:ok, %{
+    {:error, %{
         cadena_peticion:  @valid_person_data_string,
         cadena_respuesta: "ERRRAR25                         0014NO AUTENTICADOES05000660002**",
-        respuesta: {:error, [
-                       numero_de_referencia_del_operador: "                         ",
-                       solicitud_del_cliente_erronea: "NO AUTENTICADO"]}
+        respuesta: [numero_de_referencia_del_operador: "                         ",
+                       solicitud_del_cliente_erronea: "NO AUTENTICADO"]
      }
     }
   end

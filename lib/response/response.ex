@@ -248,7 +248,7 @@ defmodule Burox.Response.ErrorUser do
     :producto_solicitado_erroneo,
     :clave_de_usuario_o_contrasena_erronea,
     :segmento_requerido_no_proporcionado,
-    :ultima_informacion_valida_del_cliente,
+    :informacion_a_validar_del_cliente,
     :informacion_erronea_para_consulta,
     :valor_erroneo_en_una_campo_relacionado,
     :error_en_el_sistema_de_buro_de_credito,
