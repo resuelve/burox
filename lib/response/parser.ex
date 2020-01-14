@@ -30,6 +30,14 @@ defmodule Burox.Response.Parser do
     "ES"
   ]
 
+  @error_translations [
+    {"PN",    "Nombre del cliente"},
+    {"PA",    "Dirección del cliente"},
+    {"PE",    "Empleo del cliente (Domicilio)"},
+    {"PI",    "Referencia de cuentas o créditos"},
+    {"ES",     "Cierre"}
+  ]
+
   @doc """
   Procesa y parsea la cadena recibida del Buró de Crédito
   """
@@ -53,7 +61,7 @@ defmodule Burox.Response.Parser do
         |> _process_response(@error_sections)
         |> Map.get(:error)
         |> Map.to_list()
-
+        |> translate_errors()
       {:error, errors}
     end
 
@@ -264,6 +272,28 @@ defmodule Burox.Response.Parser do
        Keyword.merge(sections, [score: new_values])
       end
   end
+
+  # Traduce una lista de errores
+  
+  defp translate_errors([{key, val} = head | tail]) do
+    [{key, translate_error(val)} | translate_errors(tail)]
+  end
+  defp translate_errors(any), do: any
+
+  defp translate_error(error) do
+    error
+    |> String.slice(0..1)
+    |> validate_error()
+    |> get_error_value(error)
+  end
+
+  defp validate_error(key) do
+    @error_translations
+    |> List.keyfind(key, 0)
+  end
+
+  defp get_error_value({_, value}, _), do: value
+  defp get_error_value(_, value), do: value
 
 end
 
