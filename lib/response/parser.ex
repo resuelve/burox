@@ -187,8 +187,13 @@ defmodule Burox.Response.Parser do
     is_same_section = section == next_tag
     cond do
       is_same_section ->
+        clean_values =
+          values
+          |> Map.keys()
+          |> Map.new(fn val -> {val, nil} end)
+
         {next_values, final_tail} =
-          _match_section(section, tail, "", values, sections)
+          _match_section(section, tail, "", clean_values, sections)
 
         {List.flatten([values] ++ [next_values]) , final_tail}
 
