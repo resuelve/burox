@@ -5,6 +5,7 @@ defmodule Burox.Mixfile do
     [
       app: :burox,
       version: "0.3.0",
+      package: package(),
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -31,6 +32,17 @@ defmodule Burox.Mixfile do
       {:socket, "~> 0.3.2"},
       {:mox, "~> 0.4", only: :test},
       {:vex, "~> 0.7"}
+    ]
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README.md"],
+      organization: "resuelve",
+      description: "Libreria para consulta de buro de credito.",
+      maintainers: ["Jorge Medina", "Octavio Juarez"],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/resuelve/burox"}
     ]
   end
 end
