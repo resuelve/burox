@@ -23,3 +23,5 @@ erl_crash.dump
 
 # Variables de Entorno
 .env
+
+.DS_Store
