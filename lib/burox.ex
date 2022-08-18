@@ -17,25 +17,28 @@ defmodule Burox do
       {:ok, term}
 
   """
-  @spec solicitar(Request.t(), String.t(), boolean()) :: {:ok, term} | {:error, term}
-  def solicitar(data, codigo_producto \\"507", special \\ false) do
+  @spec solicitar(Request.t(), map()) :: {:ok, map()} | {:error, map()}
+  def solicitar(data, config \\ %{}) do
+    product_code = Map.get(config, :product_code, "507")
+    special = Map.get(config, :special, false)
+    credentials = Map.get(config, :credentials, "fmg")
     response_map = %{
       cadena_peticion: "",
       cadena_respuesta: ""
     }
 
-    # Valida los datos de la petición
     with {:ok, request} <- Validator.valid?(data) do
       buro_service = Application.get_env(:burox, :buro_service)
       # Convierte la petición a una cadena de texto
-      request_string = Encoder.encode_buro(request, codigo_producto, special)
-      # Solicita el buró
-      with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
+      request_string = Encoder.encode_buro(request, product_code, special, credentials)
+
+      with {:ok, buro_response} <- buro_service.post(request_string, product_code) do
         parsed_response = Parser.process_response(buro_response)
         response_string =
           buro_response
           |> Strip.strip_utf()
           |> String.slice(0..-2)
+
         result = Map.merge(
           response_map,
           %{
@@ -44,6 +47,7 @@ defmodule Burox do
             respuesta: parsed_response
           }
         )
+
         case parsed_response do
           {:ok, _} ->
             {:ok, result}
@@ -58,5 +62,4 @@ defmodule Burox do
         {:error, Map.put(response_map, :respuesta , error_list)}
     end
   end
-
 end

@@ -11,55 +11,99 @@ defmodule Burox.Request.Encoder do
   Convierte una estructura de respuesta al formato
   recibido por el buró de crédito
   """
-  @spec encode_buro(Request.t(), String.t(), boolean()) :: {:ok, term} | {:error, term}
-  def encode_buro(peticion, codigo_de_producto, special \\ false) do
+  @spec encode_buro(Request.t(), String.t(), boolean(), String.t()) :: String.t()
+  def encode_buro(request, product_code \\ "507", special \\ false, credentials_type \\ "fmg")
+  def encode_buro(
+    %{autenticacion: %{cuenta_con_tarjeta_de_credito: nil}} = request,
+    product_code,
+    special,
+    credentials_type
+  ) do
+    body = build_header(product_code, special, credentials_type) <> "#{build_body(request)}"
+    body <> build_end(body)
+  end
+
+  def encode_buro(request, product_code, special, credentials_type) do
     body =
-      if peticion.autenticacion.cuenta_con_tarjeta_de_credito != nil do
-        "#{build_authentication(peticion.autenticacion)}" <>
-          "#{build_header(codigo_de_producto, special)}" <> "#{build_body(peticion)}"
-      else
-        "#{build_header(codigo_de_producto, special)}" <> "#{build_body(peticion)}"
-      end
+      "#{build_authentication(request.autenticacion)}" <>
+      "#{build_header(product_code, special, credentials_type)}" <> "#{build_body(request)}"
 
     body <> build_end(body)
   end
 
-  # Crea el encabezado de la petición,
-  defp build_header(codigo_de_producto, special) do
-    {buro_user, buro_password, version} =
-    case special do
-      true ->
-        {
-          Application.get_env(:burox, :buro_user_special),
-          Application.get_env(:burox, :buro_password_special),
-          "13"
-        }
-      false ->
-        case codigo_de_producto do
-          "107" ->
-            # El servicio de prospector solo esta disponible en la versión 11
-            {Application.get_env(:burox, :buro_user_prospector),
-              Application.get_env(:burox, :buro_password_prospector),
-              "11"}
-          _ ->
-            {Application.get_env(:burox, :buro_user),
-              Application.get_env(:burox, :buro_password),
-              "13"}
-        end
-    end
+  # Build the request header with the associated credentials
+  @spec build_header(String.t(), boolean(), String.t()) :: String.t()
+  defp build_header(product_code, special, credentials_type) do
+    product_code
+    |> get_credentials(special, credentials_type)
+    |> validate_credentials()
+    |> get_header_payload(product_code)
+  end
 
-    if is_nil(buro_user) or is_nil(buro_password) do
-      raise Burox.Error, message: "Deben configurarse las credenciales del Buró de Crédito"
-    end
+  # El servicio de prospector solo esta disponible en la versión 11
+  # Currently, all requests for score are with sae credentials
+  @spec get_credentials(String.t(), boolean(), String.t()) :: tuple()
+  defp get_credentials("107", _special, _type) do
+    user = Application.get_env(:burox, :buro_user_prospector)
+    password = Application.get_env(:burox, :buro_password_prospector)
 
+    {user, password, "11"}
+  end
+
+  defp get_credentials(_product_code, true, "sae") do
+    user = Application.get_env(:burox, :buro_user_special_sae)
+    password = Application.get_env(:burox, :buro_password_special_sae)
+
+    {user, password, "13"}
+  end
+
+  # request are with 'fmg' credentials by default
+  defp get_credentials(_product_code, true, _type) do
+    user = Application.get_env(:burox, :buro_user_special)
+    password = Application.get_env(:burox, :buro_password_special)
+
+    {user, password, "13"}
+  end
+
+  defp get_credentials(_product_code, _special, "sae") do
+      user = Application.get_env(:burox, :buro_user_sae)
+      password = Application.get_env(:burox, :buro_password_sae)
+
+      {user, password, "13"}
+  end
+
+  # request are with 'fmg' credentials by default
+  defp get_credentials(_product_code, _special, _type) do
+      user = Application.get_env(:burox, :buro_user)
+      password = Application.get_env(:burox, :buro_password)
+
+      {user, password, "13"}
+  end
+
+  @spec validate_credentials(
+    {String.t(), String.t(), String.t()}
+  ) :: {String.t(), String.t(), String.t()}
+  defp validate_credentials({nil, _password, _version}),
+    do: validate_credentials({nil, nil, nil})
+
+  defp validate_credentials({_user, nil, _version}),
+    do: validate_credentials({nil, nil, nil})
+
+  defp validate_credentials({nil, nil, _version}), do: raise Burox.Error,
+    message: "Deben configurarse las credenciales del buró de crédito"
+
+  defp validate_credentials(credentials), do: credentials
+
+  @spec get_header_payload(tuple(), String.t()) :: String.t()
+  defp get_header_payload({user, password, version}, product_code) do
     "INTL"
     <> version
     <> "                         "
-    <> codigo_de_producto
+    <> product_code
     <> "MX"                             # Clave de pais
     <> "0000"                           # Reservado
-    <> buro_user
-    <> buro_password
+    <> user
+    <> password
     <> "I"                              # Tipo de responsabilidad(I: Individual)
     <> "CC"                             # Tipo de contrato
     <> "MX"                             # Mondea del crédito
@@ -73,6 +117,7 @@ defmodule Burox.Request.Encoder do
 
   # Crea el cuerpo de la petición
   # donde van codificados los datos de la persona
+  @spec build_body(Request.t()) :: String.t()
   defp build_body(request) do
     request_map = Map.from_struct(request)
 
@@ -93,6 +138,7 @@ defmodule Burox.Request.Encoder do
   end
 
   # Función para construir los valores de segmento de autenticación del cliente
+  @spec build_authentication(list()) :: String.t()
   defp build_authentication(values) do
     auth = autenticacion()
     acc = "AU03RCN000120125                         "
@@ -104,7 +150,8 @@ defmodule Burox.Request.Encoder do
     end
   end
 
-  # Funcion para construir el segmento de fin de petición
+  # Función para construir el segmento de fin de petición
+  @spec build_end(String.t()) :: String.t()
   defp build_end(request_string) do
     # Retorna el tamaño de la cadena de petición
     # Siempre es una cadena de 5 caracteres, si hace
@@ -121,6 +168,7 @@ defmodule Burox.Request.Encoder do
 
   # Función para construir los valores de las etiquetas de un segmento
   # Nombre + tamaño + valor
+  @spec build_tag_values(list(), list()) :: String.t()
   defp build_tag_values(tags, values) do
     Enum.reduce(tags, "", fn {key, tag}, acc ->
       value = Map.get(values, key)
@@ -133,11 +181,12 @@ defmodule Burox.Request.Encoder do
     end)
   end
 
-  # Retorna el numero de caracteres de una cadena
+  # Retorna el número de caracteres de una cadena
   # El valor retornado siempre estará expresado en dos caracteres
   # i.e '12'
   # Si el valor es menor a 10, comenzará con 0
   # i.e '02'
+  @spec size_of(String.t()) :: String.t()
   defp size_of(string) do
     size = String.length(string)
 
