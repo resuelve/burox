@@ -18,7 +18,7 @@ defmodule Burox do
 
   """
   @spec solicitar(Request.t(), map()) :: {:ok, map()} | {:error, map()}
-  def solicitar(data, config \\ %{}) doL
+  def solicitar(data, config \\ %{}) do
     product_code = Map.get(config, :product_code, "507")
     special = Map.get(config, :special, false)
     credentials = Map.get(config, :credentials, "fmg")
