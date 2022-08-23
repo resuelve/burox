@@ -27,15 +27,10 @@ defmodule Burox do
       cadena_respuesta: ""
     }
 
-    Logger.info(inspect(data))
-    Logger.info(inspect(config))
-
     with {:ok, request} <- Validator.valid?(data) do
       buro_service = Application.get_env(:burox, :buro_service)
       # Convierte la petición a una cadena de texto
       request_string = Encoder.encode_buro(request, product_code, special, credentials)
-
-      Logger.info(request_string)
 
       with {:ok, buro_response} <- buro_service.post(request_string, product_code) do
         parsed_response = Parser.process_response(buro_response)
