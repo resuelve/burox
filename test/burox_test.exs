@@ -97,16 +97,16 @@ defmodule BuroxTest do
                          tipo_de_responsabilidad_de_la_cuenta: "I"
                        },
                        %{
-                         clave_del_usuario: "Usuario123",
+                         clave_del_usuario: nil,
                          fecha_de_consulta: ~D[2016-07-18],
                          importe_del_credito: "000000000",
                          indicador_de_cliente_nuevo: "Y",
                          moneda_del_credito: "MX",
                          nombre_del_usuario: "BURO DE CREDITO",
-                         numero_telefonico_del_usuario: "5586479602",
+                         numero_telefonico_del_usuario: nil,
                          reserved: "1",
                          tipo_de_producto: "CC",
-                         tipo_de_responsabilidad_de_la_cuenta: "I"
+                         tipo_de_responsabilidad_de_la_cuenta: nil
                        }
                      ],
                      creditos: [],
