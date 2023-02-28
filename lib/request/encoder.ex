@@ -83,14 +83,14 @@ defmodule Burox.Request.Encoder do
   @spec validate_credentials(
     {String.t(), String.t(), String.t()}
   ) :: {String.t(), String.t(), String.t()}
+  defp validate_credentials({nil, nil, _version}), do: raise Burox.Error,
+    message: "Deben configurarse las credenciales del buró de crédito"
+
   defp validate_credentials({nil, _password, _version}),
     do: validate_credentials({nil, nil, nil})
 
   defp validate_credentials({_user, nil, _version}),
     do: validate_credentials({nil, nil, nil})
-
-  defp validate_credentials({nil, nil, _version}), do: raise Burox.Error,
-    message: "Deben configurarse las credenciales del buró de crédito"
 
   defp validate_credentials(credentials), do: credentials
 
